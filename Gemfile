@@ -18,7 +18,6 @@ gem 'spring', group: :development
 
 # Authentication
 gem 'devise'
-gem 'pundit'
 
 # Internationalization
 gem 'rails-i18n'
