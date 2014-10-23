@@ -13,9 +13,6 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'bootstrap-sass'
 
-# Preloading
-gem 'spring', group: :development
-
 # Authentication
 gem 'devise'
 
@@ -40,6 +37,10 @@ gem 'therubyracer', platform: :ruby
 gem 'thin'
 
 group :development do
+  # Preloading
+  gem 'spring'
+  gem 'spring-commands-rspec'
+
   # Error handling
   gem 'better_errors'
   gem 'binding_of_caller', platforms: [:mri_21]
