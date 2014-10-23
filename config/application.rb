@@ -33,5 +33,11 @@ module Herudio
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     config.i18n.default_locale = ENV['LOCALE']
     config.i18n.available_locales = [:it]
+
+    # ActionMailer configuration.
+    config.action_mailer.default_url_options = { host: ENV['HOST'] }
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.raise_delivery_errors = true
   end
 end
