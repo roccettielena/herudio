@@ -46,7 +46,6 @@ group :development do
 
   # Guard
   gem 'guard-bundler'
-  gem 'guard-rails'
   gem 'guard-rspec'
 
   # Guard (filesystem events)
