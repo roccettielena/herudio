@@ -1,4 +1,4 @@
-describe User do
+RSpec.describe User do
   subject { FactoryGirl.build(:user) }
 
   it 'is valid' do
