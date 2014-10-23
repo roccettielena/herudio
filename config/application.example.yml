@@ -1,7 +1,7 @@
-TIME_ZONE: Rome
-LOCALE: it
-SECRET_TOKEN: SecretToken1
-MAIL_SENDER: noreply@example.com
-DEVISE_SECRET: SecretToken2
-DEVISE_PEPPER: SecretToken3
-FORCE_SSL: false
+TIME_ZONE: 'Rome'
+LOCALE: 'it'
+SECRET_TOKEN: 'SecretToken1'
+MAIL_SENDER: 'noreply@example.com'
+DEVISE_SECRET: 'SecretToken2'
+DEVISE_PEPPER: 'SecretToken3'
+FORCE_SSL: 'false'
