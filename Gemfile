@@ -77,7 +77,7 @@ group :test do
   # Acceptance testing
   gem 'capybara'
   gem 'launchy'
-  gem 'selenium-webdriver'
+  gem 'poltergeist'
 
   # Database cleansing
   gem 'database_cleaner'
