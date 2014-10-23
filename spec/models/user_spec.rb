@@ -1,13 +1,7 @@
 describe User do
+  subject { FactoryGirl.build(:user) }
 
-  before(:each) { @user = User.new(email: 'user@example.com') }
-
-  subject { @user }
-
-  it { should respond_to(:email) }
-
-  it "#email returns a string" do
-    expect(@user.email).to match 'user@example.com'
+  it 'is valid' do
+    expect(subject).to be_valid
   end
-
 end
