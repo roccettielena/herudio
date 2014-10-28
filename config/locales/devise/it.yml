@@ -7,3 +7,8 @@ it:
         hints:
           confirmation: "Non hai ricevuto l'email di conferma?"
           password:     'Hai dimenticato la password?'
+
+    confirmations:
+      new:
+        title:  'Conferma account'
+        submit: 'Invia istruzioni'
