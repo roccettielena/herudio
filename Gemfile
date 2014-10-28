@@ -12,6 +12,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # Assets
 gem 'jquery-rails'
 gem 'bootstrap-sass'
+gem 'font-awesome-rails'
 
 # Authentication
 gem 'devise'
