@@ -1,0 +1,15 @@
+- provide :title, t('devise.passwords.edit.title')
+
+.container-sm
+  %h1= t('devise.passwords.edit.title')
+
+  .strong
+    = simple_form_for(resource, url: user_password_path, html: { method: :put }) do |f|
+      = f.hidden_field :reset_password_token
+
+      = f.input :password, required: true, input_html: { class: 'input-lg' }, autofocus: true, label: t('simple_form.labels.user.new_password')
+      = f.input :password_confirmation, required: true, input_html: { class: 'input-lg' }
+
+      .form-actions
+        %button.btn.btn-lg.btn-primary(type='submit')
+          = t('devise.passwords.edit.submit')

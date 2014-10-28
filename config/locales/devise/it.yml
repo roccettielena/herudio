@@ -17,3 +17,6 @@ it:
       new:
         title:  'Reimposta password'
         submit: 'Invia istruzioni'
+      edit:
+        title:  'Reimposta password'
+        submit: 'Reimposta password'

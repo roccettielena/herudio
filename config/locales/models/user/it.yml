@@ -2,6 +2,8 @@ it:
   simple_form:
     labels:
       user:
-        email:       'Email:'
-        password:    'Password:'
-        remember_me: 'Ricordami'
+        email:                 'Email:'
+        password:              'Password:'
+        remember_me:           'Ricordami'
+        new_password:          'Nuova password:'
+        password_confirmation: 'Conferma password:'
