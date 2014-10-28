@@ -1,0 +1,9 @@
+it:
+  devise:
+    sessions:
+      new:
+        title:  'Accedi'
+        submit: 'Accedi'
+        hints:
+          confirmation: "Non hai ricevuto l'email di conferma?"
+          password:     'Hai dimenticato la password?'

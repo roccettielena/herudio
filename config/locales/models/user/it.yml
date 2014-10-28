@@ -1,0 +1,7 @@
+it:
+  simple_form:
+    labels:
+      user:
+        email:       'Email:'
+        password:    'Password:'
+        remember_me: 'Ricordami'

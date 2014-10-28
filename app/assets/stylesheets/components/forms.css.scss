@@ -1,0 +1,11 @@
+.form-actions {
+  padding-top: 20px;
+  border-top: 1px solid $gray-lighter;
+  text-align: right;
+}
+
+.form-control {
+  &, &:focus {
+    box-shadow: none;
+  }
+}

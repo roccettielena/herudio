@@ -1,0 +1,12 @@
+.container-sm
+  %h1= t('devise.sessions.new.title')
+
+  .strong
+    = simple_form_for(resource, url: user_session_path, html: { role: 'form' }, wrapper_mappings: { boolean: :vertical_boolean }) do |f|
+      = f.input :email, input_html: { class: 'input-lg' }, autofocus: true, hint: link_to(t('devise.sessions.new.hints.confirmation'), new_user_confirmation_path)
+      = f.input :password, input_html: { class: 'input-lg' }, hint: link_to(t('devise.sessions.new.hints.password'), new_user_password_path)
+      = f.input :remember_me, as: :boolean
+
+      .form-actions
+        %button.btn.btn-lg.btn-primary(type='submit')
+          = t('devise.sessions.new.submit')
