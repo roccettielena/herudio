@@ -3,4 +3,6 @@ it:
     toggle_navigation: 'Visualizza/nascondi navigazione'
 
     nav:
-      sign_in: 'Accedi'
+      sign_in:      'Accedi'
+      sign_out:     'Esci'
+      edit_profile: 'Modifica profilo'
