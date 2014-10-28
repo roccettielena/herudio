@@ -11,4 +11,8 @@ $strong-border-radius: $border-radius-small !default;
   background: white;
   border-radius: $strong-border-radius;
   border: 1px solid $strong-border-color;
+
+  & + .strong {
+    margin-top: 10px;
+  }
 }
