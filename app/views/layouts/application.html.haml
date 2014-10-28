@@ -9,10 +9,11 @@
 
     = csrf_meta_tags
 
-  %body
+  %body.weak
     %header
       = render 'layouts/navigation'
 
     %main(role='main')
       = render 'layouts/messages'
-      = yield
+      .strong
+        = yield

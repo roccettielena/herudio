@@ -1,0 +1,14 @@
+$weak-background: $gray-lighter !default;
+$strong-border-color: darken($weak-background, 6.5%) !default;
+$strong-border-radius: $border-radius-small !default;
+
+.weak {
+  background-color: $weak-background;
+}
+
+.strong {
+  padding: 15px;
+  background: white;
+  border-radius: $strong-border-radius;
+  border: 1px solid $strong-border-color;
+}

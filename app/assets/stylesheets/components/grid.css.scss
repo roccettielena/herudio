@@ -1,9 +1,6 @@
-.container, main {
-  max-width: 1170px;
-}
-
 main {
   @extend .container;
+  margin-top: 10px;
 }
 
 section {
