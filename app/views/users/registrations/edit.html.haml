@@ -1,0 +1,25 @@
+- provide :title, t('devise.registrations.edit.title')
+
+- email_hint = ''
+- if resource.pending_reconfirmation?
+  - email_hint = t('devise.registrations.edit.hints.reconfirmation_html', email: resource.unconfirmed_email)
+
+.container-sm
+  %h1= t('devise.registrations.edit.title')
+
+  = simple_form_for(resource, url: user_registration_path, html: { method: :put, role: 'form' }) do |f|
+
+    .strong
+      = f.input :full_name, input_html: { class: 'input-lg' }, autofocus: true, required: true, readonly: true
+
+    .strong
+      = f.input :email, input_html: { class: 'input-lg' }, required: true, hint: email_hint
+      = f.input :password, input_html: { class: 'input-lg' }, label: t('simple_form.labels.user.new_password')
+      = f.input :password_confirmation, input_html: { class: 'input-lg' }
+
+    .strong
+      = f.input :current_password, input_html: { class: 'input-lg' }, required: true
+
+      .form-actions
+        %button.btn.btn-lg.btn-primary(type='submit')
+          = t('devise.registrations.edit.submit')

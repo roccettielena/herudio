@@ -7,3 +7,5 @@ it:
         remember_me:           'Ricordami'
         new_password:          'Nuova password:'
         password_confirmation: 'Conferma password:'
+        current_password:      'Password attuale:'
+        full_name:             'Nome completo:'

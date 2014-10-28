@@ -20,3 +20,10 @@ it:
       edit:
         title:  'Reimposta password'
         submit: 'Reimposta password'
+
+    registrations:
+      edit:
+        title:  'Modifica profilo'
+        submit: 'Modifica profilo'
+        hints:
+          reconfirmation_html: 'In attesa di conferma per <strong>%{email}</strong>'
