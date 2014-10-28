@@ -36,6 +36,9 @@ gem 'therubyracer', platform: :ruby
 # Web server
 gem 'thin'
 
+# Process management
+gem 'foreman'
+
 group :development do
   # Preloading
   gem 'spring'
