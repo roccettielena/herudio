@@ -1,18 +1,11 @@
 module Features
   module SessionHelpers
-    def sign_up_with(email, password, confirmation)
-      visit new_user_registration_path
-      fill_in 'Email', with: email
-      fill_in 'Password', with: password
-      fill_in 'Password confirmation', :with => confirmation
-      click_button 'Sign up'
-    end
-
     def signin(email, password)
-      visit new_user_session_path
-      fill_in 'Email', with: email
-      fill_in 'Password', with: password
-      click_button 'Sign in'
+      visit root_path
+      click_link I18n.t('layout.nav.sign_in')
+      fill_in I18n.t('simple_form.labels.user.email'), with: email
+      fill_in I18n.t('simple_form.labels.user.password'), with: password
+      click_button I18n.t('devise.sessions.new.submit')
     end
   end
 end
