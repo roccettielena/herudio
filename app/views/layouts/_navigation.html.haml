@@ -2,7 +2,7 @@
   .container
     .navbar-header
       %button.navbar-toggle(data-target='.navbar-collapse' data-toggle='collapse' type='button')
-        %span.sr-only Toggle navigation
+        %span.sr-only= t('layout.toggle_navigation')
 
         %span.icon-bar
         %span.icon-bar
@@ -11,5 +11,9 @@
       = link_to ENV['SITE_NAME'], root_path, class: 'navbar-brand'
 
     .collapse.navbar-collapse
-      %ul.nav.navbar-nav
-        = render 'layouts/navigation_links'
+      %ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          %li= link_to 'Sign out', destroy_user_session_path, method: :delete
+        - else
+          %li{class: ('active' if params[:controller] == 'devise/sessions' && ['new', 'create'].include?(params[:action]))}
+            = link_to "#{fa_icon('sign-in')} #{t('layout.nav.sign_in')}".html_safe, new_user_session_path

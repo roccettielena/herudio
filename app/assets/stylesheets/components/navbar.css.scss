@@ -1,0 +1,7 @@
+.navbar-nav.navbar-right:last-child {
+  @media (min-width: $screen-sm-min) {
+    // For some reason Bootstrap sets this to 15px, which throws off the
+    // alignment of the 'main' element and the right nav in the navbar.
+    margin-right: 0;
+  }
+}

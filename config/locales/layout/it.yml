@@ -1,0 +1,6 @@
+it:
+  layout:
+    toggle_navigation: 'Visualizza/nascondi navigazione'
+
+    nav:
+      sign_in: 'Accedi'
