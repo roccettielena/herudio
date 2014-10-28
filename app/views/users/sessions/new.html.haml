@@ -5,8 +5,8 @@
 
   .strong
     = simple_form_for(resource, url: user_session_path, html: { role: 'form' }, wrapper_mappings: { boolean: :vertical_boolean }) do |f|
-      = f.input :email, input_html: { class: 'input-lg' }, autofocus: true, hint: link_to(t('devise.sessions.new.hints.confirmation'), new_user_confirmation_path)
-      = f.input :password, input_html: { class: 'input-lg' }, hint: link_to(t('devise.sessions.new.hints.password'), new_user_password_path)
+      = f.input :email, input_html: { class: 'input-lg' }, autofocus: true, hint: link_to(t('devise.sessions.new.hints.confirmation'), new_user_confirmation_path), required: true
+      = f.input :password, input_html: { class: 'input-lg' }, hint: link_to(t('devise.sessions.new.hints.password'), new_user_password_path), required: true
       = f.input :remember_me, as: :boolean
 
       .form-actions
