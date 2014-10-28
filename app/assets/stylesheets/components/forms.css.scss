@@ -4,7 +4,7 @@
   text-align: right;
 }
 
-.form-control {
+.form-control, .has-error .form-control {
   &, &:focus {
     box-shadow: none;
   }
