@@ -12,3 +12,8 @@ it:
       new:
         title:  'Conferma account'
         submit: 'Invia istruzioni'
+
+    passwords:
+      new:
+        title:  'Reimposta password'
+        submit: 'Invia istruzioni'
