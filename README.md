@@ -33,7 +33,7 @@ $ foreman start
 Documentation and Support
 -------------------------
 All documentation is contained in the [GitHub repository](https://github.com/alessandro1997/herudio).
-If you need support, you can ping me on Twitter ([https://twitter.com/alessandro1997](@alessandro1997)).
+If you need support, you can ping me on Twitter ([@alessandro1997](https://twitter.com/alessandro1997)).
 
 Issues
 ------
