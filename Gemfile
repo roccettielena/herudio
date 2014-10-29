@@ -28,6 +28,7 @@ gem 'figaro', '>= 1.0.0.rc1'
 # Views
 gem 'haml-rails'
 gem 'simple_form', '~> 3.1.0.rc2', github: 'plataformatec/simple_form'
+gem 'high_voltage'
 
 # Active Record
 gem 'pg'

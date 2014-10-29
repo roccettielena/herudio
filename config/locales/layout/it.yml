@@ -6,3 +6,5 @@ it:
       sign_in:      'Accedi'
       sign_out:     'Esci'
       edit_profile: 'Modifica profilo'
+      home:         'Home'
+      contact:      'Contatti'

@@ -11,6 +11,12 @@
       = link_to ENV['SITE_NAME'], root_path, class: 'navbar-brand'
 
     .collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li{class: ('active' if params[:controller] == 'high_voltage/pages' && params[:id] == 'home')}
+          = link_to "#{fa_icon('home')} #{t('layout.nav.home')}".html_safe, root_path
+        %li{class: ('active' if params[:controller] == 'high_voltage/pages' && params[:id] == 'contact')}
+          = link_to "#{fa_icon('envelope')} #{t('layout.nav.contact')}".html_safe, contact_path
+
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           %li.dropdown
