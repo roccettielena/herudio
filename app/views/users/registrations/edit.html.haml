@@ -9,11 +9,11 @@
 
   = simple_form_for(resource, url: user_registration_path, html: { method: :put, role: 'form' }) do |f|
     .strong
-      = f.input :full_name, input_html: { class: 'input-lg' }, autofocus: true, required: true, readonly: true
+      = f.input :full_name, input_html: { class: 'input-lg' }, required: true, readonly: true
       = f.input :group, input_html: { class: 'input-lg' }, required: true, readonly: true
 
     .strong
-      = f.input :email, input_html: { class: 'input-lg' }, required: true, hint: email_hint
+      = f.input :email, input_html: { class: 'input-lg' }, autofocus: true, required: true, hint: email_hint
       = f.input :password, input_html: { class: 'input-lg' }, label: t('simple_form.labels.user.new_password')
       = f.input :password_confirmation, input_html: { class: 'input-lg' }
 
