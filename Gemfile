@@ -78,6 +78,9 @@ group :production do
 end
 
 group :test do
+  # RSpec
+  gem 'fuubar'
+
   # Acceptance testing
   gem 'capybara'
   gem 'launchy'
