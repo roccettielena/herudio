@@ -4,5 +4,6 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     password { SecureRandom.hex }
     confirmed_at { Time.now }
+    association :group, strategy: :build
   end
 end

@@ -80,6 +80,7 @@ end
 group :test do
   # RSpec
   gem 'fuubar'
+  gem 'shoulda-matchers'
 
   # Acceptance testing
   gem 'capybara'

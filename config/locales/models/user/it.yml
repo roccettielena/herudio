@@ -9,3 +9,4 @@ it:
         password_confirmation: 'Conferma password:'
         current_password:      'Password attuale:'
         full_name:             'Nome completo:'
+        group:                 'Gruppo:'
