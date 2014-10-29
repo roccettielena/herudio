@@ -11,3 +11,8 @@ section {
   max-width: $container-sm * 0.5;
   margin: 0 auto;
 }
+
+.container-md {
+  max-width: $container-sm * 1.25;
+  margin: 0 auto;
+}
