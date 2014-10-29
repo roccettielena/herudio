@@ -12,6 +12,13 @@ it:
       new:
         title:  'Conferma account'
         submit: 'Invia istruzioni'
+      email:
+        body_html: >
+          <p>Ciao %{full_name},</p>
+          <p>per confermare il tuo account sulla piattaforma %{site_name} clicca
+          <a href="%{url}">qui</a>.</p>
+          <p>Cordiali saluti,<br>
+          il team di %{site_name}</p>
 
     passwords:
       new:
@@ -20,6 +27,15 @@ it:
       edit:
         title:  'Reimposta password'
         submit: 'Reimposta password'
+      email:
+        body_html: >
+          <p>Ciao %{full_name},</p>
+          <p>per reimpostare la password per la piattaforma %{site_name} clicca
+          <a href="%{url}">qui</a>.</p>
+          <p>Se non hai chiesto di reimpostare la password, ignora questa
+          email.</p>
+          <p>Cordiali saluti,<br>
+          il team di %{site_name}</p>
 
     registrations:
       edit:
