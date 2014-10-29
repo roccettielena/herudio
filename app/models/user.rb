@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
          :trackable, :validatable, :registerable
 
   validates :group, presence: true
+  validates :full_name, presence: true
 end

@@ -5,7 +5,9 @@ RSpec.describe User do
     expect(subject).to be_valid
   end
 
-  it 'validates the presence of a group' do
-    expect(subject).to validate_presence_of(:group)
+  %w(full_name group).each do |attribute|
+    it "validates the presence of #{attribute}" do
+      expect(subject).to validate_presence_of(attribute)
+    end
   end
 end
