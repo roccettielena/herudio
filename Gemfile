@@ -21,6 +21,7 @@ gem 'devise'
 # Internationalization
 gem 'rails-i18n'
 gem 'devise-i18n'
+gem 'will-paginate-i18n'
 
 # Configuration
 gem 'figaro', '>= 1.0.0.rc1'
@@ -29,6 +30,10 @@ gem 'figaro', '>= 1.0.0.rc1'
 gem 'haml-rails'
 gem 'simple_form', '~> 3.1.0.rc2', github: 'plataformatec/simple_form'
 gem 'high_voltage'
+gem 'truncate_html'
+gem 'draper'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
 # Active Record
 gem 'pg'

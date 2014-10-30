@@ -1,0 +1,6 @@
+it:
+  controllers:
+    courses:
+      index:
+        title: 'Corsi'
+        empty: 'Nessun corso corrisponde ai criteri specificati.'

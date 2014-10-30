@@ -12,7 +12,7 @@
 
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li{class: ('active' if params[:controller] == 'high_voltage/pages' && params[:id] == 'home')}
+        %li{class: ('active' if params[:controller] == 'courses' && params[:action] == 'index')}
           = link_to "#{fa_icon('home')} #{t('layout.nav.home')}".html_safe, root_path
         %li{class: ('active' if params[:controller] == 'high_voltage/pages' && params[:id] == 'contact')}
           = link_to "#{fa_icon('envelope')} #{t('layout.nav.contact')}".html_safe, contact_path

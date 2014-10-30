@@ -1,0 +1,20 @@
+- provide :title, t('controllers.courses.index.title')
+
+%h1= t('controllers.courses.index.title')
+
+- if @courses.empty?
+  .strong
+    %p= t('controllers.courses.index.empty')
+- else
+  - @courses.each_slice(3) do |slice|
+    .row
+      - slice.each do |course|
+        - course = course.decorate
+
+        .col-xs-12.col-sm-6.col-md-4
+          .strong
+            %h3= link_to course.name, course
+            = course.short_description_html
+
+.text-center
+  = will_paginate @courses, renderer: BootstrapPagination::Rails
