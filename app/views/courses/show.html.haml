@@ -4,3 +4,23 @@
 
 .strong
   = course.description_html
+
+%h2= t('controllers.courses.show.lessons.title')
+
+%table.table.table-bordered.table-hover.strong
+  %thead
+    %tr
+      %th #
+      %th= t('activerecord.attributes.lesson.starts_at')
+      %th= t('activerecord.attributes.lesson.ends_at')
+
+  %tbody
+    - if course.lessons.empty?
+      %tr
+        %td(colspan='2')= t('controllers.courses.show.lessons.empty')
+    - else
+      - course.lessons.each_with_index do |lesson, index|
+        %tr
+          %td= index + 1
+          %td= lesson.starts_at
+          %td= lesson.ends_at

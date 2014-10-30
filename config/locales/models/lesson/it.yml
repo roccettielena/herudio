@@ -1,0 +1,6 @@
+it:
+  activerecord:
+    attributes:
+      lesson:
+        starts_at: 'Data inizio'
+        ends_at:   'Data fine'

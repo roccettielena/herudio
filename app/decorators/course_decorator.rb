@@ -1,6 +1,8 @@
 class CourseDecorator < Draper::Decorator
   delegate_all
 
+  decorates_association :lessons
+
   def description_html
     h.simple_format(object.description)
   end
