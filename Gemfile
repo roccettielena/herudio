@@ -89,6 +89,9 @@ group :test do
   gem 'fuubar'
   gem 'shoulda-matchers'
 
+  # Mocking
+  gem 'mocha'
+
   # Acceptance testing
   gem 'capybara'
   gem 'launchy'

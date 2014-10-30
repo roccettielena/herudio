@@ -14,6 +14,9 @@
       %th= t('activerecord.attributes.lesson.starts_at')
       %th= t('activerecord.attributes.lesson.ends_at')
 
+      - if user_signed_in?
+        %th
+
   %tbody
     - if course.lessons.empty?
       %tr
@@ -24,3 +27,10 @@
           %td= index + 1
           %td= lesson.starts_at
           %td= lesson.ends_at
+
+          - if user_signed_in?
+            %td
+              - if current_user.subscribed_to?(lesson)
+                = link_to "#{fa_icon('trash')} #{t('controllers.courses.show.lessons.unsubscribe')}".html_safe, [course, lesson, :subscription], method: :delete, class: 'btn btn-sm btn-danger'
+              - else
+                = link_to "#{fa_icon('plus')} #{t('controllers.courses.show.lessons.subscribe')}".html_safe, [course, lesson, :subscription], method: :post, class: 'btn btn-sm btn-primary'

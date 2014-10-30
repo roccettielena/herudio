@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   root to: 'courses#index'
   get '/contact', to: 'high_voltage/pages#show', id: 'contact'
 
-  resources :courses, only: [:index, :show]
+  resources :courses, only: [:index, :show] do
+    resources :lessons, only: [] do
+      resource :subscription, only: [:create, :destroy]
+    end
+  end
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
 end
