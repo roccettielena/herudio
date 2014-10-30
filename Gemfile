@@ -37,6 +37,7 @@ gem 'will_paginate-bootstrap'
 
 # Active Record
 gem 'pg'
+gem 'date_validator'
 
 # JavaScript runtime
 gem 'therubyracer', platform: :ruby
