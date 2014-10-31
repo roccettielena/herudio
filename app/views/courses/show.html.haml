@@ -13,6 +13,11 @@
         %strong= t('controllers.courses.show.location')
         = course.location
 
+      - if course.organizers.any?
+        %p
+          %strong= t('controllers.courses.show.organizers')
+          = course.organizers.map(&:full_name).join(', ')
+
 %h2= t('controllers.courses.show.lessons.title')
 
 %table.table.table-bordered.table-hover.strong
