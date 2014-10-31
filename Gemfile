@@ -5,9 +5,9 @@ ruby '2.1.3'
 gem 'rails', '4.1.6'
 
 # Asset processors
-gem 'sass-rails', '~> 4.0.3'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
 gem 'autoprefixer-rails'
 
 # Assets
@@ -24,7 +24,7 @@ gem 'devise-i18n'
 gem 'will-paginate-i18n'
 
 # Configuration
-gem 'figaro', '>= 1.0.0.rc1'
+gem 'figaro'
 
 # Views
 gem 'haml-rails'
