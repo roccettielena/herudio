@@ -7,7 +7,7 @@ RSpec.describe Course do
     expect(subject).to be_valid
   end
 
-  %w(name description).each do |attribute|
+  %w(name description location).each do |attribute|
     it "validates the presence of #{attribute}" do
       expect(subject).to validate_presence_of(attribute)
     end

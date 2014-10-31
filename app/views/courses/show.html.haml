@@ -2,8 +2,16 @@
 
 %h1= course.name
 
-.strong
-  = course.description_html
+.row
+  .col-xs-12.col-md-8
+    .strong
+      = course.description_html
+
+  .col-xs-12.col-md-4
+    .strong
+      %p
+        %strong= t('controllers.courses.show.location')
+        = course.location
 
 %h2= t('controllers.courses.show.lessons.title')
 
