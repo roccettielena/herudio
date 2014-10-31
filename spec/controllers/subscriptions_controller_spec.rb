@@ -62,6 +62,35 @@ RSpec.describe SubscriptionsController do
         }.not_to change(lesson.subscriptions, :count)
       end
     end
+
+    context 'when the lesson is in conflict' do
+      before(:each) do
+        course
+          .lessons
+          .expects(:find)
+          .once
+          .with(lesson.id.to_s)
+          .returns(lesson)
+
+        Course
+          .expects(:find)
+          .with(course.id.to_s)
+          .once
+          .returns(course)
+
+        lesson
+          .expects(:conflicting_for?)
+          .with(current_user)
+          .once
+          .returns(true)
+      end
+
+      it 'does not create the subscription' do
+        expect {
+          post :create, course_id: course.id, lesson_id: lesson.id
+        }.not_to change(lesson.subscriptions, :count)
+      end
+    end
   end
 
   describe "DELETE 'destroy'" do

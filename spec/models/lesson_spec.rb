@@ -65,4 +65,92 @@ RSpec.describe Lesson do
       expect(subject.available_seats).to eq(13)
     end
   end
+
+  describe '#overlaps_with?' do
+    subject do
+      FactoryGirl.build(:lesson,
+        starts_at: Time.now,
+        ends_at: Time.now + 1.hour
+      )
+    end
+
+    context 'when the lessons overlap' do
+      let(:lesson) do
+        FactoryGirl.build(:lesson,
+          starts_at: Time.now + 30.minutes,
+          ends_at: Time.now + 90.minutes
+        )
+      end
+
+      it 'returns true' do
+        expect(subject).to be_in_conflict_with(lesson)
+      end
+    end
+
+    context "when the lessons don't overlap" do
+      let(:lesson) do
+        FactoryGirl.build(:lesson,
+          starts_at: Time.now + 61.minutes,
+          ends_at: Time.now + 121.minutes
+        )
+      end
+
+      it 'returns false' do
+        expect(subject).not_to be_in_conflict_with(lesson)
+      end
+    end
+  end
+
+  describe '#conflicting_for?' do
+    let(:user) { stub() }
+
+    context 'when the user has conflicting lessons' do
+      before do
+        conflicting_lesson = stub()
+        compatible_lesson = stub()
+
+        user
+          .expects(:lessons)
+          .once
+          .returns([compatible_lesson, conflicting_lesson])
+
+        subject
+          .expects(:in_conflict_with?)
+          .with(compatible_lesson)
+          .once
+          .returns(false)
+
+        subject
+          .expects(:in_conflict_with?)
+          .with(conflicting_lesson)
+          .once
+          .returns(true)
+      end
+
+      it 'returns true' do
+        expect(subject).to be_conflicting_for(user)
+      end
+    end
+
+    context 'when the user has no conflicting lessons' do
+      before do
+        compatible_lesson = stub()
+
+        user
+          .expects(:lessons)
+          .once
+          .returns([compatible_lesson])
+
+        subject
+          .expects(:in_conflict_with?)
+          .with(compatible_lesson)
+          .once
+          .returns(false)
+      end
+
+      it 'returns false' do
+        expect(subject).not_to be_conflicting_for(user)
+      end
+    end
+  end
 end

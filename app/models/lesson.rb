@@ -17,4 +17,12 @@ class Lesson < ActiveRecord::Base
   def available_seats
     seats - taken_seats
   end
+
+  def in_conflict_with?(lesson)
+    (starts_at <= lesson.ends_at) && (ends_at >= lesson.starts_at)
+  end
+
+  def conflicting_for?(user)
+    user.lessons.any?{ |l| in_conflict_with?(l) }
+  end
 end

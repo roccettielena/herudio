@@ -17,6 +17,11 @@ class SubscriptionsController < ApplicationController
       return
     end
 
+    if @lesson.conflicting_for?(current_user)
+      redirect_back_or @course, alert: t('controllers.subscriptions.create.conflicting')
+      return
+    end
+
     Subscription.create!(user: current_user, lesson: @lesson)
     redirect_back_or @course, notice: t('controllers.subscriptions.create.subscribed')
   end

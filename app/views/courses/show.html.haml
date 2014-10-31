@@ -48,4 +48,4 @@
               - if current_user.subscribed_to?(lesson)
                 = link_to "#{fa_icon('trash')} #{t('controllers.courses.show.lessons.unsubscribe')}".html_safe, [course, lesson, :subscription], method: :delete, class: 'btn btn-sm btn-danger'
               - else
-                = link_to "#{fa_icon('plus')} #{t('controllers.courses.show.lessons.subscribe')}".html_safe, [course, lesson, :subscription], method: :post, class: 'btn btn-sm btn-primary', disabled: (lesson.available_seats <= 0)
+                = link_to "#{fa_icon('plus')} #{t('controllers.courses.show.lessons.subscribe')}".html_safe, [course, lesson, :subscription], method: :post, class: 'btn btn-sm btn-primary', disabled: (lesson.available_seats <= 0 || lesson.conflicting_for?(current_user))
