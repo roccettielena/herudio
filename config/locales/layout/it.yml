@@ -9,3 +9,8 @@ it:
       home:          'Home'
       contact:       'Contatti'
       subscriptions: 'Le mie iscrizioni'
+
+    course_search:
+      label:       'Nome corso'
+      placeholder: 'Cerca corsi...'
+      submit:      'Cerca'

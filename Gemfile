@@ -48,6 +48,9 @@ gem 'thin'
 # Process management
 gem 'foreman'
 
+# Controllers
+gem 'has_scope'
+
 group :development do
   # Preloading
   gem 'spring'

@@ -8,6 +8,16 @@ RSpec.describe CoursesController do
       get :index
       expect(assigns(:courses)).to eq([course])
     end
+
+    context "when the 'by_name' param is specified'" do
+      let!(:matching_course) { FactoryGirl.create(:course, name: 'Foocourse') }
+      let!(:nonmatching_course) { FactoryGirl.create(:course, name: 'Barcourse') }
+
+      it 'loads only the matching courses' do
+        get :index, by_name: 'foo'
+        expect(assigns(:courses)).to eq([matching_course])
+      end
+    end
   end
 
   describe "GET 'show'" do

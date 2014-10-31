@@ -17,6 +17,18 @@
         %li{class: ('active' if params[:controller] == 'high_voltage/pages' && params[:id] == 'contact')}
           = link_to "#{fa_icon('envelope')} #{t('layout.nav.contact')}".html_safe, contact_path
 
+      %form.navbar-form.navbar-left{role: 'search', action: root_path}
+        .form-group
+          %label.sr-only(for='course_search_query')= t('layout.course_search.label')
+
+          .input-group
+            %input.form-control#course_search_query{name: :by_name, type: 'text', placeholder: t('layout.course_search.placeholder'), value: params[:by_name]}
+
+            .input-group-btn
+              %button.btn.btn-default(type='submit')
+                = fa_icon 'search'
+                = t('layout.course_search.submit')
+
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           %li.dropdown
