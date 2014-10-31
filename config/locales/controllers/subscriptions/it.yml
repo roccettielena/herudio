@@ -4,6 +4,7 @@ it:
       create:
         subscribed:         'Ti sei iscritto alla lezione specificata.'
         already_subscribed: 'Sei già iscritto a questa lezione!'
+        no_seats:           'Non ci sono più posti disponibili per questa lezione.'
       destroy:
         unsubscribed:   'La tua iscrizione è stata cancellata.'
         not_subscribed: 'Non sei iscritto a questa lezione!'

@@ -2,6 +2,7 @@ it:
   activerecord:
     attributes:
       lesson:
-        starts_at: 'Data inizio'
-        ends_at:   'Data fine'
-        course:    'Corso'
+        starts_at:       'Data inizio'
+        ends_at:         'Data fine'
+        course:          'Corso'
+        available_seats: 'Posti disponibili'

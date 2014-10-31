@@ -5,4 +5,5 @@ class Course < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
   validates :location, presence: true
+  validates :seats, presence: true, numericality: { greater_than: 0 }
 end

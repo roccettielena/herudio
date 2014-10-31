@@ -5,6 +5,7 @@ RSpec.describe SubscriptionsController do
   before { sign_in current_user }
 
   let!(:lesson) { FactoryGirl.create(:lesson) }
+  let(:course) { lesson.course }
 
   describe "GET 'index'" do
     let(:subscription) { FactoryGirl.create(:subscription, user: current_user) }
@@ -19,7 +20,7 @@ RSpec.describe SubscriptionsController do
     context 'when the user is not subscribed to the lesson' do
       it 'creates the subscription' do
         expect {
-          post :create, course_id: lesson.course.id, lesson_id: lesson.id
+          post :create, course_id: course.id, lesson_id: lesson.id
         }.to change(lesson.subscriptions, :count).by(1)
       end
     end
@@ -29,7 +30,35 @@ RSpec.describe SubscriptionsController do
 
       it 'does not create the subscription' do
         expect {
-          post :create, course_id: lesson.course.id, lesson_id: lesson.id
+          post :create, course_id: course.id, lesson_id: lesson.id
+        }.not_to change(lesson.subscriptions, :count)
+      end
+    end
+
+    context 'when there are no seats available' do
+      before(:each) do
+        course
+          .lessons
+          .expects(:find)
+          .once
+          .with(lesson.id.to_s)
+          .returns(lesson)
+
+        Course
+          .expects(:find)
+          .with(course.id.to_s)
+          .once
+          .returns(course)
+
+        lesson
+          .expects(:available_seats)
+          .once
+          .returns(0)
+      end
+
+      it 'does not create the subscription' do
+        expect {
+          post :create, course_id: course.id, lesson_id: lesson.id
         }.not_to change(lesson.subscriptions, :count)
       end
     end
@@ -41,7 +70,7 @@ RSpec.describe SubscriptionsController do
 
       it 'destroys the subscription' do
         expect {
-          delete :destroy, course_id: lesson.course.id, lesson_id: lesson.id
+          delete :destroy, course_id: course.id, lesson_id: lesson.id
         }.to change(lesson.subscriptions, :count).by(-1)
       end
     end
@@ -49,7 +78,7 @@ RSpec.describe SubscriptionsController do
     context 'when the user is not subscribed to the lesson' do
       it 'does not destroy the subscription' do
         expect {
-          delete :destroy, course_id: lesson.course.id, lesson_id: lesson.id
+          delete :destroy, course_id: course.id, lesson_id: lesson.id
         }.not_to change(lesson.subscriptions, :count)
       end
     end
