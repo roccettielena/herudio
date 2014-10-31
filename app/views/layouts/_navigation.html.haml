@@ -28,6 +28,8 @@
             %ul.dropdown-menu(role='menu' aria-labelledby='user-dropdown')
               %li{role: 'presentation', class: ('active' if params[:controller] == 'users/registrations' && ['edit', 'update'].include?(params[:action]))}
                 = link_to "#{fa_icon('cog')} #{t('layout.nav.edit_profile')}".html_safe, edit_user_registration_path, role: 'menuitem', tabindex: '-1'
+              %li{role: 'presentation', class: ('active' if params[:controller] == 'subscriptions' && params[:action] == 'index')}
+                = link_to "#{fa_icon('th-list')} #{t('layout.nav.subscriptions')}".html_safe, subscriptions_path, role: 'menuitem', tabindex: '-1'
               %li.divider
               %li{role: 'presentation'}
                 = link_to "#{fa_icon('sign-out')} #{t('layout.nav.sign_out')}".html_safe, destroy_user_session_path, method: :delete, role: 'menuitem', tabindex: '-1'

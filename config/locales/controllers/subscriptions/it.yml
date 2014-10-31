@@ -7,3 +7,7 @@ it:
       destroy:
         unsubscribed:   'La tua iscrizione è stata cancellata.'
         not_subscribed: 'Non sei iscritto a questa lezione!'
+      index:
+        title:       'Le mie iscrizioni'
+        unsubscribe: 'Cancella iscrizione'
+        empty:       'Non ti sei ancora iscritto ad alcuna lezione.'

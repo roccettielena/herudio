@@ -6,6 +6,15 @@ RSpec.describe SubscriptionsController do
 
   let!(:lesson) { FactoryGirl.create(:lesson) }
 
+  describe "GET 'index'" do
+    let(:subscription) { FactoryGirl.create(:subscription, user: current_user) }
+
+    it 'retrieves the subscriptions' do
+      get :index
+      expect(assigns(:subscriptions)).to eq([subscription])
+    end
+  end
+
   describe "POST 'create'" do
     context 'when the user is not subscribed to the lesson' do
       it 'creates the subscription' do

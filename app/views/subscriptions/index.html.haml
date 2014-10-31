@@ -1,0 +1,27 @@
+- provide :title, t('controllers.subscriptions.index.title')
+
+%h1= t('controllers.subscriptions.index.title')
+
+%table.table.table-bordered.table-hover.strong
+  %thead
+    %tr
+      %th= t('activerecord.attributes.lesson.course')
+      %th= t('activerecord.attributes.lesson.starts_at')
+      %th= t('activerecord.attributes.lesson.ends_at')
+      %th
+
+
+  %tbody
+    - if current_user.subscriptions.any?
+      - current_user.subscriptions.each do |subscription|
+        - subscription = subscription.decorate
+
+        %tr
+          %td= link_to subscription.course.name, subscription.course
+          %td= subscription.lesson.starts_at
+          %td= subscription.lesson.ends_at
+          %td
+            = link_to "#{fa_icon('trash')} #{t('controllers.subscriptions.index.unsubscribe')}".html_safe, [subscription.course, subscription.lesson, :subscription], method: :delete, class: 'btn btn-sm btn-danger'
+    - else
+      %tr
+        %td(colspan='4')= t('controllers.subscriptions.index.empty')

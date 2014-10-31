@@ -8,5 +8,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :subscriptions, only: :index
+
   devise_for :users, controllers: { registrations: 'users/registrations' }
 end

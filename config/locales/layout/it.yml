@@ -3,8 +3,9 @@ it:
     toggle_navigation: 'Visualizza/nascondi navigazione'
 
     nav:
-      sign_in:      'Accedi'
-      sign_out:     'Esci'
-      edit_profile: 'Modifica profilo'
-      home:         'Home'
-      contact:      'Contatti'
+      sign_in:       'Accedi'
+      sign_out:      'Esci'
+      edit_profile:  'Modifica profilo'
+      home:          'Home'
+      contact:       'Contatti'
+      subscriptions: 'Le mie iscrizioni'

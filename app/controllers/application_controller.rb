@@ -8,4 +8,9 @@ class ApplicationController < ActionController::Base
   def raise_404
     raise ActionController::RoutingError.new('Not Found')
   end
+
+  def redirect_back_or(default, *options)
+    destination = request.referer.present? ? :back : default
+    redirect_to destination, *options
+  end
 end

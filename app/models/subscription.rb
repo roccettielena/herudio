@@ -4,4 +4,8 @@ class Subscription < ActiveRecord::Base
 
   validates :user, presence: true
   validates :lesson, presence: true, uniqueness: { scope: :user }
+
+  def course
+    lesson.course
+  end
 end
