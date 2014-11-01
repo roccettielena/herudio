@@ -20,8 +20,7 @@
           %td= link_to subscription.course.name, subscription.course
           %td= subscription.lesson.starts_at
           %td= subscription.lesson.ends_at
-          %td
-            = link_to "#{fa_icon('trash')} #{t('controllers.subscriptions.index.unsubscribe')}".html_safe, [subscription.course, subscription.lesson, :subscription], method: :delete, class: 'btn btn-sm btn-danger'
+          %td= subscription_link current_user, subscription.lesson
     - else
       %tr
         %td(colspan='4')= t('controllers.subscriptions.index.empty')
