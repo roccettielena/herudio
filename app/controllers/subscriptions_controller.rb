@@ -17,8 +17,13 @@ class SubscriptionsController < ApplicationController
       return
     end
 
-    if @lesson.conflicting_for?(current_user)
-      redirect_back_or @course, alert: t('controllers.subscriptions.create.conflicting')
+    if @lesson.conflicting_for?(current_user, [:subscribed])
+      redirect_back_or @course, alert: t('controllers.subscriptions.create.conflicting_with_subscribed')
+      return
+    end
+
+    if @lesson.conflicting_for?(current_user, [:organized])
+      redirect_back_or @course, alert: t('controllers.subscriptions.create.conflicting_with_organized')
       return
     end
 

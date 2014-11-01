@@ -22,7 +22,15 @@ class Lesson < ActiveRecord::Base
     (starts_at <= lesson.ends_at) && (ends_at >= lesson.starts_at)
   end
 
-  def conflicting_for?(user)
-    user.lessons.any?{ |l| in_conflict_with?(l) }
+  def conflicting_for?(user, associations = [:subscribed, :organized])
+    raise 'Invalid association(s) specified' if associations.select do |a|
+      !a.try(:to_sym).in?([:subscribed, :organized])
+    end.any?
+
+    associations.any? do |association|
+      user.send("#{association}_lessons").any? do |lesson|
+        in_conflict_with?(lesson)
+      end
+    end
   end
 end

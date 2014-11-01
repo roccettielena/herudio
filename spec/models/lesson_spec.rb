@@ -110,7 +110,7 @@ RSpec.describe Lesson do
         compatible_lesson = stub()
 
         user
-          .expects(:lessons)
+          .expects(:subscribed_lessons)
           .once
           .returns([compatible_lesson, conflicting_lesson])
 
@@ -128,7 +128,7 @@ RSpec.describe Lesson do
       end
 
       it 'returns true' do
-        expect(subject).to be_conflicting_for(user)
+        expect(subject).to be_conflicting_for(user, [:subscribed])
       end
     end
 
@@ -137,19 +137,32 @@ RSpec.describe Lesson do
         compatible_lesson = stub()
 
         user
-          .expects(:lessons)
+          .expects(:subscribed_lessons)
+          .once
+          .returns([compatible_lesson])
+
+        user
+          .expects(:organized_lessons)
           .once
           .returns([compatible_lesson])
 
         subject
           .expects(:in_conflict_with?)
           .with(compatible_lesson)
-          .once
+          .twice
           .returns(false)
       end
 
       it 'returns false' do
         expect(subject).not_to be_conflicting_for(user)
+      end
+    end
+
+    context 'when an invalid association is specified' do
+      it 'raises an error' do
+        expect {
+          subject.conflicting_for?(user, [:organized, :foo])
+        }.to raise_error
       end
     end
   end

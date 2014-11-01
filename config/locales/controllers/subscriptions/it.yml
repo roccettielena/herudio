@@ -2,13 +2,16 @@ it:
   controllers:
     subscriptions:
       create:
-        subscribed:         'Ti sei iscritto alla lezione specificata.'
-        already_subscribed: 'Sei già iscritto a questa lezione!'
-        no_seats:           'Non ci sono più posti disponibili per questa lezione.'
-        conflicting:        "Questa iscrizione è in conflitto con un'iscrizione esistente."
+        subscribed:                  'Ti sei iscritto alla lezione specificata.'
+        already_subscribed:          'Sei già iscritto a questa lezione!'
+        no_seats:                    'Non ci sono più posti disponibili per questa lezione.'
+        conflicting_with_subscribed: "Questa iscrizione è in conflitto con un'iscrizione esistente."
+        conflicting_with_organized:  'Questa iscrizione è in conflitto con una lezione che organizzi.'
+
       destroy:
         unsubscribed:   'La tua iscrizione è stata cancellata.'
         not_subscribed: 'Non sei iscritto a questa lezione!'
+
       index:
         title:       'Le mie iscrizioni'
         unsubscribe: 'Cancella iscrizione'
