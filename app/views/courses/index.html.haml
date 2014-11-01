@@ -3,14 +3,16 @@
 .row
   .col-xs-12.col-sm-6
     %h1= t('controllers.courses.index.title')
-  .col-xs-12.col-sm-6
-    .pull-right
-      .btn-group.toolbar
-        = link_to fa_icon('times'), root_path(params.except(:by_category)), class: 'btn btn-default'
 
-        - CourseCategory.all.each do |category|
-          - classes = 'btn ' + ((params[:by_category].to_i == category.id) ? 'btn-primary' : 'btn-default')
-          = link_to category.name, root_path(params.merge(by_category: category.id)), class: classes
+  - if CourseCategory.any?
+    .col-xs-12.col-sm-6
+      .pull-right
+        .btn-group.toolbar
+          = link_to fa_icon('times'), root_path(params.except(:by_category)), class: 'btn btn-default'
+
+          - CourseCategory.all.each do |category|
+            - classes = 'btn ' + ((params[:by_category].to_i == category.id) ? 'btn-primary' : 'btn-default')
+            = link_to category.name, root_path(params.merge(by_category: category.id)), class: classes
 
 - if @courses.empty?
   .strong
