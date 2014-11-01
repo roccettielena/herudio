@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  belongs_to :group, inverse_of: :users
+  belongs_to :group, class_name: 'UserGroup', inverse_of: :users
 
   has_many :subscriptions, dependent: :destroy, inverse_of: :user
   has_many :subscribed_lessons, class_name: 'Lesson', through: :subscriptions, source: :lesson

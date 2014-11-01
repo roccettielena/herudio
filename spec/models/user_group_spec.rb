@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Group do
-  subject { FactoryGirl.build(:group) }
+RSpec.describe UserGroup do
+  subject { FactoryGirl.build(:user_group) }
 
   it 'is valid' do
     expect(subject).to be_valid
@@ -12,7 +12,7 @@ RSpec.describe Group do
   end
 
   it 'validates the uniqueness of the name' do
-    FactoryGirl.create(:group)
+    FactoryGirl.create(:user_group)
     expect(subject).to validate_uniqueness_of(:name)
   end
 end

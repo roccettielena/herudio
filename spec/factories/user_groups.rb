@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :group do
+  factory :user_group do
     name { SecureRandom.hex }
   end
 end
