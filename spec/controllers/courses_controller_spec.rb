@@ -18,6 +18,16 @@ RSpec.describe CoursesController do
         expect(assigns(:courses)).to eq([matching_course])
       end
     end
+
+    context "when the 'by_category' param is specified'" do
+      let!(:matching_course) { FactoryGirl.create(:course) }
+      let!(:nonmatching_course) { FactoryGirl.create(:course) }
+
+      it 'loads only the matching courses' do
+        get :index, by_category: matching_course.category.id
+        expect(assigns(:courses)).to eq([matching_course])
+      end
+    end
   end
 
   describe "GET 'show'" do

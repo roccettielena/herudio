@@ -7,7 +7,7 @@ RSpec.describe Course do
     expect(subject).to be_valid
   end
 
-  %w(name description location seats).each do |attribute|
+  %w(name description location seats category).each do |attribute|
     it "validates the presence of #{attribute}" do
       expect(subject).to validate_presence_of(attribute)
     end
@@ -28,6 +28,15 @@ RSpec.describe Course do
 
     it 'returns the courses matching the given query' do
       expect(Course.by_name('foo')).to eq([matching_course])
+    end
+  end
+
+  describe '.by_category' do
+    let!(:matching_course) { FactoryGirl.create(:course) }
+    let!(:nonmatching_course) { FactoryGirl.create(:course) }
+
+    it 'returns the courses belonging to the given category' do
+      expect(Course.by_category(matching_course.category)).to eq([matching_course])
     end
   end
 end

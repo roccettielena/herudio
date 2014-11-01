@@ -1,6 +1,14 @@
 - provide :title, t('controllers.courses.index.title')
 
-%h1= t('controllers.courses.index.title')
+.row
+  .col-xs-12.col-sm-6
+    %h1= t('controllers.courses.index.title')
+  .col-xs-12.col-sm-6
+    .pull-right
+      .btn-group.toolbar
+        - CourseCategory.all.each do |category|
+          - classes = 'btn ' + ((params[:by_category].to_i == category.id) ? 'btn-primary' : 'btn-default')
+          = link_to category.name, root_path(params.merge(by_category: category.id)), class: classes
 
 - if @courses.empty?
   .strong
