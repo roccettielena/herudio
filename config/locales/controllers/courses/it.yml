@@ -7,6 +7,7 @@ it:
       show:
         location:   'Luogo:'
         organizers: 'Organizzatore/i:'
+        category:   'Categoria:'
         lessons:
           title:       'Lezioni'
           empty:       'Non ci sono lezioni per questo corso.'
