@@ -17,11 +17,17 @@
         %li{class: ('active' if params[:controller] == 'high_voltage/pages' && params[:id] == 'contact')}
           = link_to "#{fa_icon('envelope')} #{t('layout.nav.contact')}".html_safe, contact_path
 
-      %form.navbar-form.navbar-left{role: 'search', action: root_path}
+      %form.navbar-form.navbar-left{role: 'search', action: root_path(params)}
+        - params.slice(:by_category).each_pair do |name, value|
+          %input{type: 'hidden', value: value, name: name}
+
         .form-group
           %label.sr-only(for='course_search_query')= t('layout.course_search.label')
 
           .input-group
+            .input-group-btn
+              = link_to fa_icon('times'), root_path(params.except(:by_name)), class: 'btn btn-default'
+
             %input.form-control#course_search_query{name: :by_name, type: 'text', placeholder: t('layout.course_search.placeholder'), value: params[:by_name]}
 
             .input-group-btn
