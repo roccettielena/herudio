@@ -22,6 +22,7 @@ gem 'devise'
 gem 'rails-i18n'
 gem 'devise-i18n'
 gem 'will-paginate-i18n'
+gem 'kaminari-i18n'
 
 # Configuration
 gem 'figaro'
