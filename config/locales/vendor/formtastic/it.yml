@@ -1,0 +1,7 @@
+it:
+  formtastic:
+    actions:
+      create: 'Crea %{model}'
+      update: 'Aggiorna %{model}'
+      reset:  'Reimposta modulo'
+      cancel: 'Cancella e torna indietro'

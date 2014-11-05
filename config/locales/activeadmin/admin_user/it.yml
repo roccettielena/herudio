@@ -1,0 +1,5 @@
+it:
+  activeadmin:
+    admin_user:
+      panels:
+        details: 'Dettagli amministratore'

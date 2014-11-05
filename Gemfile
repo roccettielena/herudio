@@ -51,6 +51,9 @@ gem 'foreman'
 # Controllers
 gem 'has_scope'
 
+# Administration
+gem 'activeadmin', github: 'activeadmin'
+
 group :development do
   # Preloading
   gem 'spring'
