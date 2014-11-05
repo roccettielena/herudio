@@ -1,0 +1,26 @@
+it:
+  activerecord:
+    models:
+      course:
+        one:   'Corso'
+        other: 'Corsi'
+
+    attributes:
+      course:
+        id:          'ID'
+        name:        'Nome'
+        location:    'Luogo'
+        seats:       'Posti'
+        description: 'Descrizione'
+        category:    'Categoria'
+        organizers:  'Organizzatori'
+
+  formtastic:
+    labels:
+      course:
+        name:        'Nome:'
+        location:    'Luogo:'
+        seats:       'Posti:'
+        description: 'Descrizione:'
+        category:    'Categoria:'
+        organizers:  'Organizzatori:'

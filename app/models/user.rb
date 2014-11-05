@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   validates :group, presence: true
   validates :full_name, presence: true
 
+  scope :ordered_by_name, ->{ order('full_name ASC') }
+
   def subscription_to(lesson)
     subscriptions.find_by(lesson: lesson)
   end
