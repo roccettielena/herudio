@@ -13,7 +13,9 @@ ActiveAdmin.register Course do
 
     column :name
     column :location
-    column :category
+    column :category do |course|
+      link_to course.category.name, admin_course_category_path(course.category)
+    end
 
     actions
   end
@@ -23,7 +25,11 @@ ActiveAdmin.register Course do
       row :id
       row :name
       row :location
-      row :category
+
+      row :category do |course|
+        link_to course.category.name, admin_course_category_path(course.category)
+      end
+
       row :seats
 
       row :organizers do

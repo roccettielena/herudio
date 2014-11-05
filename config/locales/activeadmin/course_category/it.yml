@@ -1,0 +1,5 @@
+it:
+  activeadmin:
+    course_category:
+      panels:
+        details: 'Dettagli categoria'

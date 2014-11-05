@@ -1,0 +1,16 @@
+it:
+  activerecord:
+    models:
+      course_category:
+        one:   'Categoria'
+        other: 'Categorie'
+
+    attributes:
+      course_category:
+        id:   'ID'
+        name: 'Nome'
+
+  formtastic:
+    labels:
+      course_category:
+        name: 'Nome:'
