@@ -66,7 +66,7 @@ RSpec.describe Lesson do
     end
   end
 
-  describe '#overlaps_with?' do
+  describe '#in_conflict_with?' do
     subject do
       FactoryGirl.build(:lesson,
         starts_at: Time.now,
@@ -101,14 +101,14 @@ RSpec.describe Lesson do
     end
   end
 
-  describe '#conflicting_for?' do
+  describe '#conflicting_for' do
     let(:user) { stub() }
+
+    let(:conflicting_lesson) { stub() }
+    let(:compatible_lesson) { stub() }
 
     context 'when the user has conflicting lessons' do
       before do
-        conflicting_lesson = stub()
-        compatible_lesson = stub()
-
         user
           .expects(:subscribed_lessons)
           .once
@@ -127,15 +127,13 @@ RSpec.describe Lesson do
           .returns(true)
       end
 
-      it 'returns true' do
-        expect(subject).to be_conflicting_for(user, [:subscribed])
+      it 'returns the conflicting lesson' do
+        expect(subject.conflicting_for(user, [:subscribed])).to eq(conflicting_lesson)
       end
     end
 
     context 'when the user has no conflicting lessons' do
       before do
-        compatible_lesson = stub()
-
         user
           .expects(:subscribed_lessons)
           .once
@@ -153,8 +151,8 @@ RSpec.describe Lesson do
           .returns(false)
       end
 
-      it 'returns false' do
-        expect(subject).not_to be_conflicting_for(user)
+      it 'returns nil' do
+        expect(subject.conflicting_for(user)).to be_nil
       end
     end
 
