@@ -38,4 +38,15 @@ ActiveAdmin.register AdminUser do
       row :updated_at
     end
   end
+
+  controller do
+    def update
+      if params[:admin_user][:password].blank?
+        params[:admin_user].delete('password')
+        params[:admin_user].delete('password_confirmation')
+      end
+
+      super
+    end
+  end
 end
