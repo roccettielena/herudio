@@ -17,13 +17,23 @@ class SubscriptionsController < ApplicationController
       return
     end
 
-    if @lesson.conflicting_for?(current_user, [:subscribed])
-      redirect_back_or @course, alert: t('controllers.subscriptions.create.conflicting_with_subscribed')
+    if (conflicting_lesson = @lesson.conflicting_for(current_user, [:subscribed]))
+      flash[:alert] = t('controllers.subscriptions.create.conflicting_with_subscribed_html',
+        course_url: course_path(conflicting_lesson.course),
+        course_name: conflicting_lesson.course.name
+      )
+
+      redirect_back_or @course
       return
     end
 
-    if @lesson.conflicting_for?(current_user, [:organized])
-      redirect_back_or @course, alert: t('controllers.subscriptions.create.conflicting_with_organized')
+    if (conflicting_lesson = @lesson.conflicting_for(current_user, [:organized]))
+      flash[:alert] = t('controllers.subscriptions.create.conflicting_with_organized_html',
+        course_url: course_path(conflicting_lesson.course),
+        course_name: conflicting_lesson.course.name
+      )
+
+      redirect_back_or @course
       return
     end
 

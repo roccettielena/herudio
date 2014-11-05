@@ -79,13 +79,13 @@ RSpec.describe SubscriptionsController do
             .once
             .returns(course)
 
-          lesson.stubs(conflicting_for?: false)
+          lesson.stubs(conflicting_for: false)
 
           lesson
-            .expects(:conflicting_for?)
+            .expects(:conflicting_for)
             .with(current_user, [association.to_sym])
             .once
-            .returns(true)
+            .returns(stub(course: stub(name: 'Test course', id: 1)))
         end
 
         it 'does not create the subscription' do
