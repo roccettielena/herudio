@@ -1,0 +1,5 @@
+it:
+  activeadmin:
+    user:
+      panels:
+        details: 'Dettagli utente'

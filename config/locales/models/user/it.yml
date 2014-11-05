@@ -1,12 +1,38 @@
 it:
   simple_form:
     labels:
-      user:
+      user: &labels
         email:                 'Email:'
         password:              'Password:'
         remember_me:           'Ricordami'
+        password:              'Password:'
         new_password:          'Nuova password:'
         password_confirmation: 'Conferma password:'
         current_password:      'Password attuale:'
         full_name:             'Nome completo:'
         group:                 'Gruppo:'
+
+  formtastic:
+    labels:
+      user: *labels
+    hints:
+      user:
+        password: 'Lascia vuoto se non vuoi cambiarla.'
+
+  activerecord:
+    models:
+      user:
+        one: 'Utente'
+        other: 'Utenti'
+
+    attributes:
+      user:
+        id:                 'ID'
+        group:              'Gruppo'
+        full_name:          'Nome completo'
+        email:              'Email'
+        current_sign_in_at: 'Ultimo accesso'
+        current_sign_in_ip: 'Ultimo IP'
+        sign_in_count:      'Numero di accessi'
+        created_at:         'Data creazione'
+        updated_at:         'Data aggiornamento'
