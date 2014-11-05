@@ -1,0 +1,5 @@
+it:
+  activeadmin:
+    user_group:
+      panels:
+        details: 'Dettagli gruppo'

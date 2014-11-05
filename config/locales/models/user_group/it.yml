@@ -1,0 +1,16 @@
+it:
+  activerecord:
+    models:
+      user_group:
+        one:   'Gruppo'
+        other: 'Gruppi'
+
+    attributes:
+      user_group:
+        id:   'ID'
+        name: 'Nome'
+
+  formtastic:
+    labels:
+      user_group:
+        name: 'Nome:'
