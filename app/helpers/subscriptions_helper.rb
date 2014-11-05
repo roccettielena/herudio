@@ -21,7 +21,15 @@ module SubscriptionsHelper
       disabled: (lesson.available_seats <= 0 || lesson.conflicting_for?(user))
     )
 
-    link_to text, href, options
+    output = [link_to(text, href, options)]
+
+    conflict_message = conflict_message_for(user, lesson, options)
+
+    if conflict_message
+      output << fa_icon('question-circle', class: 'fa-fw text-warning', data: { toggle: 'tooltip' }, title: conflict_message)
+    end
+
+    output.join("\n").html_safe
   end
 
   def unsubscribe_link(user, lesson, options = {})
@@ -33,6 +41,26 @@ module SubscriptionsHelper
     options = { class: 'btn btn-sm btn-danger' }.merge(options)
     options = options.merge(method: :delete)
 
-    link_to text, href, options
+    output = [link_to(text, href, options)]
+
+    output.join("\n").html_safe
+  end
+
+  private
+
+  def conflict_message_for(user, lesson, options = {})
+    conflict_message = nil
+
+    if (conflicting_lesson = lesson.conflicting_for(user, [:subscribed]))
+      conflict_message = t('controllers.subscriptions.create.conflicting_with_subscribed',
+        course_name: conflicting_lesson.course.name
+      )
+    elsif (conflicting_lesson = lesson.conflicting_for(user, [:organized]))
+      conflict_message = t('controllers.subscriptions.create.conflicting_with_organized',
+        course_name: conflicting_lesson.course.name
+      )
+    end
+
+    conflict_message
   end
 end
