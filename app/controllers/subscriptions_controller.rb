@@ -20,7 +20,7 @@ class SubscriptionsController < ApplicationController
     if (conflicting_lesson = @lesson.conflicting_for(current_user, [:subscribed]))
       flash[:alert] = t('controllers.subscriptions.create.conflicting_with_subscribed_html',
         course_url: course_path(conflicting_lesson.course),
-        course_name: conflicting_lesson.course.name
+        course_name: ERB::Util.html_escape(conflicting_lesson.course.name)
       )
 
       redirect_back_or @course
@@ -30,7 +30,7 @@ class SubscriptionsController < ApplicationController
     if (conflicting_lesson = @lesson.conflicting_for(current_user, [:organized]))
       flash[:alert] = t('controllers.subscriptions.create.conflicting_with_organized_html',
         course_url: course_path(conflicting_lesson.course),
-        course_name: conflicting_lesson.course.name
+        course_name: ERB::Util.html_escape(conflicting_lesson.course.name)
       )
 
       redirect_back_or @course
