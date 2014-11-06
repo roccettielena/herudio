@@ -3,3 +3,6 @@ it:
     user_group:
       panels:
         details: 'Dettagli gruppo'
+
+      destroy:
+        restricted: 'Non puoi eliminare un gruppo che contiene utenti.'

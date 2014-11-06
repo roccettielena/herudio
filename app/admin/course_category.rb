@@ -26,4 +26,11 @@ ActiveAdmin.register CourseCategory do
 
     f.actions
   end
+
+  controller do
+    rescue_from ActiveRecord::DeleteRestrictionError do
+      flash[:error] = t('activeadmin.course_category.destroy.restricted')
+      redirect_to :back
+    end
+  end
 end

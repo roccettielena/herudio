@@ -26,4 +26,11 @@ ActiveAdmin.register UserGroup do
 
     f.actions
   end
+
+  controller do
+    rescue_from ActiveRecord::DeleteRestrictionError do
+      flash[:error] = t('activeadmin.user_group.destroy.restricted')
+      redirect_to :back
+    end
+  end
 end

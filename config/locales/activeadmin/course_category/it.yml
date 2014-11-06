@@ -3,3 +3,6 @@ it:
     course_category:
       panels:
         details: 'Dettagli categoria'
+
+      destroy:
+        restricted: 'Non puoi eliminare una categoria che contiene corsi.'
