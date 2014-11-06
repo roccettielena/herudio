@@ -6,3 +6,6 @@ it:
 
       destroy:
         restricted: 'Non puoi eliminare un gruppo che contiene utenti.'
+
+      actions:
+        users: 'Visualizza Utenti'

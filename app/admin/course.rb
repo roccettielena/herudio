@@ -9,10 +9,6 @@ ActiveAdmin.register Course do
     :id, :starts_at_date, :starts_at_time_hour, :starts_at_time_minute, :ends_at_date, :ends_at_time_hour, :ends_at_time_minute, :_destroy
   ]
 
-  action_item :subscriptions, only: :show do
-    link_to t('activeadmin.course.actions.subscriptions'), admin_course_subscriptions_path(course)
-  end
-
   index do
     selectable_column
     id_column
@@ -41,7 +37,7 @@ ActiveAdmin.register Course do
 
         row :organizers do
           course.organizers.map do |organizer|
-            organizer.full_name
+            link_to organizer.full_name, admin_user_path(organizer)
           end.join(', ')
         end
 
@@ -58,6 +54,24 @@ ActiveAdmin.register Course do
         column t('activerecord.attributes.lesson.ends_at'), :ends_at
         column t('activerecord.attributes.lesson.taken_seats'), :taken_seats
         column t('activerecord.attributes.lesson.available_seats'), :available_seats
+      end
+    end
+
+    course.lessons.each do |lesson|
+      panel t('activeadmin.course.panels.subscriptions', starts_at: lesson.starts_at, ends_at: lesson.ends_at) do
+        table_for lesson.subscriptions do
+          column t('activerecord.attributes.subscription.id'), :id
+          column t('activerecord.attributes.subscription.user'), :user
+          column t('activerecord.attributes.subscription.created_at'), :created_at
+          column do |subscription|
+            link_to(
+              t('activeadmin.subscription.actions.destroy'),
+              admin_subscription_path(subscription),
+              method: :delete,
+              data: { confirm: t('activeadmin.subscription.destroy.confirm') }
+            )
+          end
+        end
       end
     end
   end

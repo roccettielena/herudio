@@ -2,8 +2,6 @@ it:
   activeadmin:
     course:
       panels:
-        details: 'Dettagli corso'
-        lessons: 'Lezioni'
-
-      actions:
-        subscriptions: 'Visualizza Iscrizioni'
+        details:       'Dettagli corso'
+        lessons:       'Lezioni'
+        subscriptions: 'Iscrizioni (%{starts_at} - %{ends_at})'

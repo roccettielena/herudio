@@ -1,15 +1,12 @@
 ActiveAdmin.register Subscription do
   decorate_with SubscriptionDecorator
 
-  belongs_to :course, optional: true
-
   config.sort_order = :lesson_id
+  config.filters = false
 
-  filter :user, collection: ->{ User.ordered_by_name.select(:id, :full_name) }
+  actions :destroy
 
-  navigation_menu false
-
-  actions :all, except: [:show, :new, :create, :edit, :update]
+  menu false
 
   index do
     selectable_column
@@ -21,5 +18,13 @@ ActiveAdmin.register Subscription do
     column :created_at
 
     actions
+  end
+
+  controller do
+    def destroy
+      destroy! notice: t('activeadmin.subscription.destroy.notice') do
+        admin_course_path(@subscription.lesson.course)
+      end
+    end
   end
 end

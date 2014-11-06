@@ -5,6 +5,8 @@ ActiveAdmin.register User do
   filter :email
   filter :group
 
+  belongs_to :user_group, optional: true
+
   index do
     selectable_column
     id_column

@@ -1,0 +1,9 @@
+it:
+  activeadmin:
+    subscription:
+      actions:
+        destroy: 'Cancella iscrizione'
+
+      destroy:
+        notice:  "L'iscrizione è stata cancellata con successo."
+        confirm: "Sei sicuro di voler cancellare quest'iscrizione?"

@@ -3,6 +3,10 @@ ActiveAdmin.register UserGroup do
 
   filter :name
 
+  action_item :users, only: :show do
+    link_to t('activeadmin.user_group.actions.users'), admin_user_group_users_path(user_group)
+  end
+
   index do
     selectable_column
     id_column
