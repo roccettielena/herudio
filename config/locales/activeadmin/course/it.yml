@@ -3,3 +3,7 @@ it:
     course:
       panels:
         details: 'Dettagli corso'
+        lessons: 'Lezioni'
+
+      actions:
+        subscriptions: 'Visualizza Iscrizioni'

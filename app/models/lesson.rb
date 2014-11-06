@@ -6,6 +6,9 @@ class Lesson < ActiveRecord::Base
   validates :starts_at, presence: true, date: { before: :ends_at }
   validates :ends_at, presence: true, date: { after: :starts_at }
 
+  just_define_datetime_picker :starts_at
+  just_define_datetime_picker :ends_at
+
   def seats
     course.seats
   end

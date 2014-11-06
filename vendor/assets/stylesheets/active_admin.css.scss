@@ -15,3 +15,17 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+
+.just-datetime-picker-field {
+  width: auto !important;
+  margin-left: 2.5px;
+  margin-right: 2.5px;
+
+  &.just-datetime-picker-date {
+    margin-left: 0;
+  }
+}
+
+select[multiple] {
+  min-height: 200px;
+}

@@ -173,6 +173,9 @@ GEM
     jquery-ui-rails (5.0.2)
       railties (>= 3.2.16)
     json (1.8.1)
+    just-datetime-picker (0.0.6)
+      activeadmin (>= 0.4.4)
+      formtastic (>= 2.0.0)
     kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -354,6 +357,7 @@ DEPENDENCIES
   has_scope
   high_voltage
   jquery-rails
+  just-datetime-picker
   kaminari-i18n
   launchy
   mocha

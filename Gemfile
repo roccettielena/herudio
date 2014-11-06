@@ -54,6 +54,7 @@ gem 'has_scope'
 
 # Administration
 gem 'activeadmin', github: 'activeadmin'
+gem 'just-datetime-picker'
 
 group :development do
   # Preloading

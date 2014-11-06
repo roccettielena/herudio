@@ -1,0 +1,14 @@
+it:
+  activerecord:
+    models:
+      subscription:
+        one:   'Iscrizione'
+        other: 'Iscrizioni'
+
+    attributes:
+      subscription:
+        id:         'ID'
+        user:       'Utente'
+        created_at: 'Data creazione'
+        course:     'Corso'
+        lesson:     'Lezione'

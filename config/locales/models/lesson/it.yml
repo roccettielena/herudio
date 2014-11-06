@@ -1,8 +1,21 @@
 it:
   activerecord:
+    models:
+      lesson:
+        one:   'Lezione'
+        other: 'Lezioni'
+
     attributes:
       lesson:
+        id:              'ID'
         starts_at:       'Data inizio'
         ends_at:         'Data fine'
         course:          'Corso'
         available_seats: 'Posti disponibili'
+        taken_seats:     'Posti presi'
+
+  formtastic:
+    labels:
+      lesson:
+        starts_at: 'Data inizio:'
+        ends_at:   'Data fine:'
