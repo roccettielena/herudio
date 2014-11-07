@@ -1,0 +1,14 @@
+it:
+  helpers:
+    subscriptions:
+      subscribe:   'Iscriviti'
+      unsubscribe: 'Cancella iscrizione'
+
+      conflicting_with_subscribed: >
+        Questa iscrizione è in conflitto con un'iscrizione esistente al corso
+        %{course_name}. Prima di procedere, dovrai cancellare la tua
+        iscrizione.
+
+      conflicting_with_organized: >
+        Questa iscrizione è in conflitto con una lezione del corso
+        %{course_name} organizzato da te.

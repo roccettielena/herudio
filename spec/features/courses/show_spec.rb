@@ -25,7 +25,7 @@ RSpec.feature 'Courses show' do
     visit root_path
     click_link course.name
 
-    click_link I18n.t('controllers.courses.show.lessons.subscribe')
+    click_link I18n.t('helpers.subscriptions.subscribe')
 
     expect(page).to have_content I18n.t('controllers.subscriptions.create.subscribed')
   end
@@ -38,7 +38,7 @@ RSpec.feature 'Courses show' do
     visit root_path
     click_link course.name
 
-    click_link I18n.t('controllers.courses.show.lessons.unsubscribe')
+    click_link I18n.t('helpers.subscriptions.unsubscribe')
 
     expect(page).to have_content I18n.t('controllers.subscriptions.destroy.unsubscribed')
   end

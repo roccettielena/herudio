@@ -17,7 +17,7 @@ RSpec.feature 'Subscriptions index' do
   end
 
   scenario 'user can unsubscribe from the lessons' do
-    click_link I18n.t('controllers.subscriptions.index.unsubscribe')
+    click_link I18n.t('helpers.subscriptions.unsubscribe')
     expect(page).to have_content I18n.t('controllers.subscriptions.destroy.unsubscribed')
   end
 end

@@ -2,23 +2,14 @@ it:
   controllers:
     subscriptions:
       create:
-        subscribed:                  'Ti sei iscritto alla lezione specificata.'
-        already_subscribed:          'Sei già iscritto a questa lezione!'
-        no_seats:                    'Non ci sono più posti disponibili per questa lezione.'
-
-        conflicitng_with_subscribed: >
-          Questa iscrizione è in conflitto con un'iscrizione esistente al corso
-          %{course_name}. Prima di procedere, dovrai cancellare la tua
-          iscrizione.
+        subscribed:         'Ti sei iscritto alla lezione specificata.'
+        already_subscribed: 'Sei già iscritto a questa lezione!'
+        no_seats:           'Non ci sono più posti disponibili per questa lezione.'
 
         conflicting_with_subscribed_html: >
           Questa iscrizione è in conflitto con un'iscrizione esistente al corso
           <a href="%{course_url}">%{course_name}</a>. Prima di procedere, dovrai
           cancellare la tua iscrizione.
-
-        conflicting_with_organized: >
-          Questa iscrizione è in conflitto con una lezione del corso
-          %{course_name} organizzato da te.
 
         conflicting_with_organized_html: >
           Questa iscrizione è in conflitto con una lezione del corso <a
@@ -29,6 +20,5 @@ it:
         not_subscribed: 'Non sei iscritto a questa lezione!'
 
       index:
-        title:       'Le mie iscrizioni'
-        unsubscribe: 'Cancella iscrizione'
-        empty:       'Non ti sei ancora iscritto ad alcuna lezione.'
+        title: 'Le mie iscrizioni'
+        empty: 'Non ti sei ancora iscritto ad alcuna lezione.'

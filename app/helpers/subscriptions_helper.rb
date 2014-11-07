@@ -11,7 +11,7 @@ module SubscriptionsHelper
 
   def subscribe_link(user, lesson, options = {})
     text = fa_icon('plus')
-    text += ' ' + t('controllers.courses.show.lessons.subscribe')
+    text += ' ' + t('helpers.subscriptions.subscribe')
 
     href = course_lesson_subscription_path(lesson.course, lesson)
 
@@ -26,7 +26,7 @@ module SubscriptionsHelper
     conflict_message = conflict_message_for(user, lesson, options)
 
     if conflict_message
-      output << fa_icon('question-circle', class: 'fa-fw text-warning', data: { toggle: 'tooltip' }, title: conflict_message)
+      output << fa_icon('question-circle', class: 'fa-fw text-danger', data: { toggle: 'tooltip' }, title: conflict_message)
     end
 
     output.join("\n").html_safe
@@ -34,7 +34,7 @@ module SubscriptionsHelper
 
   def unsubscribe_link(user, lesson, options = {})
     text = fa_icon('trash')
-    text += ' ' + t('controllers.courses.show.lessons.unsubscribe')
+    text += ' ' + t('helpers.subscriptions.unsubscribe')
 
     href = course_lesson_subscription_path(lesson.course, lesson)
 
@@ -52,11 +52,11 @@ module SubscriptionsHelper
     conflict_message = nil
 
     if (conflicting_lesson = lesson.conflicting_for(user, [:subscribed]))
-      conflict_message = t('controllers.subscriptions.create.conflicting_with_subscribed',
+      conflict_message = t('helpers.subscriptions.conflicting_with_subscribed',
         course_name: conflicting_lesson.course.name
       )
     elsif (conflicting_lesson = lesson.conflicting_for(user, [:organized]))
-      conflict_message = t('controllers.subscriptions.create.conflicting_with_organized',
+      conflict_message = t('helpers.subscriptions.conflicting_with_organized',
         course_name: conflicting_lesson.course.name
       )
     end
