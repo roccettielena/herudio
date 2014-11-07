@@ -23,7 +23,7 @@ ActiveAdmin.register Subscription do
   controller do
     def destroy
       destroy! notice: t('activeadmin.subscription.destroy.notice') do
-        admin_course_path(@subscription.lesson.course)
+        request.referer
       end
     end
   end

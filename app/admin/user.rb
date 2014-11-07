@@ -1,4 +1,6 @@
 ActiveAdmin.register User do
+  decorate_with UserDecorator
+
   permit_params :full_name, :email, :password, :password_confirmation, :group_id
 
   filter :full_name
@@ -22,16 +24,18 @@ ActiveAdmin.register User do
   end
 
   show do |user|
-    attributes_table do
-      row :id
-      row :group
-      row :full_name
-      row :email
-      row :current_sign_in_at
-      row :current_sign_in_ip
-      row :sign_in_count
-      row :created_at
-      row :updated_at
+    panel t('activeadmin.user.panels.details') do
+      attributes_table_for user do
+        row :id
+        row :group
+        row :full_name
+        row :email
+        row :current_sign_in_at
+        row :current_sign_in_ip
+        row :sign_in_count
+        row :created_at
+        row :updated_at
+      end
     end
 
     panel t('activeadmin.user.panels.courses') do
@@ -42,6 +46,23 @@ ActiveAdmin.register User do
         end
         column t('activerecord.attributes.course.category'), :category
         column t('activerecord.attributes.course.location'), :location
+      end
+    end
+
+    panel t('activeadmin.user.panels.subscriptions') do
+      table_for user.subscriptions do
+        column t('activerecord.attributes.subscription.id'), :id
+        column t('activerecord.attributes.subscription.course'), :course
+        column t('activerecord.attributes.subscription.lesson'), :lesson
+        column t('activerecord.attributes.subscription.created_at'), :screated_at
+        column do |subscription|
+          link_to(
+            t('activeadmin.subscription.actions.destroy'),
+            admin_subscription_path(subscription),
+            method: :delete,
+            data: { confirm: t('activeadmin.subscription.destroy.confirm') }
+          )
+        end
       end
     end
   end

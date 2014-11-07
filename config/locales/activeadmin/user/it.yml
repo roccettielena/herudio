@@ -2,9 +2,6 @@ it:
   activeadmin:
     user:
       panels:
-        details: 'Dettagli utente'
-        courses: 'Corsi'
-
-      actions:
-        courses:       'Visualizza Corsi'
-        subscriptions: 'Visualizza Iscrizioni'
+        details:       'Dettagli utente'
+        courses:       'Corsi'
+        subscriptions: 'Iscrizioni'
