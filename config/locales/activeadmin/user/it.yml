@@ -3,6 +3,7 @@ it:
     user:
       panels:
         details: 'Dettagli utente'
+        courses: 'Corsi'
 
       actions:
         courses:       'Visualizza Corsi'

@@ -33,6 +33,17 @@ ActiveAdmin.register User do
       row :created_at
       row :updated_at
     end
+
+    panel t('activeadmin.user.panels.courses') do
+      table_for user.courses do
+        column t('activerecord.attributes.course.id'), :id
+        column t('activerecord.attributes.course.name'), :name do |course|
+          link_to course.name, admin_course_path(course)
+        end
+        column t('activerecord.attributes.course.category'), :category
+        column t('activerecord.attributes.course.location'), :location
+      end
+    end
   end
 
   form do |f|
