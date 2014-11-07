@@ -22,6 +22,10 @@ RSpec.describe Course do
     expect(subject).to validate_numericality_of(:seats).is_greater_than(0)
   end
 
+  it 'validates there is at least one organizer' do
+    expect(FactoryGirl.build(:course, organizers: [])).not_to be_valid
+  end
+
   describe '.by_name' do
     let!(:matching_course) { FactoryGirl.create(:course, name: 'Foocourse') }
     let!(:nonmatching_course) { FactoryGirl.create(:course, name: 'Barcourse') }

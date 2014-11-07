@@ -14,4 +14,14 @@ class Course < ActiveRecord::Base
   validates :location, presence: true
   validates :seats, presence: true, numericality: { greater_than: 0 }
   validates :category, presence: true
+
+  validate :validate_organizers
+
+  private
+
+  def validate_organizers
+    if organizers.reject(&:marked_for_destruction?).empty?
+      errors.add :organizers, :blank
+    end
+  end
 end
