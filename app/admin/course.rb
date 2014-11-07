@@ -15,7 +15,7 @@ ActiveAdmin.register Course do
 
     column :name
     column :location
-    column :category do |course|
+    column :category, sortable: :category_id do |course|
       link_to course.category.name, admin_course_category_path(course.category)
     end
 

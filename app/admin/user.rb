@@ -11,7 +11,7 @@ ActiveAdmin.register User do
     selectable_column
     id_column
 
-    column :group do |user|
+    column :group, sortable: :group_id do |user|
       link_to user.group.name, admin_user_group_path(user.group)
     end
     column :full_name
