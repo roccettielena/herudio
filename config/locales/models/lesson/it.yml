@@ -14,6 +14,11 @@ it:
         available_seats: 'Posti disponibili'
         taken_seats:     'Posti presi'
 
+    errors:
+      models:
+        lesson:
+          in_conflict: "è in conflitto con un'altra lezione del corso"
+
   formtastic:
     labels:
       lesson:

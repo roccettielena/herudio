@@ -9,6 +9,8 @@ class Lesson < ActiveRecord::Base
   just_define_datetime_picker :starts_at
   just_define_datetime_picker :ends_at
 
+  validate :validate_conflicts_in_course
+
   def seats
     course.seats
   end
@@ -41,5 +43,20 @@ class Lesson < ActiveRecord::Base
 
   def conflicting_for?(user, associations = [:subscribed, :organized])
     !!conflicting_for(user, associations)
+  end
+
+  private
+
+  def validate_conflicts_in_course
+    return unless course
+
+    course.lessons.each do |lesson|
+      if in_conflict_with?(lesson)
+        errors.add :starts_at, :in_conflict
+        errors.add :ends_at, :in_conflict
+
+        return
+      end
+    end
   end
 end

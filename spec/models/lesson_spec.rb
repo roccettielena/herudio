@@ -20,6 +20,23 @@ RSpec.describe Lesson do
     )).not_to be_valid
   end
 
+  it 'validates it is not in conflict with other lessons of the course' do
+    conflicting_lesson = Lesson.new
+
+    course = Course.new
+    course.stubs(lessons: [conflicting_lesson])
+
+    lesson = FactoryGirl.build(:lesson, course: course)
+
+    lesson
+      .expects(:in_conflict_with?)
+      .with(conflicting_lesson)
+      .once
+      .returns(true)
+
+    expect(lesson).not_to be_valid
+  end
+
   describe '#seats' do
     before(:each) do
       subject
