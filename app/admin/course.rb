@@ -38,7 +38,7 @@ ActiveAdmin.register Course do
         row :organizers do
           course.organizers.map do |organizer|
             link_to organizer.full_name, admin_user_path(organizer)
-          end.join(', ')
+          end.join(', ').html_safe
         end
 
         row :description do
