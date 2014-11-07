@@ -69,7 +69,7 @@ ActiveAdmin.register User do
 
   form do |f|
     f.inputs t('activeadmin.user.panels.details') do
-      f.input :group
+      f.input :group, collection: Group.ordered_by_name
       f.input :full_name
       f.input :email
       f.input :password, required: f.object.new_record?, hint: f.object.persisted?

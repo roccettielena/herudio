@@ -3,6 +3,8 @@ class UserGroup < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
 
+  scope :ordered_by_name, ->{ order('name ASC') }
+
   def to_s
     name
   end
