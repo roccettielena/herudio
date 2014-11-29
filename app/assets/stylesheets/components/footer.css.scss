@@ -51,6 +51,16 @@ footer {
     font-size: ceil(($font-size-large * 2));
   }
 
+  a {
+    color: darken($blue, 6.5%);
+    transition: color .25s ease-in-out;
+
+    &:hover {
+      color: darken($blue, 13%);
+      text-decoration: none;
+    }
+
+  }
   .heart-icon {
     color: $red;
   }
