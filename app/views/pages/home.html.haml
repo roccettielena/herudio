@@ -17,9 +17,10 @@
         = link_to 'Partecipa al Progetto', new_user_session_path, class: 'btn btn-cta'
 
     .overlay-arrow-container
-      = fa_icon 'angle-down', class: 'overlay-arrow'
+      %a(href='#dual')
+        = fa_icon 'angle-down', class: 'overlay-arrow'
 
-%section.home-dual
+%section.home-dual#dual
   .container-fluid.home-dual-container
     .row
       .col-xs-12.col-md-6.home-dual-col
