@@ -19,7 +19,7 @@ ActiveAdmin.register AdminUser do
     f.inputs t('activeadmin.admin_user.panels.details') do
       f.input :full_name
       f.input :email
-      f.input :password, required: f.object.new_record?, hint: f.object.persisted?
+      f.input :password, required: f.object.new_record?, hint: (t('formtastic.hints.admin_user.leave_password_blank') if f.object.persisted?)
       f.input :password_confirmation, required: f.object.new_record?
     end
 

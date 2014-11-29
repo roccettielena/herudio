@@ -26,4 +26,4 @@ it:
 
     hints:
       admin_user:
-        password: 'Lascia vuoto se non vuoi cambiarla.'
+        leave_password_blank: 'Lascia vuoto se non vuoi cambiarla.'
