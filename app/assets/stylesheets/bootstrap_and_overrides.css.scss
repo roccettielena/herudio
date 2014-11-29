@@ -28,6 +28,8 @@ $navbar-default-link-hover-color: white;
 $navbar-default-link-hover-bg: darken($navbar-default-bg, 3.25%);
 $navbar-default-brand-hover-color: white;
 $navbar-default-brand-hover-bg: darken($navbar-default-bg, 3.25%);
+$navbar-default-toggle-hover-bg: white;
+$navbar-default-toggle-icon-bar-bg: white;
 
 // Import Bootstrap
 @import "bootstrap-sprockets";

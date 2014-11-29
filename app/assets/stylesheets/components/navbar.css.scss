@@ -12,4 +12,12 @@
   .navbar-brand {
     text-transform: uppercase;
   }
+
+  .navbar-toggle {
+    &:hover, &:active, &:focus {
+      .icon-bar {
+        background-color: $red;
+      }
+    }
+  }
 }
