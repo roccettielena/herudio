@@ -9,6 +9,8 @@
 
     = csrf_meta_tags
 
+    %link(rel='stylesheet' href='//fonts.googleapis.com/css?family=Montserrat:400,700|Varela+Round')
+
   %body{class: (content_for?(:body_classes) ? yield(:body_classes) : 'weak')}
     %header
       = render 'layouts/navigation'
