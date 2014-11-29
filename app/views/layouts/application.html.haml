@@ -9,10 +9,34 @@
 
     = csrf_meta_tags
 
-  %body.weak
+  %body{class: (content_for?(:body_classes) ? yield(:body_classes) : 'weak')}
     %header
       = render 'layouts/navigation'
 
-    %main(role='main')
+    .container
       = render 'layouts/messages'
-      = yield
+
+    = yield
+
+    .footer-and-credits
+      %footer
+        .container
+          .row
+            .col-xs-12.col-sm-8
+              %h4 Serve una mano?
+
+              %p
+                Se hai bisogno di aiuto, contattaci all'indirizzo email
+                %strong labriola@karmapen.com.
+                Saremo felici di aiutarti con
+                l'iscrizione, l'organizzazione dei corsi e l'uso della piattaforma
+                online. Oppure vai a parlare con Roccia.
+
+            .col-xs-12.col-sm-4
+              = image_tag 'roccia.jpg', alt: 'Se non vieni, Roccia ti sgama.', class: 'roccia img-circle img-responsive'
+
+      .credits
+        .container
+          Fatto con
+          = fa_icon 'heart', class: 'heart-icon'
+          da Desa.

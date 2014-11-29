@@ -1,0 +1,147 @@
+/*
+ *= depends_on home-cover.jpg
+ */
+
+.home-overlay {
+  background-image: asset-url('home-cover.jpg');
+}
+
+.home-dual {
+  .home-dual-col {
+    padding-top: 150px;
+    padding-bottom: 100px;
+    padding-left: 50px;
+    padding-right: 50px;
+
+    .home-dual-col-content {
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .home-dual-title {
+      margin-top: 0;
+      margin-bottom: 50px;
+    }
+
+    .home-dual-faqs {
+      margin-top: 100px;
+    }
+
+    &:last-child {
+      border-top: 1px solid $gray-lighter;
+
+      @media (min-width: $screen-md-min) {
+        margin-left: -.5px;
+
+        border-top: none;
+        border-left: 1px solid $gray-lighter;
+      }
+    }
+  }
+}
+
+.home-calendar {
+  margin-top: 50px;
+  padding-top: 50px;
+
+  border-top: 1px solid $gray-lighter;
+
+  .home-calendar-icon-container {
+    position: relative;
+    z-index: 1000;
+
+    height: 100px;
+    width: 100px;
+
+    margin-top: -101px;
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-top: 17.5px;
+
+    border: 1px solid $gray-lighter;
+    border-radius: 50%;
+
+    background-color: white;
+
+    text-align: center;
+    font-weight: bold;
+    font-size: $font-size-h1;
+
+    .home-calendar-icon {
+      color: $blue-dark;
+    }
+  }
+
+  .home-calendar-content-container {
+    padding-bottom: 50px;
+  }
+
+  .home-calendar-col {
+    @media (max-width: $screen-xs-max) {
+      &:nth-child(1) {
+        margin-top: -49px;
+
+        .home-calendar-item {
+          padding-top: 49px;
+        }
+      }
+    }
+
+    @media (min-width: $screen-sm-min) {
+      margin-top: -49px;
+
+      &:nth-child(2) .home-calendar-item {
+        padding-top: 49px;
+      }
+    }
+  }
+
+  .home-calendar-item {
+    position: relative;
+    z-index: 1;
+
+    border-left: 1px solid $gray-lighter;
+    border-right: 1px solid $gray-lighter;
+    border-bottom: 1px solid $gray-lighter;
+
+    border-bottom-left-radius: $border-radius-base;
+    border-bottom-right-radius: $border-radius-base;
+  }
+
+  .home-calendar-title {
+    padding-top: 25px;
+    padding-bottom: 25px;
+
+    margin-top: 0;
+    margin-bottom: 0;
+
+    border-bottom: 1px solid $gray-lighter;
+
+    text-align: center;
+  }
+
+  .home-calendar-list {
+    margin-bottom: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    dt, dd {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    dt {
+      padding-top: 10px;
+    }
+
+    dd {
+      padding-bottom: 10px;
+    }
+  }
+}
+
+.home-bottom-cta {
+  background-color: $blue-dark;
+  color: white;
+}

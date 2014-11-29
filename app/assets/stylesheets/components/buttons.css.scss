@@ -1,0 +1,20 @@
+.btn {
+  transition: background-color .25s ease-in-out,
+              border-color .25s ease-in-out;
+}
+
+.btn-cta {
+  @include button-variant(white, $red, $red);
+  @include button-size(25px, 40px, $font-size-large, floor(($font-size-large * $line-height-base)), $border-radius-large);
+}
+
+.btn-outline {
+  @include button-variant($red, white, $red);
+
+  transition: none;
+
+  &:hover {
+    background: $red;
+    color: white;
+  }
+}

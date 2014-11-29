@@ -1,51 +1,52 @@
 - provide :title, course.name
 
-%h1= course.name
+.container
+  %h1= course.name
 
-.row
-  .col-xs-12.col-md-8
-    .strong
-      = course.description_html
+  .row
+    .col-xs-12.col-md-8
+      .strong
+        = course.description_html
 
-  .col-xs-12.col-md-4
-    .strong
-      %p
-        %strong= t('controllers.courses.show.category')
-        = link_to course.category.name, root_path(params.slice(:by_name).merge(by_category: course.category.id))
-
-      %p
-        %strong= t('controllers.courses.show.location')
-        = course.location
-
-      - if course.organizers.any?
+    .col-xs-12.col-md-4
+      .strong
         %p
-          %strong= t('controllers.courses.show.organizers')
-          = course.organizers.map(&:full_name).join(', ')
+          %strong= t('controllers.courses.show.category')
+          = link_to course.category.name, root_path(params.slice(:by_name).merge(by_category: course.category.id))
 
-%h2= t('controllers.courses.show.lessons.title')
+        %p
+          %strong= t('controllers.courses.show.location')
+          = course.location
 
-%table.table.table-bordered.table-hover.strong
-  %thead
-    %tr
-      %th #
-      %th= t('activerecord.attributes.lesson.starts_at')
-      %th= t('activerecord.attributes.lesson.ends_at')
-      %th= t('activerecord.attributes.lesson.available_seats')
+        - if course.organizers.any?
+          %p
+            %strong= t('controllers.courses.show.organizers')
+            = course.organizers.map(&:full_name).join(', ')
 
-      - if user_signed_in?
-        %th
+  %h2= t('controllers.courses.show.lessons.title')
 
-  %tbody
-    - if course.lessons.empty?
+  %table.table.table-bordered.table-hover.strong
+    %thead
       %tr
-        %td(colspan='2')= t('controllers.courses.show.lessons.empty')
-    - else
-      - course.lessons.each_with_index do |lesson, index|
-        %tr
-          %td= index + 1
-          %td= lesson.starts_at
-          %td= lesson.ends_at
-          %td= lesson.available_seats
+        %th #
+        %th= t('activerecord.attributes.lesson.starts_at')
+        %th= t('activerecord.attributes.lesson.ends_at')
+        %th= t('activerecord.attributes.lesson.available_seats')
 
-          - if user_signed_in?
-            %td= subscription_link(current_user, lesson)
+        - if user_signed_in?
+          %th
+
+    %tbody
+      - if course.lessons.empty?
+        %tr
+          %td(colspan='2')= t('controllers.courses.show.lessons.empty')
+      - else
+        - course.lessons.each_with_index do |lesson, index|
+          %tr
+            %td= index + 1
+            %td= lesson.starts_at
+            %td= lesson.ends_at
+            %td= lesson.available_seats
+
+            - if user_signed_in?
+              %td= subscription_link(current_user, lesson)

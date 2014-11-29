@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  root to: 'courses#index'
-  get '/contact', to: 'high_voltage/pages#show', id: 'contact'
+  root to: 'high_voltage/pages#show', id: 'home'
+
+  resources :courses, only: :index
 
   resources :courses, only: [:index, :show] do
     resources :lessons, only: [] do

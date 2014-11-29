@@ -5,6 +5,7 @@ RSpec.feature 'Courses search' do
     matching_course = FactoryGirl.create(:course, name: 'Foocourse')
     nonmatching_course = FactoryGirl.create(:course, name: 'Barcourse')
     visit root_path
+    click_link I18n.t('layout.nav.courses')
 
     fill_in I18n.t('layout.course_search.placeholder'), with: 'foo'
     click_button I18n.t('layout.course_search.submit')
@@ -24,6 +25,7 @@ RSpec.feature 'Courses search' do
     nonmatching_course = FactoryGirl.create(:course, name: 'Barcourse')
 
     visit root_path
+    click_link I18n.t('layout.nav.courses')
 
     click_link 'Test category'
 

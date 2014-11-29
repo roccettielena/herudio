@@ -1,33 +1,34 @@
 - provide :title, t('controllers.courses.index.title')
 
-.row
-  .col-xs-12.col-sm-6
-    %h1= t('controllers.courses.index.title')
-
-  - if CourseCategory.any?
+.container
+  .row
     .col-xs-12.col-sm-6
-      .pull-right
-        .btn-group.toolbar
-          - if params[:by_category]
-            = link_to fa_icon('times'), root_path(params.except(:by_category)), class: 'btn btn-default'
+      %h1= t('controllers.courses.index.title')
 
-          - CourseCategory.all.each do |category|
-            - classes = 'btn ' + ((params[:by_category].to_i == category.id) ? 'btn-primary' : 'btn-default')
-            = link_to category.name, root_path(params.merge(by_category: category.id)), class: classes
+    - if CourseCategory.any?
+      .col-xs-12.col-sm-6
+        .pull-right
+          .btn-group.toolbar
+            - if params[:by_category]
+              = link_to fa_icon('times'), courses_path(params.except(:by_category)), class: 'btn btn-default'
 
-- if @courses.empty?
-  .strong
-    %p= t('controllers.courses.index.empty')
-- else
-  - @courses.each_slice(3) do |slice|
-    .row
-      - slice.each do |course|
-        - course = course.decorate
+            - CourseCategory.all.each do |category|
+              - classes = 'btn ' + ((params[:by_category].to_i == category.id) ? 'btn-primary' : 'btn-default')
+              = link_to category.name, courses_path(params.merge(by_category: category.id)), class: classes
 
-        .col-xs-12.col-sm-6.col-md-4
-          .strong
-            %h3= link_to course.name, course
-            = course.short_description_html
+  - if @courses.empty?
+    .strong
+      %p= t('controllers.courses.index.empty')
+  - else
+    - @courses.each_slice(3) do |slice|
+      .row
+        - slice.each do |course|
+          - course = course.decorate
 
-.text-center
-  = will_paginate @courses, renderer: BootstrapPagination::Rails
+          .col-xs-12.col-sm-6.col-md-4
+            .strong
+              %h3= link_to course.name, course
+              = course.short_description_html
+
+  .text-center
+    = will_paginate @courses, renderer: BootstrapPagination::Rails

@@ -3,10 +3,6 @@ main {
   margin-top: 10px;
 }
 
-section {
-  @extend .row;
-}
-
 .container-sm {
   max-width: $container-sm * 0.5;
   margin: 0 auto;

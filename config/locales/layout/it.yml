@@ -7,8 +7,8 @@ it:
       sign_out:      'Esci'
       edit_profile:  'Modifica profilo'
       home:          'Home'
-      contact:       'Contatti'
       subscriptions: 'Le mie iscrizioni'
+      courses:       'Corsi'
 
     course_search:
       label:       'Nome corso'

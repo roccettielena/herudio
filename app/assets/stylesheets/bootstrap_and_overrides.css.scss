@@ -1,0 +1,28 @@
+// Palette (http://www.colourlovers.com/palette/3243870/LOVE_OF_LESBIAN)
+$beige: rgb(222, 212, 185);
+$black: rgb(32,31,35);
+$red: darken(rgb(206, 83, 77), 6.5%);
+$blue: rgb(164,208,196);
+$blue-dark: rgb(19,67,91);
+
+// Typography
+@import url('http://fonts.googleapis.com/css?family=Montserrat:400,700|Varela+Round');
+$font-family-montserrat: 'Montserrat', sans-serif;
+$font-family-varela-round: 'Varela Round', sans-serif;
+$font-family-sans-serif: $font-family-varela-round;
+$headings-font-family: $font-family-montserrat;
+$font-size-base: 16px;
+
+// Colors
+$brand-primary: $red;
+
+// Links
+$link-color: $red;
+
+// Import Bootstrap
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+html, body {
+  height: 100%;
+}

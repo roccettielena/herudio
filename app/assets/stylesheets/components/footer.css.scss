@@ -1,0 +1,57 @@
+footer {
+  margin-top: 50px;
+  padding-top: 75px;
+  padding-bottom: 75px;
+
+  background: $blue-dark;
+  color: white;
+
+  p {
+    opacity: .8;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    text-align: center;
+  }
+
+  .roccia {
+    margin-top: 10px;
+    max-width: 150px;
+
+    @media (max-width: $screen-xs-max) {
+      margin: 0 auto;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      float: right;
+    }
+  }
+
+  .container {
+    max-width: 600px;
+  }
+}
+
+.credits {
+  padding-top: 25px;
+  padding-bottom: 25px;
+
+  background-color: $gray-lighter;
+
+  text-align: center;
+
+  font-weight: bold;
+  color: $gray-light;
+
+  @media (max-width: $screen-xs-max) {
+    font-size: ceil(($font-size-large * 1.5));
+  }
+
+  @media (min-width: $screen-sm-min) {
+    font-size: ceil(($font-size-large * 2));
+  }
+
+  .heart-icon {
+    color: $red;
+  }
+}

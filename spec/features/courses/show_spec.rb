@@ -6,6 +6,7 @@ RSpec.feature 'Courses show' do
 
   scenario 'user can view the course' do
     visit root_path
+    click_link I18n.t('layout.nav.courses')
     click_link course.name
 
     expect(page).to have_content course.name
@@ -13,6 +14,7 @@ RSpec.feature 'Courses show' do
 
   scenario 'user can view the lessons' do
     visit root_path
+    click_link I18n.t('layout.nav.courses')
     click_link course.name
 
     expect(page).to have_content lesson.decorate.starts_at
@@ -23,6 +25,7 @@ RSpec.feature 'Courses show' do
     signin user.email, user.password
 
     visit root_path
+    click_link I18n.t('layout.nav.courses')
     click_link course.name
 
     click_link I18n.t('helpers.subscriptions.subscribe')
@@ -36,6 +39,7 @@ RSpec.feature 'Courses show' do
     FactoryGirl.create(:subscription, user: user, lesson: lesson)
 
     visit root_path
+    click_link I18n.t('layout.nav.courses')
     click_link course.name
 
     click_link I18n.t('helpers.subscriptions.unsubscribe')

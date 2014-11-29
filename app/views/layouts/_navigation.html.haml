@@ -1,4 +1,4 @@
-%nav.navbar.navbar-default.navbar-fixed-top
+%nav.navbar.navbar-default.navbar-static-top
   .container
     .navbar-header
       %button.navbar-toggle(data-target='.navbar-collapse' data-toggle='collapse' type='button')
@@ -12,12 +12,13 @@
 
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li{class: ('active' if params[:controller] == 'courses' && params[:action] == 'index')}
+        %li{class: ('active' if params[:controller] == 'high_voltage/pages' && params[:id] == 'home')}
           = link_to "#{fa_icon('home')} #{t('layout.nav.home')}".html_safe, root_path
-        %li{class: ('active' if params[:controller] == 'high_voltage/pages' && params[:id] == 'contact')}
-          = link_to "#{fa_icon('envelope')} #{t('layout.nav.contact')}".html_safe, contact_path
 
-      %form.navbar-form.navbar-left{role: 'search', action: root_path(params)}
+        %li{class: ('active' if params[:controller] == 'courses' && params[:action] == 'index')}
+          = link_to "#{fa_icon('th-list')} #{t('layout.nav.courses')}".html_safe, courses_path
+
+      %form.navbar-form.navbar-left{role: 'search', action: courses_path(params)}
         - params.slice(:by_category).each_pair do |name, value|
           %input{type: 'hidden', value: value, name: name}
 
@@ -27,7 +28,7 @@
           .input-group
             - if params[:by_name]
               .input-group-btn
-                = link_to fa_icon('times'), root_path(params.except(:by_name)), class: 'btn btn-default'
+                = link_to fa_icon('times'), courses_path(params.except(:by_name)), class: 'btn btn-default'
 
             %input.form-control#course_search_query{name: :by_name, type: 'text', placeholder: t('layout.course_search.placeholder'), value: params[:by_name]}
 

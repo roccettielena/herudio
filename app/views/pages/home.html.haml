@@ -1,0 +1,124 @@
+- provide :body_classes, 'home'
+
+%section.home-overlay.overlay.full-screen
+  .overlay-inner.full-screen-inner
+    .container.full-screen-target
+      %h1.overlay-headline
+        Insegna quello che sai, impara quello che vuoi. Sei pronto a liberare
+        la tua cultura?
+
+      .overlay-text-container
+        %p.overlay-text
+          È giunto il momento di rimettere l'apprendimento in mano agli studenti.
+          Con il progetto Didattica Alternativa sarai finalmente il protagonista
+          della tua educazione: condividi le tue passioni e apprendi dagli altri.
+
+      .overlay-actions
+        = link_to 'Partecipa al Progetto', '#', class: 'btn btn-cta'
+
+    .overlay-arrow-container
+      = fa_icon 'angle-down', class: 'overlay-arrow'
+
+%section.home-dual
+  .container-fluid.home-dual-container
+    .row
+      .col-xs-12.col-md-6.home-dual-col
+        .home-dual-col-content
+          %h1.home-dual-title Cosa vuoi imparare oggi?
+
+          %p.lead
+            Aerodinamica, musica, softair, cineforum, rompicampi, matematica...
+            puoi scegliere quello che vuoi. Materie appassionanti spiegate da
+            studenti appassionati.
+
+          = link_to 'Iscriviti a un Corso', '#', class: 'btn btn-lg btn-outline'
+
+          .home-dual-faqs.faqs
+            .home-dual-faq.faq
+              %h4 A quanti corsi posso iscrivermi?
+
+              %p
+                I corsi si svolgeranno in tre giorni, e a ogni giornata potrai
+                iscriverti a due lezioni diverse. Puoi scegliere di seguire gli
+                stessi corsi tutti e tre i giorni, di seguirne sei diversi
+                oppure una via di mezzo. Scegli la soluzione che preferisci:
+                nessuno ti obbligherà a frequentare un corso che non ti piace.
+
+            .home-dual-faq.faq
+              %h4 Cosa serve per l'iscrizione?
+
+              %p
+                Per iscriversi a un corso basta essere uno studente del
+                L.S.S. “A. Labriola”. La partecipazione è del tutto
+                gratuita e aperta a ogni studente. Non hai scuse per non
+                venire!
+
+      .col-xs-12.col-md-6.home-dual-col
+        .home-dual-col-content
+          %h1.home-dual-title O preferisci forse insegnare?
+
+          %p.lead
+            Tutti siamo esperti in un campo. Hai mai immaginato come dev'essere
+            stare dall'altra parte della cattedra, poter comunicare le proprie
+            idee? Se qualcosa ti dà gioia, condividila!
+
+          = link_to 'Proponi un Corso', '#', class: 'btn btn-lg btn-outline'
+
+          .home-dual-faqs.faqs
+            .home-dual-faq.faq
+              %h4 Ci sono limiti a ciò che posso insegnare?
+
+              %p
+                L'unico requisito è la passione. Puoi insegnare qualunque
+                materia che conosci bene; i corsi più belli sono spesso
+                proprio i più bizzarri. Tieni a mente che la Didattica
+                Alternativa è stata organizzata proprio per liberare
+                l'apprendimento dai canoni accademici: non essere timido!
+
+            .home-dual-faq.faq
+              %h4 Di quali strumenti posso disporre?
+
+              %p
+                Su richiesta, potremo assegnarti una lavagna interattiva
+                multimediale (LIM), l'uso della palestra o del campo da gioco
+                esterno. La possibilità di usarli dipende dalla loro
+                disponibilità, quindi, se hai un corso da presentare, fallo il
+                prima possibile.
+
+%section.home-calendar
+  %div.home-calendar-icon-container
+    = fa_icon 'calendar', class: 'home-calendar-icon'
+
+  - content_for :calendar_entries do
+    %dl.list-unstyled.home-calendar-list
+      %dt 8:15-9:15
+      %dd Lezione regolare
+
+      %dt 9:15-11:05
+      %dd Corsi socioculturali
+
+      %dt 11:05-11:25
+      %dd Intervallo
+
+      %dt 11:25-12:15
+      %dd Corsi ludico-creativi
+
+  .container.home-calendar-content-container
+    .row
+      .visible-xs
+        .col-xs-12.col-sm-4.home-calendar-col
+          .home-calendar-item
+            %h4.home-calendar-title
+              19, 20 e 22 dicembre
+
+            = yield :calendar_entries
+
+      .visible-sm.visible-md.visible-lg
+        - [19, 20, 22].each do |day|
+          .col-xs-12.col-sm-4.home-calendar-col
+            .home-calendar-item
+              %h4.home-calendar-title
+                = day
+                dicembre
+
+              = yield :calendar_entries
