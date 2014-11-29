@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.1.4'
+ruby '2.1.5'
 
 # Ruby on Rails
-gem 'rails', '4.1.7'
+gem 'rails', '4.1.8'
 
 # Asset processors
 gem 'sass-rails'
