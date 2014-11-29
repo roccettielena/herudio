@@ -13,4 +13,8 @@ class ApplicationController < ActionController::Base
     destination = request.referer.present? ? :back : default
     redirect_to destination, *options
   end
+
+  def after_sign_in_path_for(resource)
+    request.env['omniauth.origin'] || stored_location_for(resource) || courses_path
+  end
 end

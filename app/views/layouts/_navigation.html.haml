@@ -13,10 +13,10 @@
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li{class: ('active' if params[:controller] == 'high_voltage/pages' && params[:id] == 'home')}
-          = link_to "#{fa_icon('home')} #{t('layout.nav.home')}".html_safe, root_path
+          = link_to "#{fa_icon('home', class: 'fa-fw')} #{t('layout.nav.home')}".html_safe, root_path
 
         %li{class: ('active' if params[:controller] == 'courses' && params[:action] == 'index')}
-          = link_to "#{fa_icon('th-list')} #{t('layout.nav.courses')}".html_safe, courses_path
+          = link_to "#{fa_icon('th-list', class: 'fa-fw')} #{t('layout.nav.courses')}".html_safe, courses_path
 
       %form.navbar-form.navbar-left{role: 'search', action: courses_path(params)}
         - params.slice(:by_category).each_pair do |name, value|
@@ -28,20 +28,20 @@
           .input-group
             - if params[:by_name]
               .input-group-btn
-                = link_to fa_icon('times'), courses_path(params.except(:by_name)), class: 'btn btn-default'
+                = link_to fa_icon('times', class: 'fa-fw'), courses_path(params.except(:by_name)), class: 'btn btn-default'
 
             %input.form-control#course_search_query{name: :by_name, type: 'text', placeholder: t('layout.course_search.placeholder'), value: params[:by_name]}
 
             .input-group-btn
-              %button.btn.btn-default(type='submit')
-                = fa_icon 'search'
+              %button.btn.btn-secondary(type='submit')
+                = fa_icon 'search', class: 'fa-fw'
                 = t('layout.course_search.submit')
 
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           %li.dropdown
             %a.dropdown-toggle#user-dropdown(href='#' role='button' data-toggle='dropdown')
-              = fa_icon 'user'
+              = fa_icon 'user', class: 'fa-fw'
               = current_user.full_name
               %span.caret
 

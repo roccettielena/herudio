@@ -18,6 +18,17 @@ $brand-primary: $red;
 // Links
 $link-color: $red;
 
+// Navbar
+$navbar-height: 60px;
+$navbar-default-color: white;
+$navbar-default-bg: $red;
+$navbar-default-link-color: white;
+$navbar-default-link-active-color: white;
+$navbar-default-link-hover-color: white;
+$navbar-default-link-hover-bg: darken($navbar-default-bg, 3.25%);
+$navbar-default-brand-hover-color: white;
+$navbar-default-brand-hover-bg: darken($navbar-default-bg, 3.25%);
+
 // Import Bootstrap
 @import "bootstrap-sprockets";
 @import "bootstrap";

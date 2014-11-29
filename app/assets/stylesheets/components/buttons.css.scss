@@ -18,3 +18,7 @@
     color: white;
   }
 }
+
+.btn-secondary {
+  @include button-variant(white, $blue-dark, $blue-dark);
+}
