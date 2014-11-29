@@ -57,6 +57,9 @@ footer {
 
     &:hover {
       color: darken($blue, 13%);
+    }
+
+    &:hover, &:active {
       text-decoration: none;
     }
 
