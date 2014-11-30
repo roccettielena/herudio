@@ -2,6 +2,10 @@
  *= depends_on home-cover.jpg
  */
 
+.home .navbar {
+  margin-bottom: 0;
+}
+
 .home-overlay {
   background-image: asset-url('home-cover.jpg');
 }
