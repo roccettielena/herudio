@@ -4,11 +4,15 @@ main {
 }
 
 .container-sm {
-  max-width: $container-sm * 0.6;
+  max-width: $container-sm * 0.6 + 30px;
   margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .container-md {
-  max-width: $container-sm * 1.25;
+  max-width: $container-sm * 1.25 + 30px;
   margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
 }
