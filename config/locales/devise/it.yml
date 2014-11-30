@@ -43,3 +43,30 @@ it:
         submit: 'Modifica profilo'
         hints:
           reconfirmation_html: 'In attesa di conferma per <strong>%{email}</strong>'
+
+    failure:
+      invited: 'Hai un invito in sospeso, accettalo per terminare la creazione del tuo account.'
+
+    invitations:
+      send_instructions:        'Un email di invito è stata inviata a %{email}.'
+      invitation_token_invalid: 'Il codice invito fornito non è valido!'
+      updated:                  'La tua password è stata impostata correttamente. Ora sei loggato.'
+      no_invitations_remaining: 'Nessun invito rimanente'
+      invitation_removed:       'Il tuo invito è stato rimosso.'
+
+      edit:
+        title:  'Imposta password'
+        submit: 'Imposta password'
+
+    mailer:
+      invitation_instructions:
+        subject: 'Invitation instructions'
+        body_html: >
+          <p>Ciao %{full_name},</p>
+          <p>sei stato invitato nella piattaforma %{site_name}.</p>
+          <p>Per accettare l'invito e terminare la creazione del tuo account
+          clicca qui:</p>
+          <a href="%{url}">qui</a>.</p>
+          <p>Se non vuoi accettare l'invito, semplicemente ignora questa email.</p>
+          <p>Cordiali saluti,<br>
+          il team di %{site_name}</p>

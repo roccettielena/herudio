@@ -1,0 +1,5 @@
+<%= t('devise.confirmations.email.body_html',
+  full_name: h(@resource.full_name),
+  site_name: ENV['SITE_NAME'],
+  url: accept_user_invitation_url(invitation_token: @token)
+) %>

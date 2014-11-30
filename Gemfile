@@ -20,6 +20,7 @@ gem 'font-awesome-rails'
 
 # Authentication
 gem 'devise'
+gem 'devise_invitable'
 
 # Internationalization
 gem 'rails-i18n'

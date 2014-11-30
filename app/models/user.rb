@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :courses, inverse_of: :organizers, join_table: 'courses_organizers', foreign_key: 'organizer_id'
   has_many :organized_lessons, class_name: 'Lesson', through: :courses, source: :lessons
 
-  devise :database_authenticatable, :confirmable, :recoverable, :rememberable,
+  devise :invitable, :database_authenticatable, :confirmable, :recoverable, :rememberable,
          :trackable, :validatable, :registerable
 
   validates :group, presence: true

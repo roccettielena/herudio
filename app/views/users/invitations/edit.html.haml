@@ -1,0 +1,17 @@
+- provide :title, t('devise.invitations.edit.title')
+
+.container-sm
+  %h1= t('devise.invitations.edit.title')
+
+  .strong
+    = simple_form_for(resource, url: user_invitation_path, html: { method: :put }) do |f|
+      = devise_error_messages!
+
+      = f.hidden_field :invitation_token
+
+      = f.input :password, required: true, input_html: { class: 'input-lg' }, autofocus: true
+      = f.input :password_confirmation, required: true, input_html: { class: 'input-lg' }
+
+      .form-actions
+        %button.btn.btn-lg.btn-primary(type='submit')
+          = t('devise.invitations.edit.submit')
