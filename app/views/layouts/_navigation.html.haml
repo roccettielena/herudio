@@ -33,9 +33,8 @@
             %input.form-control#course_search_query{name: :by_name, type: 'text', placeholder: t('layout.course_search.placeholder'), value: params[:by_name]}
 
             .input-group-btn
-              %button.btn.btn-secondary(type='submit')
+              %button.btn.btn-secondary#search-submit(type='submit')
                 = fa_icon 'search', class: 'fa-fw'
-                = t('layout.course_search.submit')
 
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?

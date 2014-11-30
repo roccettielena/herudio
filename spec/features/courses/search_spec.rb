@@ -8,7 +8,7 @@ RSpec.feature 'Courses search' do
     click_link I18n.t('layout.nav.courses')
 
     fill_in I18n.t('layout.course_search.placeholder'), with: 'foo'
-    click_button I18n.t('layout.course_search.submit')
+    click_button 'search-submit'
 
     expect(page).to have_content 'Foocourse'
     expect(page).not_to have_content 'Barcourse'
