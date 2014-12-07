@@ -18,7 +18,7 @@ module SubscriptionsHelper
     options = { class: 'btn btn-sm btn-primary' }.merge(options)
     options = options.merge(
       method: :post,
-      disabled: (lesson.available_seats <= 0 || lesson.conflicting_for?(user))
+      disabled: (Subscription.closed? || lesson.available_seats <= 0 || lesson.conflicting_for?(user))
     )
 
     output = [link_to(text, href, options)]
@@ -41,7 +41,7 @@ module SubscriptionsHelper
     options = { class: 'btn btn-sm btn-danger' }.merge(options)
     options = options.merge(
       method:   :delete,
-      disabled: lesson.past?
+      disabled: (Subscription.closed? || lesson.past?)
     )
 
     output = [link_to(text, href, options)]

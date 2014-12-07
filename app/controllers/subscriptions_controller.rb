@@ -7,6 +7,11 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
+    if Subscription.closed?
+      redirect_back_or @course, alert: t('controllers.subscriptions.closed')
+      return
+    end
+
     if current_user.subscribed_to?(@lesson)
       redirect_back_or @course, alert: t('controllers.subscriptions.create.already_subscribed')
       return
@@ -42,6 +47,11 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
+    if Subscription.closed?
+      redirect_back_or @course, alert: t('controllers.subscriptions.closed')
+      return
+    end
+
     unless current_user.subscribed_to?(@lesson)
       redirect_back_or @course, alert: t('controllers.subscriptions.destroy.not_subscribed')
       return

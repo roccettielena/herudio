@@ -1,6 +1,8 @@
 it:
   controllers:
     subscriptions:
+      closed: 'Le iscrizioni sono attualmente chiuse.'
+
       create:
         subscribed:         'Ti sei iscritto alla lezione specificata.'
         already_subscribed: 'Sei già iscritto a questa lezione!'

@@ -25,6 +25,21 @@ RSpec.describe SubscriptionsController do
       end
     end
 
+    context 'when subscriptions are closed' do
+      before(:each) do
+        Subscription
+          .expects(:closed?)
+          .once
+          .returns(true)
+      end
+
+      it 'does not create the subscription' do
+        expect {
+          post :create, course_id: course.id, lesson_id: lesson.id
+        }.not_to change(lesson.subscriptions, :count)
+      end
+    end
+
     context 'when the user is already subscribed to the lesson' do
       before { FactoryGirl.create(:subscription, user: current_user, lesson: lesson) }
 
@@ -98,6 +113,21 @@ RSpec.describe SubscriptionsController do
   end
 
   describe "DELETE 'destroy'" do
+    context 'when subscriptions are closed' do
+      before(:each) do
+        Subscription
+          .expects(:closed?)
+          .once
+          .returns(true)
+      end
+
+      it 'does not destroy the subscription' do
+        expect {
+          delete :destroy, course_id: course.id, lesson_id: lesson.id
+        }.not_to change(lesson.subscriptions, :count)
+      end
+    end
+
     context 'when the user is subscribed to the lesson' do
       before { FactoryGirl.create(:subscription, user: current_user, lesson: lesson) }
 
