@@ -23,6 +23,10 @@ class Lesson < ActiveRecord::Base
     seats - taken_seats
   end
 
+  def past?
+    ends_at <= Time.now
+  end
+
   def in_conflict_with?(lesson)
     (starts_at <= lesson.ends_at) && (ends_at >= lesson.starts_at)
   end

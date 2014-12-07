@@ -37,6 +37,32 @@ RSpec.describe Lesson do
     expect(lesson).not_to be_valid
   end
 
+  describe '#past?' do
+    context 'when the lesson is past' do
+      subject do
+        FactoryGirl.build_stubbed(:lesson,
+          ends_at: Date.yesterday
+        )
+      end
+
+      it 'returns true' do
+        expect(subject).to be_past
+      end
+    end
+
+    context 'when the lesson is not past' do
+      subject do
+        FactoryGirl.build_stubbed(:lesson,
+          ends_at: Date.tomorrow
+        )
+      end
+
+      it 'returns false' do
+        expect(subject).not_to be_past
+      end
+    end
+  end
+
   describe '#seats' do
     before(:each) do
       subject

@@ -106,6 +106,34 @@ RSpec.describe SubscriptionsController do
           delete :destroy, course_id: course.id, lesson_id: lesson.id
         }.to change(lesson.subscriptions, :count).by(-1)
       end
+
+      context 'when the subscription is to a past lesson' do
+        before(:each) do
+          course
+            .lessons
+            .expects(:find)
+            .once
+            .with(lesson.id.to_s)
+            .returns(lesson)
+
+          Course
+            .expects(:find)
+            .with(course.id.to_s)
+            .once
+            .returns(course)
+
+          lesson
+            .expects(:past?)
+            .once
+            .returns(true)
+        end
+
+        it 'does not destroy the subscription' do
+          expect {
+            delete :destroy, course_id: course.id, lesson_id: lesson.id
+          }.not_to change(lesson.subscriptions, :count)
+        end
+      end
     end
 
     context 'when the user is not subscribed to the lesson' do

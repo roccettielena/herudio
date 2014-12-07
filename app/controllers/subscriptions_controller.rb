@@ -47,6 +47,11 @@ class SubscriptionsController < ApplicationController
       return
     end
 
+    if @lesson.past?
+      redirect_back_or @course, alert: t('controllers.subscriptions.destroy.past_lesson')
+      return
+    end
+
     current_user.subscription_to(@lesson).destroy
     redirect_back_or @course, notice: t('controllers.subscriptions.destroy.unsubscribed')
   end

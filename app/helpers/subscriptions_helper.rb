@@ -39,7 +39,10 @@ module SubscriptionsHelper
     href = course_lesson_subscription_path(lesson.course, lesson)
 
     options = { class: 'btn btn-sm btn-danger' }.merge(options)
-    options = options.merge(method: :delete)
+    options = options.merge(
+      method:   :delete,
+      disabled: lesson.past?
+    )
 
     output = [link_to(text, href, options)]
 
