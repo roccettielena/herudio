@@ -21,21 +21,23 @@
 
     .footer-and-credits
       %footer
-        .container
-          .row
-            .col-xs-12.col-sm-4.pull-right
-              = image_tag 'roccia.jpg', alt: 'Se non vieni, Roccia ti sgama.', class: 'roccia img-circle img-responsive'
+        .container.container-text
+          %h4 Serve una mano?
 
-            .col-xs-12.col-sm-8
-              %h4 Serve una mano?
+          %p
+            Se hai bisogno di aiuto, contattaci all'indirizzo email
+            %strong herudio@karmapen.com.
+            Saremo felici di aiutarti con
+            l'iscrizione, l'organizzazione dei corsi e l'uso della piattaforma
+            online o parla con i rappresentanti d'istituto (Biondo, Roccetti,
+            Latini e Caporali).
 
-              %p
-                Se hai bisogno di aiuto, contattaci all'indirizzo email
-                %strong herudio@karmapen.com.
-                Saremo felici di aiutarti con
-                l'iscrizione, l'organizzazione dei corsi e l'uso della piattaforma
-                online o parla con i rappresentanti d'istituto (Biondo, Roccetti,
-                Caporali e Latini).
+        .container.container-images
+          %ul.list-inline
+            - %w(raffo roccia bea titto).each do |person|
+              %li
+                %a{href: ENV["#{person.upcase}_URL"], title: "Se non vieni, #{person.capitalize} ti sgama.",}
+                  = image_tag "#{person}.jpg", alt: person.capitalize, class: 'roccia img-circle img-responsive', style: 'max-width: 150px'
 
       .credits
         .container
