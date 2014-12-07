@@ -31,6 +31,11 @@ RSpec.describe Subscription do
   end
 
   describe '.open?' do
+    after(:each) do
+      ENV['SUBSCRIPTIONS_OPEN_AT'] = ''
+      ENV['SUBSCRIPTIONS_CLOSE_AT'] = ''
+    end
+
     context 'when there is no opening or closing time' do
       before(:each) do
         ENV['SUBSCRIPTIONS_OPEN_AT'] = ''
