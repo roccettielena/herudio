@@ -62,4 +62,19 @@ RSpec.describe User do
       end
     end
   end
+
+  describe '.with_no_subscriptions_for' do
+    let!(:frame) { FactoryGirl.create :time_frame }
+    let!(:lesson) { FactoryGirl.create :lesson, time_frame: frame }
+
+    let!(:subscribed_user) { FactoryGirl.create(:subscription, lesson: lesson).user }
+    let!(:unsubscribed_user) { FactoryGirl.create :user }
+
+    let(:result) { User.with_no_subscriptions_for(frame) }
+
+    it 'returns the users with no subscriptions to the given time frame' do
+      expect(result).to include(unsubscribed_user)
+      expect(result).not_to include(subscribed_user)
+    end
+  end
 end

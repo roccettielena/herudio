@@ -15,6 +15,26 @@ class User < ActiveRecord::Base
 
   scope :ordered_by_name, ->{ order('full_name ASC') }
 
+  class << self
+    NO_SUBSCRIPTIONS_SQL = <<-SQL
+      (SELECT COUNT(subscriptions.*)
+      FROM subscriptions
+      WHERE
+        subscriptions.user_id = users.id
+        AND (
+          SELECT lessons.time_frame_id
+          FROM lessons
+          WHERE
+            lessons.id = subscriptions.lesson_id
+        ) = :time_frame_id
+      ) = 0
+    SQL
+
+    def with_no_subscriptions_for(time_frame)
+      where NO_SUBSCRIPTIONS_SQL, time_frame_id: time_frame.id
+    end
+  end
+
   def subscription_to(lesson)
     subscriptions.find_by(lesson: lesson)
   end
