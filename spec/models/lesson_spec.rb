@@ -210,4 +210,43 @@ RSpec.describe Lesson do
       end
     end
   end
+
+  describe '.available' do
+    it 'returns the available lessons' do
+      available_lesson = FactoryGirl.create(:lesson,
+        course: FactoryGirl.create(:course,
+          seats: 1
+        )
+      )
+
+      unavailable_lesson = FactoryGirl.create(:lesson,
+        course: FactoryGirl.create(:course,
+          seats: 1
+        )
+      )
+
+      FactoryGirl.create(:subscription, lesson: unavailable_lesson)
+
+      expect(Lesson.available).to eq([available_lesson])
+    end
+  end
+
+  describe '.available_for' do
+    it 'returns the available lessons in the given time frame' do
+      frame = FactoryGirl.build_stubbed(:time_frame)
+      scope = stub()
+
+      Lesson
+        .expects(:where)
+        .with(time_frame: frame)
+        .once
+        .returns(scope)
+
+      scope
+        .expects(:available)
+        .once
+
+      Lesson.available_for(frame)
+    end
+  end
 end
