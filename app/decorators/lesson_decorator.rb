@@ -1,12 +1,14 @@
 class LessonDecorator < Draper::Decorator
   delegate_all
 
+  decorates_association :time_frame
+
   def starts_at
-    h.l object.starts_at, format: :long
+    time_frame.starts_at
   end
 
   def ends_at
-    h.l object.ends_at, format: :long
+    time_frame.starts_at
   end
 
   def to_s

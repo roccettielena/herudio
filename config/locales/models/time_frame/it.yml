@@ -1,0 +1,18 @@
+it:
+  activerecord:
+    models:
+      time_frame:
+        one:   'Periodo'
+        other: 'Periodi'
+
+    attributes:
+      time_frame:
+        id:        'ID'
+        starts_at: 'Data inizio'
+        ends_at:   'Data fine'
+
+  formtastic:
+    labels:
+      time_frame:
+        starts_at: 'Data inizio:'
+        ends_at:   'Data fine:'

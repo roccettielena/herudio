@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141130104931) do
+ActiveRecord::Schema.define(version: 20141208174515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,9 +74,8 @@ ActiveRecord::Schema.define(version: 20141130104931) do
   add_index "courses_organizers", ["course_id", "organizer_id"], name: "index_courses_organizers_on_course_id_and_organizer_id", using: :btree
 
   create_table "lessons", force: true do |t|
-    t.integer  "course_id", null: false
-    t.datetime "starts_at", null: false
-    t.datetime "ends_at",   null: false
+    t.integer "course_id",     null: false
+    t.integer "time_frame_id", null: false
   end
 
   create_table "subscriptions", force: true do |t|
@@ -84,6 +83,11 @@ ActiveRecord::Schema.define(version: 20141130104931) do
     t.integer  "lesson_id",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "time_frames", force: true do |t|
+    t.datetime "starts_at", null: false
+    t.datetime "ends_at",   null: false
   end
 
   create_table "user_groups", force: true do |t|

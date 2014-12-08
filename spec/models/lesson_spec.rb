@@ -7,17 +7,10 @@ RSpec.describe Lesson do
     expect(subject).to be_valid
   end
 
-  %w(course starts_at ends_at).each do |attribute|
+  %w(course).each do |attribute|
     it "validates the presence of #{attribute}" do
       expect(subject).to validate_presence_of(attribute)
     end
-  end
-
-  it 'validates ends_at is after starts_at' do
-    expect(FactoryGirl.build(:lesson,
-      starts_at: Time.now,
-      ends_at: Time.now - 1.hour
-    )).not_to be_valid
   end
 
   it 'validates it is not in conflict with other lessons of the course' do
@@ -41,7 +34,9 @@ RSpec.describe Lesson do
     context 'when the lesson is past' do
       subject do
         FactoryGirl.build_stubbed(:lesson,
-          ends_at: Date.yesterday
+          time_frame: FactoryGirl.build_stubbed(:time_frame,
+            ends_at: Date.yesterday
+          )
         )
       end
 
@@ -53,7 +48,9 @@ RSpec.describe Lesson do
     context 'when the lesson is not past' do
       subject do
         FactoryGirl.build_stubbed(:lesson,
-          ends_at: Date.tomorrow
+          time_frame: FactoryGirl.build_stubbed(:time_frame,
+            ends_at: Date.tomorrow
+          )
         )
       end
 
@@ -111,17 +108,21 @@ RSpec.describe Lesson do
 
   describe '#in_conflict_with?' do
     subject do
-      FactoryGirl.build(:lesson,
-        starts_at: Time.now,
-        ends_at: Time.now + 1.hour
+      FactoryGirl.build_stubbed(:lesson,
+        time_frame: FactoryGirl.build_stubbed(:time_frame,
+          starts_at: Time.now,
+          ends_at: Time.now + 1.hour
+        )
       )
     end
 
     context 'when the lessons overlap' do
       let(:lesson) do
-        FactoryGirl.build(:lesson,
-          starts_at: Time.now + 30.minutes,
-          ends_at: Time.now + 90.minutes
+        FactoryGirl.build_stubbed(:lesson,
+          time_frame: FactoryGirl.build_stubbed(:time_frame,
+            starts_at: Time.now + 30.minutes,
+            ends_at: Time.now + 90.minutes
+          )
         )
       end
 
@@ -132,9 +133,11 @@ RSpec.describe Lesson do
 
     context "when the lessons don't overlap" do
       let(:lesson) do
-        FactoryGirl.build(:lesson,
-          starts_at: Time.now + 61.minutes,
-          ends_at: Time.now + 121.minutes
+        FactoryGirl.build_stubbed(:lesson,
+          time_frame: FactoryGirl.build_stubbed(:time_frame,
+            starts_at: Time.now + 61.minutes,
+            ends_at: Time.now + 121.minutes
+          )
         )
       end
 

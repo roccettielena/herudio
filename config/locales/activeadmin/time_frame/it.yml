@@ -1,0 +1,5 @@
+it:
+  activeadmin:
+    time_frame:
+      panels:
+        details: 'Dettagli periodo'

@@ -6,7 +6,7 @@ ActiveAdmin.register Course do
   filter :location
 
   permit_params :name, :description, :location, :seats, :category_id, organizer_ids: [], lessons_attributes: [
-    :id, :starts_at_date, :starts_at_time_hour, :starts_at_time_minute, :ends_at_date, :ends_at_time_hour, :ends_at_time_minute, :_destroy
+    :id, :time_frame_id, :_destroy
   ]
 
   index do
@@ -77,6 +77,8 @@ ActiveAdmin.register Course do
   end
 
   form do |f|
+    puts f.object.errors.inspect
+
     f.inputs t('activeadmin.course.panels.details') do
       f.input :category
       f.input :name
@@ -87,8 +89,7 @@ ActiveAdmin.register Course do
     end
 
     f.has_many :lessons, heading: t('activeadmin.course.panels.lessons'), allow_destroy: true do |a|
-      a.input :starts_at, as: :just_datetime_picker
-      a.input :ends_at, as: :just_datetime_picker
+      a.input :time_frame, label: t('formtastic.labels.lesson.time_frame'), collection: TimeFrame.all.decorate
     end
 
     f.actions

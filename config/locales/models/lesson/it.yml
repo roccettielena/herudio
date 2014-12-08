@@ -22,5 +22,4 @@ it:
   formtastic:
     labels:
       lesson:
-        starts_at: 'Data inizio:'
-        ends_at:   'Data fine:'
+        time_frame: 'Periodo:'
