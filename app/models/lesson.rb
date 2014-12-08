@@ -11,6 +11,32 @@ class Lesson < ActiveRecord::Base
 
   delegate :starts_at, :ends_at, to: :time_frame, allow_nil: true
 
+  class << self
+    AVAILABLE_SQL = <<-SQL
+      (
+        (
+          SELECT courses.seats
+          FROM courses
+          WHERE courses.id = lessons.course_id
+        )
+        -
+        (
+          SELECT COUNT(subscriptions.id)
+          FROM subscriptions
+          WHERE subscriptions.lesson_id = lessons.id
+        )
+      ) > 0
+    SQL
+
+    def available
+      where(AVAILABLE_SQL)
+    end
+
+    def available_for(time_frame)
+      where(time_frame: time_frame).available
+    end
+  end
+
   def seats
     course.seats
   end
