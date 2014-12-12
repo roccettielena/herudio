@@ -27,8 +27,27 @@ class User < ActiveRecord::Base
       ) = 0
     SQL
 
+
+    NO_ORGANIZED_LESSONS_SQL = <<-SQL
+      (
+        SELECT COUNT(lessons.*)
+        FROM lessons
+        INNER JOIN courses
+          ON lessons.course_id = courses.id
+        INNER JOIN courses_organizers
+          ON courses.id = courses_organizers.course_id
+        WHERE
+          courses_organizers.organizer_id = users.id
+          AND lessons.time_frame_id = :time_frame_id
+      ) = 0
+    SQL
+
     def with_no_subscriptions_for(time_frame)
       where NO_SUBSCRIPTIONS_SQL, time_frame_id: time_frame.id
+    end
+
+    def with_no_organized_lessons_for(time_frame)
+      where NO_ORGANIZED_LESSONS_SQL, time_frame_id: time_frame.id
     end
   end
 
