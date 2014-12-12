@@ -17,6 +17,11 @@ class SubscriptionsController < ApplicationController
       return
     end
 
+    if @lesson.past?
+      redirect_back_or @course, alert: t('controllers.subscriptions.past_lesson')
+      return
+    end
+
     if @lesson.available_seats <= 0
       redirect_back_or @course, alert: t('controllers.subscriptions.create.no_seats')
       return
@@ -58,7 +63,7 @@ class SubscriptionsController < ApplicationController
     end
 
     if @lesson.past?
-      redirect_back_or @course, alert: t('controllers.subscriptions.destroy.past_lesson')
+      redirect_back_or @course, alert: t('controllers.subscriptions.past_lesson')
       return
     end
 

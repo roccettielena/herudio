@@ -1,7 +1,8 @@
 it:
   controllers:
     subscriptions:
-      closed: 'Le iscrizioni sono attualmente chiuse.'
+      closed:      'Le iscrizioni sono attualmente chiuse.'
+      past_lesson: 'Questa lezione è già finita!'
 
       create:
         subscribed:         'Ti sei iscritto alla lezione specificata.'
@@ -20,7 +21,6 @@ it:
       destroy:
         unsubscribed:   'La tua iscrizione è stata cancellata.'
         not_subscribed: 'Non sei iscritto a questa lezione!'
-        past_lesson:    'Questa lezione è già finita!'
 
       index:
         title: 'Le mie iscrizioni'
