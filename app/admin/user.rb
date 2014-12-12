@@ -41,9 +41,7 @@ ActiveAdmin.register User do
     selectable_column
     id_column
 
-    column :group, sortable: :group_id do |user|
-      link_to user.group.name, admin_user_group_path(user.group)
-    end
+    column :group, sortable: :group_id
     column :full_name
     column :email
     column :current_sign_in_at
@@ -122,7 +120,7 @@ ActiveAdmin.register User do
 
   form do |f|
     f.inputs t('activeadmin.user.panels.details') do
-      f.input :group, collection: UserGroup.ordered_by_name
+      f.input :group, collection: UserGroup.ordered_by_name, required: false
       f.input :full_name
       f.input :email
       f.input :password, required: f.object.new_record?, hint: f.object.persisted?
@@ -133,6 +131,12 @@ ActiveAdmin.register User do
   end
 
   controller do
+    def create
+      @user = User.new(permitted_params[:user])
+      @user.skip_group_validation!
+      super
+    end
+
     def update
       if params[:user][:password].blank?
         params[:user].delete("password")

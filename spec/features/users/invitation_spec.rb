@@ -2,15 +2,17 @@ require 'rails_helper'
 
 RSpec.feature 'Invitations' do
   scenario 'user can set a password' do
+    group = FactoryGirl.create(:user_group)
+
     user_attributes = FactoryGirl.attributes_for(:user)
-    user = User.invite!(
-      full_name: user_attributes[:full_name],
-      email: user_attributes[:email],
-      group: FactoryGirl.create(:user_group)
-    )
+
+    user = FactoryGirl.build(:user, group: nil)
+    user.skip_group_validation!
+    user.save! && user.invite!
 
     visit accept_user_invitation_path(invitation_token: user.raw_invitation_token)
 
+    select group.name, from: I18n.t('simple_form.labels.user.group')
     fill_in I18n.t('simple_form.labels.user.password'), with: user_attributes[:password]
     fill_in I18n.t('simple_form.labels.user.password_confirmation'), with: user_attributes[:password]
 
