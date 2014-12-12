@@ -27,7 +27,7 @@ RSpec.describe SubscriptionFillingService do
         .yields(user)
 
       User
-        .expects(:with_no_subscriptions_for)
+        .expects(:with_no_occupations_for)
         .with(lesson.time_frame)
         .once
         .returns(relation)
