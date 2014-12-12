@@ -9,6 +9,25 @@ ActiveAdmin.register User do
 
   belongs_to :user_group, optional: true
 
+  collection_action :fill_subscriptions, method: :post do
+    filler = SubscriptionFillingService.new
+
+    TimeFrame.all.each do |time_frame|
+      begin
+        filler.fill_subscriptions_for(time_frame)
+      rescue SubscriptionFillingService::NoLessonError => e
+        flash[:error] = "Non ci sono lezioni disponibili per l'iscrizione automatica."
+        redirect_to collection_path && return
+      end
+    end
+
+    redirect_to collection_path, notice: 'Le iscrizioni sono state completate correttamente!'
+  end
+
+  action_item only: :index do
+    link_to('Completa iscrizioni', fill_subscriptions_admin_users_path, method: :post)
+  end
+
   index do
     selectable_column
     id_column
