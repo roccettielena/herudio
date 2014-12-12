@@ -49,6 +49,12 @@ class User < ActiveRecord::Base
     def with_no_organized_lessons_for(time_frame)
       where NO_ORGANIZED_LESSONS_SQL, time_frame_id: time_frame.id
     end
+
+    def with_no_occupations_for(time_frame)
+      self
+        .with_no_subscriptions_for(time_frame)
+        .with_no_organized_lessons_for(time_frame)
+    end
   end
 
   def subscription_to(lesson)
