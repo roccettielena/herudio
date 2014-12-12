@@ -3,5 +3,5 @@ it:
     user:
       panels:
         details:       'Dettagli utente'
-        courses:       'Corsi'
+        courses:       'Corsi organizzati'
         subscriptions: 'Iscrizioni'
