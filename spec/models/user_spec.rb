@@ -68,7 +68,7 @@ RSpec.describe User do
     let!(:lesson) { FactoryGirl.create :lesson, time_frame: frame }
 
     let!(:subscribed_user) { FactoryGirl.create(:subscription, lesson: lesson).user }
-    let!(:unsubscribed_user) { FactoryGirl.create :user }
+    let!(:unsubscribed_user) { FactoryGirl.create(:subscription).user }
 
     let(:result) { User.with_no_subscriptions_for(frame) }
 

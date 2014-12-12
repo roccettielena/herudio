@@ -17,16 +17,13 @@ class User < ActiveRecord::Base
 
   class << self
     NO_SUBSCRIPTIONS_SQL = <<-SQL
-      (SELECT COUNT(subscriptions.*)
-      FROM subscriptions
-      WHERE
-        subscriptions.user_id = users.id
-        AND (
-          SELECT lessons.time_frame_id
-          FROM lessons
-          WHERE
-            lessons.id = subscriptions.lesson_id
-        ) = :time_frame_id
+      (
+        SELECT COUNT(subscriptions.*)
+        FROM subscriptions, lessons
+        WHERE
+          subscriptions.user_id = users.id
+          AND subscriptions.lesson_id = lessons.id
+          AND lessons.time_frame_id = :time_frame_id
       ) = 0
     SQL
 
