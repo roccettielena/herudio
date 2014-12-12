@@ -5,3 +5,4 @@ it:
         details:       'Dettagli utente'
         courses:       'Corsi organizzati'
         subscriptions: 'Iscrizioni'
+        stats:         'Statistiche'

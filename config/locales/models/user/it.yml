@@ -33,6 +33,6 @@ it:
         email:              'Email'
         current_sign_in_at: 'Ultimo accesso'
         current_sign_in_ip: 'Ultimo IP'
-        sign_in_count:      'Numero di accessi'
         created_at:         'Data creazione'
         updated_at:         'Data aggiornamento'
+        status:             'Stato'

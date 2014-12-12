@@ -9,6 +9,11 @@ ActiveAdmin.register User do
 
   belongs_to :user_group, optional: true
 
+  member_action :invite, method: :post do
+    resource.invite!
+    redirect_to resource_path, notice: "L'utente è stato invitato."
+  end
+
   collection_action :fill_subscriptions, method: :post do
     filler = SubscriptionFillingService.new
 
@@ -28,6 +33,10 @@ ActiveAdmin.register User do
     link_to('Completa iscrizioni', fill_subscriptions_admin_users_path, method: :post)
   end
 
+  action_item only: :show do
+    link_to('Invita Utente', invite_admin_user_path(user), method: :post) unless user.invitation_accepted?
+  end
+
   index do
     selectable_column
     id_column
@@ -39,21 +48,46 @@ ActiveAdmin.register User do
     column :email
     column :current_sign_in_at
 
+    column :status do |user|
+      if user.invitation_accepted?
+        status_tag 'Confermato', :ok
+      else
+        status_tag 'Invitato', :standby
+      end
+    end
+
     actions
   end
 
   show do |user|
-    panel t('activeadmin.user.panels.details') do
-      attributes_table_for user do
-        row :id
-        row :group
-        row :full_name
-        row :email
-        row :current_sign_in_at
-        row :current_sign_in_ip
-        row :sign_in_count
-        row :created_at
-        row :updated_at
+    columns do
+      column do
+        panel t('activeadmin.user.panels.details') do
+          attributes_table_for user do
+            row :id
+            row :group
+            row :full_name
+            row :email
+          end
+        end
+      end
+
+      column do
+        panel t('activeadmin.user.panels.stats') do
+          attributes_table_for user do
+            row :status do
+              if user.invitation_accepted?
+                status_tag 'Confermato', :ok
+              else
+                status_tag 'Invitato', :standby
+              end
+            end
+            row :current_sign_in_at
+            row :current_sign_in_ip
+            row :created_at
+            row :updated_at
+          end
+        end
       end
     end
 
