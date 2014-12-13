@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :confirmable, :recoverable, :rememberable,
          :trackable, :validatable, :registerable
 
-  validates :group, presence: { if: :validate_group? }
+  validates :group, presence: { if: ->{ validate_group? && persisted? } }
   validates :full_name, presence: true
 
   scope :ordered_by_name, ->{ order('full_name ASC') }

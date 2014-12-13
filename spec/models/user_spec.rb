@@ -5,9 +5,17 @@ RSpec.describe User do
     expect(subject).to be_valid
   end
 
-  %w(full_name group).each do |attribute|
+  %w(full_name).each do |attribute|
     it "validates the presence of #{attribute}" do
       expect(subject).to validate_presence_of(attribute)
+    end
+  end
+
+  context 'when it is saved' do
+    subject { FactoryGirl.create(:user) }
+
+    it 'validates the presence of group' do
+      expect(subject).to validate_presence_of :group
     end
   end
 
