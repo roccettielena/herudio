@@ -36,3 +36,4 @@ it:
         created_at:         'Data creazione'
         updated_at:         'Data aggiornamento'
         status:             'Stato'
+        unconfirmed_email:  'Email (non confermata)'

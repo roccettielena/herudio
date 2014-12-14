@@ -9,8 +9,16 @@ ActiveAdmin.register User do
 
   belongs_to :user_group, optional: true
 
+  member_action :confirm, method: :put do
+    resource.skip_group_validation!
+    resource.confirm!
+
+    redirect_to resource_path, notice: "L'utente è stato confermato."
+  end
+
   member_action :invite, method: :post do
     resource.invite!
+
     redirect_to resource_path, notice: "L'utente è stato invitato."
   end
 
@@ -29,11 +37,15 @@ ActiveAdmin.register User do
     redirect_to collection_path, notice: 'Le iscrizioni sono state completate correttamente!'
   end
 
-  action_item only: :index do
-    link_to('Completa iscrizioni', fill_subscriptions_admin_users_path, method: :post)
+  action_item :fill_subscriptions, only: :index do
+    link_to('Completa Iscrizioni', fill_subscriptions_admin_users_path, method: :post)
   end
 
-  action_item only: :show do
+  action_item :confirm, only: :show do
+    link_to('Conferma Utente', confirm_admin_user_path(user), method: :put) unless user.confirmed?
+  end
+
+  action_item :invite, only: :show do
     link_to('Invita Utente', invite_admin_user_path(user), method: :post) unless user.invitation_accepted?
   end
 
@@ -66,6 +78,7 @@ ActiveAdmin.register User do
             row :group
             row :full_name
             row :email
+            row :unconfirmed_email if user.unconfirmed_email.present?
           end
         end
       end
@@ -134,16 +147,22 @@ ActiveAdmin.register User do
     def create
       @user = User.new(permitted_params[:user])
       @user.skip_group_validation!
-      super
+      @user.skip_confirmation!
+
+      create!
     end
 
     def update
       if params[:user][:password].blank?
-        params[:user].delete("password")
-        params[:user].delete("password_confirmation")
+        params[:user].delete('password')
+        params[:user].delete('password_confirmation')
       end
 
-      super
+      @user = User.find(params[:id])
+      @user.skip_group_validation!
+      @user.skip_reconfirmation!
+
+      update!
     end
   end
 end
