@@ -16,11 +16,11 @@ class User < ActiveRecord::Base
   scope :ordered_by_name, ->{ order('full_name ASC') }
 
   def validate_group?
-    !@skip_group_validation
+    @validate_group
   end
 
-  def skip_group_validation!
-    @skip_group_validation = true
+  def validate_group!
+    @validate_group = true
   end
 
   class << self
@@ -34,7 +34,6 @@ class User < ActiveRecord::Base
           AND lessons.time_frame_id = :time_frame_id
       ) = 0
     SQL
-
 
     NO_ORGANIZED_LESSONS_SQL = <<-SQL
       (

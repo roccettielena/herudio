@@ -11,8 +11,10 @@ RSpec.describe User do
     end
   end
 
-  context 'when it is saved' do
+  context 'when it is saved and #validate_group! is called' do
     subject { FactoryGirl.create(:user) }
+
+    before(:each) { subject.validate_group! }
 
     it 'validates the presence of group' do
       expect(subject).to validate_presence_of :group

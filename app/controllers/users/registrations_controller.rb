@@ -14,4 +14,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def destroy
     raise_404
   end
+
+  protected
+
+  def update_resource(resource, params)
+    resource.validate_group!
+    super(resource, params)
+  end
 end

@@ -55,8 +55,8 @@ it:
       invitation_removed:       'Il tuo invito è stato rimosso.'
 
       edit:
-        title:  'Imposta password'
-        submit: 'Imposta password'
+        title:  'Conferma account'
+        submit: 'Conferma account'
 
     mailer:
       invitation_instructions:

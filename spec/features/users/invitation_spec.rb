@@ -7,7 +7,6 @@ RSpec.feature 'Invitations' do
     user_attributes = FactoryGirl.attributes_for(:user)
 
     user = FactoryGirl.build(:user, group: nil)
-    user.skip_group_validation!
     user.save! && user.invite!
 
     visit accept_user_invitation_path(invitation_token: user.raw_invitation_token)

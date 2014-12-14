@@ -146,7 +146,6 @@ ActiveAdmin.register User do
   controller do
     def create
       @user = User.new(permitted_params[:user])
-      @user.skip_group_validation!
       @user.skip_confirmation!
 
       create!
@@ -159,7 +158,6 @@ ActiveAdmin.register User do
       end
 
       @user = User.find(params[:id])
-      @user.skip_group_validation!
       @user.skip_reconfirmation!
 
       update!
