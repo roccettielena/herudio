@@ -39,7 +39,7 @@
             - images.each_with_index do |image, index|
               %li
                 %a{href: urls[index]}
-                  = image_tag url, class: 'team-member img-circle img-responsive'
+                  = image_tag image, class: 'team-member img-circle img-responsive'
 
       .credits
         .container
