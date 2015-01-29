@@ -33,10 +33,13 @@
 
         .container.container-images
           %ul.list-inline
-            - %w(raffo roccia bea titto).each do |person|
+            - images = (ENV['TEAM_IMAGES'] || '').split('|')
+            - urls = (ENV['TEAM_URLS'] || '').split('|')
+
+            - images.each_with_index do |image, index|
               %li
-                %a{href: ENV["#{person.upcase}_URL"], title: "Se non vieni, #{person.capitalize} ti sgama.",}
-                  = image_tag "#{person}.jpg", alt: person.capitalize, class: 'person img-circle img-responsive', style: 'max-width: 150px'
+                %a{href: urls[index]}
+                  = image_tag url, class: 'team-member img-circle img-responsive'
 
       .credits
         .container
