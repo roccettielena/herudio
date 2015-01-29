@@ -56,7 +56,7 @@
 
       .col-xs-12.col-md-6.home-dual-col
         .home-dual-col-content
-          %h1.home-dual-title O preferisci forse insegnare?
+          %h1.home-dual-title O preferisci insegnare?
 
           %p.lead
             Tutti siamo esperti in un campo. Hai mai immaginato come dev'essere
@@ -92,17 +92,20 @@
 
   - content_for :calendar_entries do
     %dl.list-unstyled.home-calendar-list
-      %dt 8:15-9:15
-      %dd Lezione regolare
+      %dt 8:05-8:30
+      %dd Appello
 
-      %dt 9:15-11:05
-      %dd Corsi socioculturali
+      %dt 8:30-10:55
+      %dd Prima fascia
 
-      %dt 11:05-11:25
+      %dt 10:55-11:05
       %dd Intervallo
 
-      %dt 11:25-12:15
-      %dd Corsi ludico-creativi
+      %dt 11:05-13:45
+      %dd Seconda fascia
+
+      %dt 13:45-13:55
+      %dd Contrappello
 
   .container.home-calendar-content-container
     .row
@@ -110,16 +113,16 @@
         .col-xs-12.col-sm-4.home-calendar-col
           .home-calendar-item
             %h4.home-calendar-title
-              19, 20 e 22 dicembre
+              3 e 4 febbraio
 
             = yield :calendar_entries
 
       .visible-sm.visible-md.visible-lg
-        - [19, 20, 22].each do |day|
+        - [3, 4].each do |day|
           .col-xs-12.col-sm-4.home-calendar-col
             .home-calendar-item
               %h4.home-calendar-title
                 = day
-                dicembre
+                febbraio
 
               = yield :calendar_entries

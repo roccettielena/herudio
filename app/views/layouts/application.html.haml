@@ -26,18 +26,17 @@
 
           %p
             Se hai bisogno di aiuto, contattaci all'indirizzo email
-            %strong herudio@karmapen.com.
-            Saremo felici di aiutarti con
-            l'iscrizione, l'organizzazione dei corsi e l'uso della piattaforma
-            online o parla con i rappresentanti d'istituto (Biondo, Roccetti,
-            Latini e Caporali).
+            %strong= mail_to ENV['CONTACT_EMAIL']
+            = "o parla con i rappresentanti d'istituto (#{ENV['TEAM_NAMES']})."
+            Saremo felici di aiutarti con l'iscrizione, l'organizzazione dei
+            corsi e l'utilizzo della piattaforma online.
 
         .container.container-images
           %ul.list-inline
             - %w(raffo roccia bea titto).each do |person|
               %li
                 %a{href: ENV["#{person.upcase}_URL"], title: "Se non vieni, #{person.capitalize} ti sgama.",}
-                  = image_tag "#{person}.jpg", alt: person.capitalize, class: 'roccia img-circle img-responsive', style: 'max-width: 150px'
+                  = image_tag "#{person}.jpg", alt: person.capitalize, class: 'person img-circle img-responsive', style: 'max-width: 150px'
 
       .credits
         .container
