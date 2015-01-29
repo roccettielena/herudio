@@ -18,7 +18,7 @@
         %li{class: ('active' if params[:controller] == 'courses')}
           = link_to "#{fa_icon('th-list', class: 'fa-fw')} #{t('layout.nav.courses')}".html_safe, courses_path
 
-      %form.navbar-form.navbar-left{role: 'search', action: courses_path(params)}
+      %form.navbar-form.navbar-left{role: 'search', action: courses_path(params.deep_symbolize_keys)}
         - params.slice(:by_category).each_pair do |name, value|
           %input{type: 'hidden', value: value, name: name}
 
@@ -28,7 +28,7 @@
           .input-group
             - if params[:by_name]
               .input-group-btn
-                = link_to fa_icon('times', class: 'fa-fw'), courses_path(params.except(:by_name)), class: 'btn btn-default'
+                = link_to fa_icon('times', class: 'fa-fw'), courses_path(params.except(:by_name).deep_symbolize_keys), class: 'btn btn-default'
 
             %input.form-control#course_search_query{name: :by_name, type: 'text', placeholder: t('layout.course_search.placeholder'), value: params[:by_name]}
 

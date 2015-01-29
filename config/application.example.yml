@@ -1,6 +1,7 @@
 TIME_ZONE: 'Rome'
 LOCALE: 'it'
 SECRET_TOKEN: 'SecretToken1'
+SECRET_KEY_BASE: 'SecretToken4'
 MAIL_SENDER: 'noreply@example.com'
 DEVISE_SECRET: 'SecretToken2'
 DEVISE_PEPPER: 'SecretToken3'

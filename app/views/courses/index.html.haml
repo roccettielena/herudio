@@ -10,11 +10,11 @@
         .pull-right
           .btn-group.toolbar
             - if params[:by_category]
-              = link_to fa_icon('times'), courses_path(params.except(:by_category)), class: 'btn btn-default'
+              = link_to fa_icon('times'), courses_path(params.except(:by_category).deep_symbolize_keys), class: 'btn btn-default'
 
             - CourseCategory.all.each do |category|
               - classes = 'btn ' + ((params[:by_category].to_i == category.id) ? 'btn-primary' : 'btn-default')
-              = link_to category.name, courses_path(params.merge(by_category: category.id)), class: classes
+              = link_to category.name, courses_path(params.merge(by_category: category.id).deep_symbolize_keys), class: classes
 
   - if @courses.empty?
     .strong
