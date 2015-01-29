@@ -15,11 +15,19 @@ footer {
     opacity: .8;
   }
 
+  a {
+    color: $blue;
+
+    &:hover {
+      color: darken($blue, 6.5%);
+    }
+  }
+
   @media (max-width: $screen-xs-max) {
     text-align: center;
   }
 
-  .roccia {
+  .person {
     margin-top: 10px;
     max-width: 150px;
 
