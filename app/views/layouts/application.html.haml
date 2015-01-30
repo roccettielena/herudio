@@ -20,6 +20,17 @@
     = yield
 
     .footer-and-credits
+      .org-credits
+        .container
+          .row
+            .img-col
+              = link_to image_tag(ENV['ORG_IMAGE'], class: 'img-responsive img-circle img-org'), ENV['ORG_URL']
+
+            .credits-col
+              %p.lead
+                Questo sito web è gratuitamente offerto dal
+                = link_to('Coordinamento Studenti X Municipio', ENV['ORG_URL']) + '.'
+
       %footer
         .container.container-text
           %h4 Serve una mano?

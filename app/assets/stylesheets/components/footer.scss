@@ -2,6 +2,52 @@
   margin-top: 50px;
 }
 
+.org-credits {
+  border-top: 1px solid #eee;
+  margin-top: 50px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+
+  .container {
+    max-width: 800px;
+  }
+
+  .img-org {
+    opacity: .75;
+    max-width: 170px;
+    margin: 0 auto;
+
+    &:hover {
+      opacity: 1;
+      transition: opacity .25s ease-in-out;
+    }
+  }
+
+  .img-col {
+    @include make-xs-column(12);
+    @include make-md-column(3);
+
+  }
+
+  .credits-col {
+    @include make-xs-column(12);
+    @include make-md-column(9);
+
+    @media (max-width: $screen-xs-max) {
+      text-align: center;
+      padding-top: 25px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      padding-top: 52px;
+    }
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
 footer {
   text-align: center;
 
