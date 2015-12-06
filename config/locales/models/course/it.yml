@@ -24,3 +24,17 @@ it:
         description: 'Descrizione:'
         category:    'Categoria:'
         organizers:  'Organizzatori:'
+
+  simple_form:
+    labels:
+      course:
+        name:        'Nome:'
+        description: 'Descrizione:'
+        category:    'Categoria:'
+
+  enumerize:
+    course:
+      status:
+        proposed: 'Proposto'
+        accepted: 'Accettato'
+        rejected: 'Rifiutato'

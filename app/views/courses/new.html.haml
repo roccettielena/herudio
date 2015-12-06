@@ -1,0 +1,26 @@
+- provide :title, t('controllers.courses.new.title')
+
+.container
+  %h1= t('controllers.courses.new.title')
+
+  .strong
+    = simple_form_for(@course, url: courses_path, defaults: { input_html: { class: 'input-lg' } }) do |f|
+      = f.input :name, autofocus: true
+      = f.input :description
+      = f.association :category
+
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th Fascia oraria
+            %th
+              .links
+                = link_to_add_association fa_icon('plus'), f, :lessons, data: { 'association-insertion-node' => '#lessons' }, class: 'btn btn-sm btn-success'
+
+        %tbody#lessons
+          = f.simple_fields_for :lessons do |lesson|
+            = render 'lesson_fields', f: lesson
+
+      .form-actions
+        %button.btn.btn-lg.btn-primary(type='submit')
+          = t('controllers.courses.new.submit')

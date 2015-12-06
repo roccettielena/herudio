@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :courses, only: :index
 
-  resources :courses, only: [:index, :show] do
+  resources :courses, only: [:index, :new, :create, :show] do
     resources :lessons, only: [] do
       resource :subscription, only: [:create, :destroy]
     end

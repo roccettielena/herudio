@@ -23,6 +23,11 @@
             %strong= t('controllers.courses.show.organizers')
             = course.organizers.map(&:full_name).join(', ')
 
+        - if user_signed_in? && course.organizers.include?(current_user)
+          %p
+            %strong= t('controllers.courses.show.status')
+            = course.status
+
   %h2= t('controllers.courses.show.lessons.title')
 
   %table.table.table-bordered.table-hover.strong
@@ -39,7 +44,7 @@
     %tbody
       - if course.lessons.empty?
         %tr
-          %td(colspan='2')= t('controllers.courses.show.lessons.empty')
+          %td{colspan: user_signed_in? ? 5 : 4}= t('controllers.courses.show.lessons.empty')
       - else
         - course.lessons.each_with_index do |lesson, index|
           %tr

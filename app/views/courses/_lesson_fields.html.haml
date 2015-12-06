@@ -1,0 +1,5 @@
+%tr.nested-fields
+  %td
+    = f.association :time_frame, collection: TimeFrame.all.decorate, label: false, wrapper: false
+  %td
+    = link_to_remove_association fa_icon('trash'), f, class: 'btn btn-sm btn-danger'

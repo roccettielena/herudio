@@ -7,7 +7,7 @@ class Course < ActiveRecord::Base
   has_many :subscriptions, through: :lessons
   has_and_belongs_to_many :organizers, class_name: 'User', inverse_of: :courses, join_table: 'courses_organizers', association_foreign_key: 'organizer_id'
 
-  accepts_nested_attributes_for :lessons, allow_destroy: true
+  accepts_nested_attributes_for :lessons, reject_if: :all_blank, allow_destroy: true
 
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
@@ -16,6 +16,19 @@ class Course < ActiveRecord::Base
   validates :category, presence: true
 
   validate :validate_organizers
+
+  extend Enumerize
+  enumerize :status, in: [:proposed, :accepted, :rejected], predicates: true, scope: true
+
+  scope :accepted, ->{ with_status(:accepted) }
+
+  def self.accessible_by(user)
+    if user
+      where("status = 'accepted' OR #{user.id} IN (SELECT organizer_id FROM courses_organizers WHERE course_id = courses.id)")
+    else
+      accepted
+    end
+  end
 
   private
 

@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141212201418) do
+ActiveRecord::Schema.define(version: 20151206184535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "active_admin_comments", force: true do |t|
+  create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
     t.text     "body"
     t.string   "resource_id",   null: false
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20141212201418) do
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
-  create_table "admin_users", force: true do |t|
+  create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -50,53 +50,54 @@ ActiveRecord::Schema.define(version: 20141212201418) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "course_categories", force: true do |t|
+  create_table "course_categories", force: :cascade do |t|
     t.string "name", null: false
   end
 
   add_index "course_categories", ["name"], name: "index_course_categories_on_name", unique: true, using: :btree
 
-  create_table "courses", force: true do |t|
-    t.string  "name",        null: false
-    t.text    "description", null: false
-    t.string  "location",    null: false
-    t.integer "seats",       null: false
-    t.integer "category_id", null: false
+  create_table "courses", force: :cascade do |t|
+    t.string  "name",                             null: false
+    t.text    "description",                      null: false
+    t.string  "location",                         null: false
+    t.integer "seats",                            null: false
+    t.integer "category_id",                      null: false
+    t.string  "status",      default: "proposed", null: false
   end
 
   add_index "courses", ["name"], name: "index_courses_on_name", unique: true, using: :btree
 
-  create_table "courses_organizers", id: false, force: true do |t|
+  create_table "courses_organizers", id: false, force: :cascade do |t|
     t.integer "course_id",    null: false
     t.integer "organizer_id", null: false
   end
 
   add_index "courses_organizers", ["course_id", "organizer_id"], name: "index_courses_organizers_on_course_id_and_organizer_id", using: :btree
 
-  create_table "lessons", force: true do |t|
+  create_table "lessons", force: :cascade do |t|
     t.integer "course_id",     null: false
     t.integer "time_frame_id", null: false
   end
 
-  create_table "subscriptions", force: true do |t|
+  create_table "subscriptions", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.integer  "lesson_id",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "time_frames", force: true do |t|
+  create_table "time_frames", force: :cascade do |t|
     t.datetime "starts_at", null: false
     t.datetime "ends_at",   null: false
   end
 
-  create_table "user_groups", force: true do |t|
+  create_table "user_groups", force: :cascade do |t|
     t.string "name", null: false
   end
 
   add_index "user_groups", ["name"], name: "index_user_groups_on_name", unique: true, using: :btree
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: ""
     t.string   "reset_password_token"

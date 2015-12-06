@@ -43,10 +43,12 @@ gem 'truncate_html'
 gem 'draper'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
+gem 'cocoon'
 
 # Active Record
 gem 'pg'
 gem 'date_validator'
+gem 'enumerize'
 
 # JavaScript runtime
 gem 'therubyracer', platform: :ruby
