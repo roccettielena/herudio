@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.feature 'Courses show' do
+  background do
+    allow(Subscription).to receive(:open?)
+      .and_return(true)
+  end
+
   given!(:course) { FactoryGirl.create(:course) }
   given!(:lesson) { FactoryGirl.create(:lesson, course: course) }
 

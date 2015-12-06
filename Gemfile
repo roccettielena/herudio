@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.2.0'
+ruby '2.2.3'
 
 # Ruby on Rails
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.5'
 
 # Asset processors
 gem 'sass-rails'
@@ -33,7 +33,7 @@ gem 'figaro'
 
 # Views
 gem 'haml-rails'
-gem 'simple_form', '~> 3.1.0.rc2', github: 'plataformatec/simple_form'
+gem 'simple_form'
 gem 'high_voltage'
 gem 'truncate_html'
 gem 'draper'
@@ -65,18 +65,8 @@ group :development do
   gem 'spring'
   gem 'spring-commands-rspec'
 
-  # Error handling
-  gem 'better_errors'
-  gem 'binding_of_caller', platforms: [:mri_21]
-
-  # Guard
-  gem 'guard-bundler'
-  gem 'guard-rspec'
-
-  # Guard (filesystem events)
-  gem 'rb-fchange', require: false
-  gem 'rb-fsevent', require: false
-  gem 'rb-inotify', require: false
+  # Development
+  gem 'pry-rails'
 
   # Asset logging suppression
   gem 'quiet_assets'
@@ -100,9 +90,6 @@ group :test do
   # RSpec
   gem 'fuubar'
   gem 'shoulda-matchers'
-
-  # Mocking
-  gem 'mocha'
 
   # Acceptance testing
   gem 'capybara'

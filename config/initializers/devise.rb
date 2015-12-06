@@ -163,14 +163,6 @@ Devise.setup do |config|
   # to give user feedback and not to assert the e-mail validity.
   config.email_regexp = /\A[^@]+@[^@]+\z/
 
-  # ==> Configuration for :timeoutable
-  # The time you want to timeout the user session without activity. After this
-  # time the user will be asked for credentials again. Default is 30 minutes.
-  config.timeout_in = 15.minutes
-
-  # If true, expires auth token on session timeout.
-  config.expire_auth_token_on_timeout = false
-
   # ==> Configuration for :recoverable
   #
   # Defines which key will be used when recovering the password for an account

@@ -25,15 +25,13 @@ RSpec.describe User do
     subject { User.new }
 
     it 'returns the subscription to the lesson' do
-      lesson = stub()
-      subscription = stub()
+      lesson = instance_double('Lesson')
+      subscription = instance_double('Subscription')
 
-      subject
-        .subscriptions
-        .expects(:find_by)
+      expect(subject.subscriptions).to receive(:find_by)
         .with(lesson: lesson)
         .once
-        .returns(subscription)
+        .and_return(subscription)
 
       expect(subject.subscription_to(lesson)).to eq(subscription)
     end
@@ -42,15 +40,19 @@ RSpec.describe User do
   describe '#subscribed_to?' do
     subject { User.new }
 
-    let(:lesson) { stub(id: 1) }
+    let(:lesson) do
+      lesson = instance_double('Lesson')
+      allow(lesson).to receive(:id)
+        .and_return(1)
+      lesson
+    end
 
     context 'when the user is subscribed to the lesson' do
       before do
-        subject
-          .expects(:subscription_to)
+        expect(subject).to receive(:subscription_to)
           .with(lesson)
           .once
-          .returns(stub())
+          .and_return(instance_double('Subscription'))
       end
 
       it 'returns true' do
@@ -60,11 +62,10 @@ RSpec.describe User do
 
     context 'when the user is not subscrbed to the lesson' do
       before do
-        subject
-          .expects(:subscription_to)
+        expect(subject).to receive(:subscription_to)
           .with(lesson)
           .once
-          .returns(nil)
+          .and_return(nil)
       end
 
       it 'returns false' do

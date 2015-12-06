@@ -17,15 +17,15 @@ RSpec.describe Lesson do
     conflicting_lesson = Lesson.new
 
     course = Course.new
-    course.stubs(lessons: [conflicting_lesson])
+    allow(course).to receive(:lessons)
+      .and_return([conflicting_lesson])
 
     lesson = FactoryGirl.build(:lesson, course: course)
 
-    lesson
-      .expects(:in_conflict_with?)
+    expect(lesson).to receive(:in_conflict_with?)
       .with(conflicting_lesson)
       .once
-      .returns(true)
+      .and_return(true)
 
     expect(lesson).not_to be_valid
   end
@@ -62,11 +62,8 @@ RSpec.describe Lesson do
 
   describe '#seats' do
     before(:each) do
-      subject
-        .course
-        .expects(:seats)
-        .once
-        .returns(30)
+      allow(subject.course).to receive(:seats)
+        .and_return(30)
     end
 
     it 'returns Course#seats' do
@@ -76,11 +73,8 @@ RSpec.describe Lesson do
 
   describe '#taken_seats' do
     before(:each) do
-      subject
-        .subscriptions
-        .expects(:count)
-        .once
-        .returns(13)
+      allow(subject.subscriptions).to receive(:count)
+        .and_return(13)
     end
 
     it 'returns the number of taken seats' do
@@ -90,15 +84,11 @@ RSpec.describe Lesson do
 
   describe '#available_seats' do
     before(:each) do
-      subject
-        .expects(:seats)
-        .once
-        .returns(30)
+      allow(subject).to receive(:seats)
+        .and_return(30)
 
-      subject
-        .expects(:taken_seats)
-        .once
-        .returns(17)
+      allow(subject).to receive(:taken_seats)
+        .and_return(17)
     end
 
     it 'returns the number of available seats' do
@@ -148,29 +138,23 @@ RSpec.describe Lesson do
   end
 
   describe '#conflicting_for' do
-    let(:user) { stub() }
+    let(:user) { instance_double('User') }
 
-    let(:conflicting_lesson) { stub() }
-    let(:compatible_lesson) { stub() }
+    let(:conflicting_lesson) { instance_double('Lesson') }
+    let(:compatible_lesson) { instance_double('Lesson') }
 
     context 'when the user has conflicting lessons' do
       before do
-        user
-          .expects(:subscribed_lessons)
-          .once
-          .returns([compatible_lesson, conflicting_lesson])
+        allow(user).to receive(:subscribed_lessons)
+          .and_return([compatible_lesson, conflicting_lesson])
 
-        subject
-          .expects(:in_conflict_with?)
+        allow(subject).to receive(:in_conflict_with?)
           .with(compatible_lesson)
-          .once
-          .returns(false)
+          .and_return(false)
 
-        subject
-          .expects(:in_conflict_with?)
+        allow(subject).to receive(:in_conflict_with?)
           .with(conflicting_lesson)
-          .once
-          .returns(true)
+          .and_return(true)
       end
 
       it 'returns the conflicting lesson' do
@@ -180,21 +164,15 @@ RSpec.describe Lesson do
 
     context 'when the user has no conflicting lessons' do
       before do
-        user
-          .expects(:subscribed_lessons)
-          .once
-          .returns([compatible_lesson])
+        allow(user).to receive(:subscribed_lessons)
+          .and_return([compatible_lesson])
 
-        user
-          .expects(:organized_lessons)
-          .once
-          .returns([compatible_lesson])
+        allow(user).to receive(:organized_lessons)
+          .and_return([compatible_lesson])
 
-        subject
-          .expects(:in_conflict_with?)
+        allow(subject).to receive(:in_conflict_with?)
           .with(compatible_lesson)
-          .twice
-          .returns(false)
+          .and_return(false)
       end
 
       it 'returns nil' do
@@ -206,7 +184,7 @@ RSpec.describe Lesson do
       it 'raises an error' do
         expect {
           subject.conflicting_for?(user, [:organized, :foo])
-        }.to raise_error
+        }.to raise_error(Lesson::InvalidAssociationError)
       end
     end
   end
@@ -234,17 +212,11 @@ RSpec.describe Lesson do
   describe '.available_for' do
     it 'returns the available lessons in the given time frame' do
       frame = FactoryGirl.build_stubbed(:time_frame)
-      scope = stub()
+      scope = OpenStruct.new(available: [])
 
-      Lesson
-        .expects(:where)
+      allow(Lesson).to receive(:where)
         .with(time_frame: frame)
-        .once
-        .returns(scope)
-
-      scope
-        .expects(:available)
-        .once
+        .and_return(scope)
 
       Lesson.available_for(frame)
     end

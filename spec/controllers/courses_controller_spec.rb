@@ -44,7 +44,7 @@ RSpec.describe CoursesController do
       it 'raises an error' do
         expect {
           get :show, id: 1
-        }.to raise_error
+        }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

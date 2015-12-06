@@ -58,7 +58,7 @@ class Lesson < ActiveRecord::Base
   end
 
   def conflicting_for(user, associations = [:subscribed, :organized])
-    raise 'Invalid association(s) specified' if associations.select do |a|
+    raise InvalidAssociationError, 'Invalid association(s) specified' if associations.select do |a|
       !a.try(:to_sym).in?([:subscribed, :organized])
     end.any?
 
@@ -88,5 +88,8 @@ class Lesson < ActiveRecord::Base
         return
       end
     end
+  end
+
+  class InvalidAssociationError < RuntimeError
   end
 end

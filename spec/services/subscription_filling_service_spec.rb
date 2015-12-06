@@ -7,30 +7,25 @@ RSpec.describe SubscriptionFillingService do
     it 'fills the subscriptions for the given time frame' do
       lesson = FactoryGirl.build_stubbed(:lesson)
 
-      Lesson
-        .expects(:available_for)
+      expect(Lesson).to receive(:available_for)
         .with(lesson.time_frame)
         .once
-        .returns([lesson])
+        .and_return([lesson])
 
       user = FactoryGirl.build_stubbed(:user)
-      user
-        .subscriptions
-        .expects(:create!)
+      expect(user.subscriptions).to receive(:create!)
         .with(lesson: lesson)
         .once
 
-      relation = stub()
-      relation
-        .expects(:find_each)
+      relation = instance_double('ActiveRecord::Relation')
+      expect(relation).to receive(:find_each)
         .once
-        .yields(user)
+        .and_yield(user)
 
-      User
-        .expects(:with_no_occupations_for)
+      expect(User).to receive(:with_no_occupations_for)
         .with(lesson.time_frame)
         .once
-        .returns(relation)
+        .and_return(relation)
 
       subject.fill_subscriptions_for(lesson.time_frame)
     end
