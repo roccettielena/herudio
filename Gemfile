@@ -21,6 +21,10 @@ gem 'font-awesome-rails'
 # Authentication
 gem 'devise'
 gem 'devise_invitable'
+gem 'devise-async'
+
+# Async processing
+gem 'sidekiq'
 
 # Internationalization
 gem 'rails-i18n'

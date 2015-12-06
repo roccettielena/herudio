@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :organized_lessons, class_name: 'Lesson', through: :courses, source: :lessons
 
   devise :invitable, :database_authenticatable, :confirmable, :recoverable, :rememberable,
-         :trackable, :validatable, :registerable
+         :trackable, :validatable, :registerable, :async
 
   validates :group, presence: { if: ->{ validate_group? && persisted? } }
   validates :full_name, presence: true
