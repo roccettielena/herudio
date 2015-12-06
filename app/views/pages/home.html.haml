@@ -32,7 +32,7 @@
             puoi scegliere quello che vuoi. Materie appassionanti spiegate da
             studenti appassionati.
 
-          = link_to 'Iscriviti a un Corso', new_user_session_path, class: 'btn btn-lg btn-outline'
+          = link_to 'Iscriviti a un Corso', (user_signed_in? ? courses_path : new_user_session_path), class: 'btn btn-lg btn-outline'
 
           .home-dual-faqs.faqs
             .home-dual-faq.faq
@@ -63,7 +63,7 @@
             stare dall'altra parte della cattedra, poter comunicare le proprie
             idee? Se qualcosa ti dà gioia, condividila!
 
-          = link_to 'Proponi un Corso', new_user_session_path, class: 'btn btn-lg btn-outline'
+          = link_to 'Proponi un Corso', (user_signed_in? ? new_course_path : new_user_session_path), class: 'btn btn-lg btn-outline'
 
           .home-dual-faqs.faqs
             .home-dual-faq.faq
