@@ -15,8 +15,11 @@
         %li{class: ('active' if params[:controller] == 'high_voltage/pages' && params[:id] == 'home')}
           = link_to "#{fa_icon('home', class: 'fa-fw')} #{t('layout.nav.home')}".html_safe, root_path
 
-        %li{class: ('active' if params[:controller] == 'courses')}
-          = link_to "#{fa_icon('th-list', class: 'fa-fw')} #{t('layout.nav.courses')}".html_safe, courses_path
+        %li{class: ('active' if params[:controller] == 'courses' && params[:action].in?(['index', 'show']))}
+          = link_to "#{fa_icon('bullhorn', class: 'fa-fw')} #{t('layout.nav.courses')}".html_safe, courses_path
+
+        %li{class: ('active' if params[:controller] == 'courses' && params[:action].in?(['new', 'create']))}
+          = link_to "#{fa_icon('plus', class: 'fa-fw')} #{t('layout.nav.propose_course')}".html_safe, new_course_path
 
       %form.navbar-form.navbar-left{role: 'search', action: courses_path(params.deep_symbolize_keys)}
         - params.slice(:by_category).each_pair do |name, value|
@@ -46,12 +49,14 @@
 
             %ul.dropdown-menu(role='menu' aria-labelledby='user-dropdown')
               %li{role: 'presentation', class: ('active' if params[:controller] == 'users/registrations' && ['edit', 'update'].include?(params[:action]))}
-                = link_to "#{fa_icon('cog')} #{t('layout.nav.edit_profile')}".html_safe, edit_user_registration_path, role: 'menuitem', tabindex: '-1'
+                = link_to "#{fa_icon('cog', class: 'fa-fw')} #{t('layout.nav.edit_profile')}".html_safe, edit_user_registration_path, role: 'menuitem', tabindex: '-1'
+              %li{role: 'presentation', class: ('active' if params[:controller] == 'controllers' && params[:action] == 'index' && params[:by_organizer] == current_user.id)}
+                = link_to "#{fa_icon('th-list', class: 'fa-fw')} #{t('layout.nav.my_courses')}".html_safe, courses_path(by_organizer: current_user.id), role: 'menuitem', tabindex: '-1'
               %li{role: 'presentation', class: ('active' if params[:controller] == 'subscriptions' && params[:action] == 'index')}
-                = link_to "#{fa_icon('th-list')} #{t('layout.nav.subscriptions')}".html_safe, subscriptions_path, role: 'menuitem', tabindex: '-1'
+                = link_to "#{fa_icon('bullhorn', class: 'fa-fw')} #{t('layout.nav.subscriptions')}".html_safe, subscriptions_path, role: 'menuitem', tabindex: '-1'
               %li.divider
               %li{role: 'presentation'}
-                = link_to "#{fa_icon('sign-out')} #{t('layout.nav.sign_out')}".html_safe, destroy_user_session_path, method: :delete, role: 'menuitem', tabindex: '-1'
+                = link_to "#{fa_icon('sign-out', class: 'fa-fw')} #{t('layout.nav.sign_out')}".html_safe, destroy_user_session_path, method: :delete, role: 'menuitem', tabindex: '-1'
         - else
           %li{class: ('active' if params[:controller] == 'devise/sessions' && ['new', 'create'].include?(params[:action]))}
-            = link_to "#{fa_icon('sign-in')} #{t('layout.nav.sign_in')}".html_safe, new_user_session_path
+            = link_to "#{fa_icon('sign-in', class: 'fa-fw')} #{t('layout.nav.sign_in')}".html_safe, new_user_session_path

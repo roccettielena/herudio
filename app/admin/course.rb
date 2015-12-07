@@ -4,8 +4,9 @@ ActiveAdmin.register Course do
   filter :category
   filter :name
   filter :location
+  filter :status, as: :select, collection: Course.status.options
 
-  permit_params :name, :description, :location, :seats, :category_id, organizer_ids: [], lessons_attributes: [
+  permit_params :name, :description, :location, :seats, :category_id, :status, organizer_ids: [], lessons_attributes: [
     :id, :time_frame_id, :_destroy
   ]
 
@@ -18,6 +19,7 @@ ActiveAdmin.register Course do
     column :category, sortable: :category_id do |course|
       link_to course.category.name, admin_course_category_path(course.category)
     end
+    column :status, :admin_status, sortable: :status
 
     actions
   end
@@ -31,6 +33,9 @@ ActiveAdmin.register Course do
 
         row :category do |course|
           link_to course.category.name, admin_course_category_path(course.category)
+        end
+        row :status do |course|
+          course.admin_status
         end
 
         row :seats
@@ -81,6 +86,7 @@ ActiveAdmin.register Course do
 
     f.inputs t('activeadmin.course.panels.details') do
       f.input :category
+      f.input :status
       f.input :name
       f.input :description
       f.input :location

@@ -3,12 +3,14 @@ it:
     toggle_navigation: 'Visualizza/nascondi navigazione'
 
     nav:
-      sign_in:       'Accedi'
-      sign_out:      'Esci'
-      edit_profile:  'Modifica profilo'
-      home:          'Home'
-      subscriptions: 'Le mie iscrizioni'
-      courses:       'Corsi'
+      sign_in:        'Accedi'
+      sign_out:       'Esci'
+      edit_profile:   'Modifica profilo'
+      home:           'Home'
+      subscriptions:  'Le mie iscrizioni'
+      courses:        'Iscriviti a un corso'
+      propose_course: 'Proponi un corso'
+      my_courses:     'I miei corsi'
 
     course_search:
       label:       'Nome corso'

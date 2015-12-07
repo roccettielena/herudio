@@ -22,9 +22,23 @@ class Course < ActiveRecord::Base
 
   scope :accepted, ->{ with_status(:accepted) }
 
+  BY_ORGANIZER_SQL = <<-SQL
+    :user_id IN (
+      SELECT organizer_id FROM courses_organizers WHERE course_id = courses.id
+    )
+  SQL
+
+  def self.by_organizer(user)
+    where(BY_ORGANIZER_SQL,
+      user_id: user.is_a?(User) ? user.id : user
+    )
+  end
+
   def self.accessible_by(user)
     if user
-      where("status = 'accepted' OR #{user.id} IN (SELECT organizer_id FROM courses_organizers WHERE course_id = courses.id)")
+      where("status = 'accepted' OR #{BY_ORGANIZER_SQL}",
+        user_id: user.is_a?(User) ? user.id : user
+      )
     else
       accepted
     end

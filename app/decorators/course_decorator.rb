@@ -22,4 +22,20 @@ class CourseDecorator < Draper::Decorator
 
     h.content_tag(:span, object.status.text, class: "label #{label_class}")
   end
+
+  def admin_status
+    if object.status.proposed?
+      type = :warning
+    elsif object.status.accepted?
+      type = :ok
+    elsif object.status.rejected?
+      type = :error
+    end
+
+    status_text = object.status.text
+
+    Arbre::Context.new do
+      status_tag(status_text, type)
+    end
+  end
 end

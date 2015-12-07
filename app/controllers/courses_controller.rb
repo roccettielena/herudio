@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
   has_scope :by_name
   has_scope :by_category
+  has_scope :by_organizer
 
   decorates_assigned :course
 
