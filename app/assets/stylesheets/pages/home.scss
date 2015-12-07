@@ -81,7 +81,7 @@
     padding-bottom: 50px;
   }
 
-  .home-calendar-col {
+  .home-calendar-col:not(.home-calendar-col-standalone) {
     @media (max-width: $screen-xs-max) {
       &:nth-child(1) {
         margin-top: -49px;
@@ -111,6 +111,11 @@
 
     border-bottom-left-radius: $border-radius-base;
     border-bottom-right-radius: $border-radius-base;
+  }
+
+  .home-calendar-col-standalone .home-calendar-item {
+    border-top: 1px solid $gray-lighter;
+    margin-top: 20px;
   }
 
   .home-calendar-title {

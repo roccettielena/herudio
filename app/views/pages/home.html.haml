@@ -92,20 +92,17 @@
 
   - content_for :calendar_entries do
     %dl.list-unstyled.home-calendar-list
-      %dt 8:05-8:30
-      %dd Appello
+      %dt 8:15-09:10
+      %dd Discussione di classe
 
-      %dt 8:30-10:55
-      %dd Prima fascia
+      %dt 09:10-11:05 / 12:10
+      %dd Corso socioculturale / Cineforum
 
-      %dt 10:55-11:05
+      %dt 11:05-11:25
       %dd Intervallo
 
-      %dt 11:05-13:45
-      %dd Seconda fascia
-
-      %dt 13:45-13:55
-      %dd Contrappello
+      %dt 11:25 / 12:10-13:10
+      %dd Corso ludiforme
 
   .container.home-calendar-content-container
     .row
@@ -113,16 +110,29 @@
         .col-xs-12.col-sm-4.home-calendar-col
           .home-calendar-item
             %h4.home-calendar-title
-              3 e 4 febbraio
+              16, 17, 18, 19 e 21 dicembre
 
             = yield :calendar_entries
 
       .visible-sm.visible-md.visible-lg
-        - [3, 4].each do |day|
+        - [16, 17, 18].each do |day|
           .col-xs-12.col-sm-4.home-calendar-col
             .home-calendar-item
               %h4.home-calendar-title
                 = day
-                febbraio
+                dicembre
 
               = yield :calendar_entries
+
+    .visible-sm.visible-md.visible-lg
+      .row
+        .col-xs-12.col-sm-8.col-sm-offset-2
+          .row
+            - [19, 21].each do |day|
+              .col-xs-12.col-sm-6.home-calendar-col.home-calendar-col-standalone
+                .home-calendar-item
+                  %h4.home-calendar-title
+                    = day
+                    dicembre
+
+                  = yield :calendar_entries
