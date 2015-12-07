@@ -58,3 +58,12 @@
           = fa_icon 'heart', class: 'heart-icon'
           da
           = link_to('Desa', 'http://alessandro1997.github.io')
+
+    - if ENV['EASTER_EGG'] == 'true'
+      .container
+        .easter
+          %ul.list-inline
+            %li= image_tag 'easter/pd.png', class: 'img-responsive', alt: 'Partito Democratico'
+            %li= image_tag 'easter/rifondazione.png', class: 'img-responsive', alt: 'Rifondazione Comunista'
+            %li= image_tag 'easter/anpi.jpg', class: 'img-responsive', alt: "Associazione Nazionale Partigiani d'Italia"
+            %li= image_tag 'easter/casapound.png', class: 'img-responsive', alt: 'Casapound Italia'

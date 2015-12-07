@@ -22,3 +22,23 @@
 
 // Pages
 @import "pages/home";
+
+.easter {
+  ul {
+    text-align: center;
+    margin-bottom: 0;
+
+    li {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+
+  img {
+    max-height: 100px;
+    width: auto;
+  }
+
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
