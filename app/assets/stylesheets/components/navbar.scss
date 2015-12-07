@@ -9,10 +9,6 @@
 .navbar {
   margin-bottom: 50px;
 
-  .navbar-brand {
-    text-transform: uppercase;
-  }
-
   .navbar-toggle {
     &:hover, &:active, &:focus {
       .icon-bar {

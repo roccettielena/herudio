@@ -34,6 +34,13 @@
     opacity: .75;
   }
 
+  blockquote.overlay-text {
+    opacity: 1;
+    border-left: none;
+    font-size: ceil(($font-size-large * 1.25));
+    font-style: italic;
+  }
+
   .overlay-actions {
     margin-top: 30px;
   }
