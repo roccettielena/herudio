@@ -8,7 +8,7 @@ class LessonDecorator < Draper::Decorator
   end
 
   def ends_at
-    time_frame.starts_at
+    time_frame.ends_at
   end
 
   def to_s
