@@ -6,13 +6,13 @@ class Subscription < ActiveRecord::Base
   validates :lesson, presence: true, uniqueness: { scope: :user }
 
   def self.open?
-    now = Time.now
+    now = Time.zone.now
 
-    if ENV['SUBSCRIPTIONS_OPEN_AT'].present? && Time.parse(ENV['SUBSCRIPTIONS_OPEN_AT']) >= now
+    if ENV['SUBSCRIPTIONS_OPEN_AT'].present? && Time.zone.parse(ENV['SUBSCRIPTIONS_OPEN_AT']) >= now
       return false
     end
 
-    if ENV['SUBSCRIPTIONS_CLOSE_AT'].present? && Time.parse(ENV['SUBSCRIPTIONS_CLOSE_AT']) <= now
+    if ENV['SUBSCRIPTIONS_CLOSE_AT'].present? && Time.zone.parse(ENV['SUBSCRIPTIONS_CLOSE_AT']) <= now
       return false
     end
 
