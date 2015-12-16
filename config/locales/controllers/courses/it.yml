@@ -12,6 +12,9 @@ it:
         lessons:
           title: 'Lezioni'
           empty: 'Non ci sono lezioni per questo corso.'
+        subscriptions:
+          title: 'Iscrizioni'
+          empty: 'Non ci sono iscrizioni per questa lezione.'
       new:
         title: 'Proponi un corso'
         submit: 'Proponi corso'

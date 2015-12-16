@@ -55,3 +55,29 @@
 
             - if user_signed_in?
               %td= subscription_link(current_user, lesson)
+
+  - if user_signed_in? && current_user.in?(course.organizers) && course.lessons.any?
+    %h2= t('controllers.courses.show.subscriptions.title')
+
+    - course.lessons.each do |lesson|
+      %table.table.table-bordered.table-hover.strong
+        %thead
+          %tr
+            %th #
+            %th= t('activerecord.attributes.subscription.lesson')
+            %th= t('activerecord.attributes.subscription.user')
+
+        %tbody
+          - if lesson.subscriptions.empty?
+            %tr
+              %td(colspan='3')
+                = t('controllers.courses.show.subscriptions.empty')
+          - else
+            - lesson.subscriptions.each_with_index do |subscription, index|
+              %tr
+                %td= index + 1
+                %td
+                  = l subscription.lesson.starts_at, format: :long
+                  = '-'
+                  = l subscription.lesson.ends_at, format: :long
+                %td= subscription.user
