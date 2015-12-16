@@ -12,6 +12,6 @@ class SubscriptionFillingService
     end
   end
 
-  class NoLessonError < StandardError
+  class NoLessonsError < StandardError
   end
 end
