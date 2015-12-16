@@ -28,7 +28,7 @@ ActiveAdmin.register User do
     TimeFrame.all.each do |time_frame|
       begin
         filler.fill_subscriptions_for(time_frame)
-      rescue SubscriptionFillingService::NoLessonError => e
+      rescue SubscriptionFillingService::NoLessonsError => e
         flash[:error] = "Non ci sono lezioni disponibili per l'iscrizione automatica."
         redirect_to collection_path && return
       end
