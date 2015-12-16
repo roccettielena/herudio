@@ -6,5 +6,6 @@ FactoryGirl.define do
     seats { Random.rand(1..30) }
     association :category, factory: :course_category, strategy: :build
     organizers { [FactoryGirl.build(:user)] }
+    status :accepted
   end
 end
