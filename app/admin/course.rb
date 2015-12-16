@@ -82,8 +82,6 @@ ActiveAdmin.register Course do
   end
 
   form do |f|
-    puts f.object.errors.inspect
-
     f.inputs t('activeadmin.course.panels.details') do
       f.input :category
       f.input :status

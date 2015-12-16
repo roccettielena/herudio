@@ -3,7 +3,14 @@ it:
     subscription:
       actions:
         destroy: 'Cancella iscrizione'
-
       destroy:
         notice:  "L'iscrizione è stata cancellata con successo."
         confirm: "Sei sicuro di voler cancellare quest'iscrizione?"
+      panels:
+        details: 'Dettagli Iscrizione'
+
+  formtastic:
+    labels:
+      subscription:
+        lesson: 'Lezione:'
+        user: 'Utente:'
