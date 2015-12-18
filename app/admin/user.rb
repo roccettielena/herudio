@@ -37,8 +37,8 @@ ActiveAdmin.register User do
     redirect_to collection_path, notice: 'Le iscrizioni sono state completate correttamente!'
   end
 
-  action_item :new_subscription, only: :index do
-    link_to('Iscrivi Utente', new_admin_subscription_path)
+  action_item :new_subscription, only: :show do
+    link_to('Iscrivi Utente', new_admin_subscription_path(user_id: user.id))
   end
 
   action_item :fill_subscriptions, only: :index do
