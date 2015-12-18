@@ -59,6 +59,12 @@ ActiveAdmin.register Course do
         column t('activerecord.attributes.lesson.ends_at'), :ends_at
         column t('activerecord.attributes.lesson.taken_seats'), :taken_seats
         column t('activerecord.attributes.lesson.available_seats'), :available_seats
+        column do |lesson|
+          link_to(
+            t('activeadmin.lesson.actions.subscribe'),
+            new_admin_subscription_path(lesson_id: lesson.id)
+          )
+        end
       end
     end
 

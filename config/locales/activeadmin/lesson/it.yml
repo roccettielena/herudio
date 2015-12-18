@@ -1,0 +1,5 @@
+it:
+  activeadmin:
+    lesson:
+      actions:
+        subscribe: 'Iscrivi utente'

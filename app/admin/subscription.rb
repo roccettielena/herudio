@@ -24,6 +24,7 @@ ActiveAdmin.register Subscription do
 
   form do |f|
     f.object.user = User.find_by(id: params[:user_id]) if params[:user_id]
+    f.object.lesson = Lesson.find_by(id: params[:lesson_id]) if params[:lesson_id]
 
     f.inputs t('activeadmin.subscription.panels.details') do
       f.input :user, collection: User.order(full_name: :asc)
