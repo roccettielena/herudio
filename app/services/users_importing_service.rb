@@ -6,7 +6,7 @@ class UsersImportingService
       User.invite!(
         full_name: "#{row['NOME']} #{row['COGNOME']}",
         email: row['EMAIL'],
-        group: UserGroup.find_or_create_by(name: "#{row['CLASSE']} #{row['SEZIONE']}")
+        group: UserGroup.find_or_create_by(name: "#{row['SEZIONE']}#{row['CLASSE']}")
       ) do |u|
         u.skip_invitation = true
       end

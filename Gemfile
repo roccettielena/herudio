@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.3'
+ruby '2.3.0'
 
 # Ruby on Rails
 gem 'rails', '4.2.5'
@@ -73,6 +73,7 @@ group :development do
 
   # Development
   gem 'pry-rails'
+  gem 'pry-rescue'
 
   # Asset logging suppression
   gem 'quiet_assets'
