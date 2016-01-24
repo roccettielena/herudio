@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
 
   scope :ordered_by_name, ->{ order('full_name ASC') }
 
+  def to_s
+    "#{full_name} (#{group.name})"
+  end
+
   def validate_group?
     @validate_group
   end

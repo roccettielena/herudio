@@ -37,6 +37,10 @@ class Lesson < ActiveRecord::Base
     end
   end
 
+  def to_s
+    "Lezione ##{id} (#{course.name})"
+  end
+
   def seats
     course.seats
   end
