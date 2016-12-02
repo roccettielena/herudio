@@ -94,50 +94,56 @@
 
   - content_for :calendar_entries do
     %dl.list-unstyled.home-calendar-list
-      %dt 8:15-09:10
+      %dt 8:00-9:00
+      %dd Lezione
+
+      %dt 9:00-9:50
       %dd
-        “Costruiamo il nostro futuro. Adesso!”
+        Laboratorio
         %br/
-        (Laboratorio di discussione)
+        “Costruiamo la Nostra Scuola”
 
-      %dt 09:05-10:55
-      %dd Prima fascia
+      %dt 9:50-10:10
+      %dd Ricreazione
 
-      %dt 10:55-11:10
-      %dd Intervallo
+      %dt 10:10-12:00
+      %dd Corsi socio-culturali
 
-      %dt 11:10 / 13:15
-      %dd Seconda fascia
+      %dt 12:00-13:00
+      %dd Corsi ludici
 
   .container.home-calendar-content-container
     .row
-      .visible-xs
+      - [16, 19, 20].each do |day|
         .col-xs-12.col-sm-4.home-calendar-col
           .home-calendar-item
             %h4.home-calendar-title
-              25, 26, 27 e 28 gennaio
+              = day
+              dicembre
 
             = yield :calendar_entries
 
-      .visible-sm.visible-md.visible-lg
-        - [25, 26, 27].each do |day|
-          .col-xs-12.col-sm-4.home-calendar-col
-            .home-calendar-item
-              %h4.home-calendar-title
-                = day
-                gennaio
+    .row
+      .col-sm-8.col-sm-push-2
+        .col-xs-12.col-sm-6.home-calendar-col.home-calendar-col-standalone
+          .home-calendar-item
+            %h4.home-calendar-title
+              21 dicembre
 
+            %dl.list-unstyled.home-calendar-list
               = yield :calendar_entries
 
-    .visible-sm.visible-md.visible-lg
-      .row
-        .col-xs-12.col-sm-8.col-sm-offset-2
-          .row
-            - [28].each do |day|
-              .col-xs-12.col-sm-6.col-sm-offset-3.home-calendar-col.home-calendar-col-standalone
-                .home-calendar-item
-                  %h4.home-calendar-title
-                    = day
-                    gennaio
+        .col-xs-12.col-sm-6.home-calendar-col.home-calendar-col-standalone
+          .home-calendar-item
+            %h4.home-calendar-title
+              22 dicembre
 
-                  = yield :calendar_entries
+            %dl.list-unstyled.home-calendar-list
+              %dt 8:00-9:00
+              %dd
+                Laboratorio
+                %br/
+                “Costruiamo la Nostra Scuola”
+
+              %dt 9:15
+              %dd Inizio assemblea d'istituto
