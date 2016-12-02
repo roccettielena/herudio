@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.0'
+ruby '2.3.3'
 
 # Ruby on Rails
 gem 'rails', '4.2.5'
