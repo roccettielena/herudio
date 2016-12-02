@@ -77,6 +77,10 @@ group :development do
 
   # Asset logging suppression
   gem 'quiet_assets'
+
+  # Code quality
+  gem 'rubocop'
+  gem 'rubocop-rspec'
 end
 
 group :development, :test do

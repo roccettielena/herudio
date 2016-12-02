@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe TimeFrame do
@@ -15,8 +16,7 @@ RSpec.describe TimeFrame do
 
   it 'validates ends_at is after starts_at' do
     expect(FactoryGirl.build_stubbed(:time_frame,
-      starts_at: Time.now,
-      ends_at: Time.now - 1.hour
-    )).not_to be_valid
+      starts_at: Time.zone.now,
+      ends_at: Time.zone.now - 1.hour)).not_to be_valid
   end
 end

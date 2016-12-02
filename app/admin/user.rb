@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register User do
   decorate_with UserDecorator
 

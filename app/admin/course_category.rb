@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register CourseCategory do
   permit_params :name
 
@@ -12,7 +13,7 @@ ActiveAdmin.register CourseCategory do
     actions
   end
 
-  show do |category|
+  show do |_category|
     attributes_table do
       row :id
       row :name

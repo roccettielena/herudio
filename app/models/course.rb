@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Course < ActiveRecord::Base
   scope :by_name, ->(query) { where('LOWER(name) LIKE :query', query: "%#{query}%") }
   scope :by_category, ->(category) { where(category_id: category.is_a?(CourseCategory) ? category.id : category) }
@@ -20,7 +21,7 @@ class Course < ActiveRecord::Base
   extend Enumerize
   enumerize :status, in: [:proposed, :accepted, :rejected], predicates: true, scope: true
 
-  scope :accepted, ->{ with_status(:accepted) }
+  scope :accepted, -> { with_status(:accepted) }
 
   BY_ORGANIZER_SQL = <<-SQL
     :user_id IN (
@@ -30,15 +31,13 @@ class Course < ActiveRecord::Base
 
   def self.by_organizer(user)
     where(BY_ORGANIZER_SQL,
-      user_id: user.is_a?(User) ? user.id : user
-    )
+      user_id: user.is_a?(User) ? user.id : user)
   end
 
   def self.accessible_by(user)
     if user
       where("status = 'accepted' OR #{BY_ORGANIZER_SQL}",
-        user_id: user.is_a?(User) ? user.id : user
-      )
+        user_id: user.is_a?(User) ? user.id : user)
     else
       accepted
     end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register Course do
   decorate_with CourseDecorator
 
@@ -31,12 +32,10 @@ ActiveAdmin.register Course do
         row :name
         row :location
 
-        row :category do |course|
+        row :category do
           link_to course.category.name, admin_course_category_path(course.category)
         end
-        row :status do |course|
-          course.admin_status
-        end
+        row :status, &:admin_status
 
         row :seats
 
@@ -53,7 +52,7 @@ ActiveAdmin.register Course do
     end
 
     panel t('activeadmin.course.panels.lessons') do
-      table_for course.lessons do |lesson|
+      table_for course.lessons do |_lesson|
         column t('activerecord.attributes.lesson.id'), :id
         column t('activerecord.attributes.lesson.starts_at'), :starts_at
         column t('activerecord.attributes.lesson.ends_at'), :ends_at

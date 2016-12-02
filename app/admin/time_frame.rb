@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register TimeFrame do
   decorate_with TimeFrameDecorator
 
@@ -5,7 +6,7 @@ ActiveAdmin.register TimeFrame do
   filter :ends_at
 
   permit_params :starts_at_date, :starts_at_time_hour, :starts_at_time_minute,
-                :ends_at_date, :ends_at_time_hour, :ends_at_time_minute
+    :ends_at_date, :ends_at_time_hour, :ends_at_time_minute
 
   index do
     selectable_column

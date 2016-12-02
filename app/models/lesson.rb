@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Lesson < ActiveRecord::Base
   belongs_to :course, inverse_of: :lessons
   belongs_to :time_frame, inverse_of: :lessons
@@ -41,9 +42,7 @@ class Lesson < ActiveRecord::Base
     "Lezione ##{id} (#{course.name})"
   end
 
-  def seats
-    course.seats
-  end
+  delegate :seats, to: :course
 
   def taken_seats
     subscriptions.count
@@ -54,7 +53,7 @@ class Lesson < ActiveRecord::Base
   end
 
   def past?
-    ends_at <= Time.now
+    ends_at <= Time.zone.now
   end
 
   def in_conflict_with?(lesson)
@@ -62,7 +61,7 @@ class Lesson < ActiveRecord::Base
   end
 
   def conflicting_for(user, associations = [:subscribed, :organized])
-    raise InvalidAssociationError, 'Invalid association(s) specified' if associations.select do |a|
+    fail InvalidAssociationError, 'Invalid association(s) specified' if associations.select do |a|
       !a.try(:to_sym).in?([:subscribed, :organized])
     end.any?
 
@@ -84,13 +83,12 @@ class Lesson < ActiveRecord::Base
   def validate_conflicts_in_course
     return unless course
 
-    course.lessons.reject{ |l| l == self }.each do |lesson|
-      if in_conflict_with?(lesson)
-        errors.add :starts_at, :in_conflict
-        errors.add :ends_at, :in_conflict
+    course.lessons.reject { |l| l == self }.each do |lesson|
+      next unless in_conflict_with?(lesson)
+      errors.add :starts_at, :in_conflict
+      errors.add :ends_at, :in_conflict
 
-        return
-      end
+      return
     end
   end
 

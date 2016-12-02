@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register UserGroup do
   permit_params :name
 
@@ -16,7 +17,7 @@ ActiveAdmin.register UserGroup do
     actions
   end
 
-  show do |group|
+  show do |_group|
     attributes_table do
       row :id
       row :name

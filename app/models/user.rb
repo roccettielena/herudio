@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class User < ActiveRecord::Base
   belongs_to :group, class_name: 'UserGroup', inverse_of: :users
 
@@ -8,12 +9,12 @@ class User < ActiveRecord::Base
   has_many :organized_lessons, class_name: 'Lesson', through: :courses, source: :lessons
 
   devise :invitable, :database_authenticatable, :confirmable, :recoverable, :rememberable,
-         :trackable, :validatable, :registerable, :async
+    :trackable, :validatable, :registerable, :async
 
-  validates :group, presence: { if: ->{ validate_group? && persisted? } }
+  validates :group, presence: { if: -> { validate_group? && persisted? } }
   validates :full_name, presence: true
 
-  scope :ordered_by_name, ->{ order('full_name ASC') }
+  scope :ordered_by_name, -> { order('full_name ASC') }
 
   def to_s
     "#{full_name} (#{group.name})"
@@ -62,8 +63,7 @@ class User < ActiveRecord::Base
     end
 
     def with_no_occupations_for(time_frame)
-      self
-        .with_no_subscriptions_for(time_frame)
+      with_no_subscriptions_for(time_frame)
         .with_no_organized_lessons_for(time_frame)
     end
   end

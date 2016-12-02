@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Subscription < ActiveRecord::Base
   belongs_to :user, inverse_of: :subscriptions
   belongs_to :lesson, inverse_of: :subscriptions
@@ -23,7 +24,5 @@ class Subscription < ActiveRecord::Base
     !open?
   end
 
-  def course
-    lesson.course
-  end
+  delegate :course, to: :lesson
 end

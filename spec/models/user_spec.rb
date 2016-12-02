@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec.describe User do
   subject { FactoryGirl.build(:user) }
 
@@ -14,7 +15,7 @@ RSpec.describe User do
   context 'when it is saved and #validate_group! is called' do
     subject { FactoryGirl.create(:user) }
 
-    before(:each) { subject.validate_group! }
+    before { subject.validate_group! }
 
     it 'validates the presence of group' do
       expect(subject).to validate_presence_of :group
@@ -22,7 +23,7 @@ RSpec.describe User do
   end
 
   describe '#subscription_to' do
-    subject { User.new }
+    subject { described_class.new }
 
     it 'returns the subscription to the lesson' do
       lesson = instance_double('Lesson')
@@ -38,7 +39,7 @@ RSpec.describe User do
   end
 
   describe '#subscribed_to?' do
-    subject { User.new }
+    subject { described_class.new }
 
     let(:lesson) do
       lesson = instance_double('Lesson')
@@ -81,7 +82,7 @@ RSpec.describe User do
     let!(:subscribed_user) { FactoryGirl.create(:subscription, lesson: lesson).user }
     let!(:unsubscribed_user) { FactoryGirl.create(:subscription).user }
 
-    let(:result) { User.with_no_subscriptions_for(frame) }
+    let(:result) { described_class.with_no_subscriptions_for(frame) }
 
     it 'returns the users with no subscriptions to the given time frame' do
       expect(result).to include(unsubscribed_user)
@@ -95,15 +96,13 @@ RSpec.describe User do
       FactoryGirl.create(:lesson,
         time_frame: frame,
         course: FactoryGirl.create(:course,
-          organizers: [organizer_user]
-        )
-      )
+          organizers: [organizer_user]))
     end
 
     let!(:organizer_user) { FactoryGirl.create(:user) }
     let!(:not_organizer_user) { FactoryGirl.create(:user) }
 
-    let(:result) { User.with_no_organized_lessons_for(frame) }
+    let(:result) { described_class.with_no_organized_lessons_for(frame) }
 
     it 'returns the users with no organized lessons to the given time frame' do
       expect(result).to include(not_organizer_user)
@@ -117,9 +116,7 @@ RSpec.describe User do
       FactoryGirl.create(:lesson,
         time_frame: frame,
         course: FactoryGirl.create(:course,
-          organizers: [organizer_user]
-        )
-      )
+          organizers: [organizer_user]))
     end
 
     let!(:subscribed_user) { FactoryGirl.create(:subscription, lesson: lesson).user }
@@ -128,7 +125,7 @@ RSpec.describe User do
     let!(:organizer_user) { FactoryGirl.create(:user) }
     let!(:not_organizer_user) { FactoryGirl.create(:user) }
 
-    let(:result) { User.with_no_occupations_for(frame) }
+    let(:result) { described_class.with_no_occupations_for(frame) }
 
     it 'returns the users with no occupations to the given time frame' do
       expect(result).to include(unsubscribed_user)

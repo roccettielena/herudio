@@ -1,15 +1,12 @@
+# frozen_string_literal: true
 class LessonDecorator < Draper::Decorator
   delegate_all
 
   decorates_association :time_frame
 
-  def starts_at
-    time_frame.starts_at
-  end
+  delegate :starts_at, to: :time_frame
 
-  def ends_at
-    time_frame.ends_at
-  end
+  delegate :ends_at, to: :time_frame
 
   def to_s
     "#{starts_at} - #{ends_at}"

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_lesson, except: :index
@@ -30,8 +31,7 @@ class SubscriptionsController < ApplicationController
     if (conflicting_lesson = @lesson.conflicting_for(current_user, [:subscribed]))
       flash[:alert] = t('controllers.subscriptions.create.conflicting_with_subscribed_html',
         course_url: course_path(conflicting_lesson.course),
-        course_name: ERB::Util.html_escape(conflicting_lesson.course.name)
-      )
+        course_name: ERB::Util.html_escape(conflicting_lesson.course.name))
 
       redirect_back_or @course
       return
@@ -40,8 +40,7 @@ class SubscriptionsController < ApplicationController
     if (conflicting_lesson = @lesson.conflicting_for(current_user, [:organized]))
       flash[:alert] = t('controllers.subscriptions.create.conflicting_with_organized_html',
         course_url: course_path(conflicting_lesson.course),
-        course_name: ERB::Util.html_escape(conflicting_lesson.course.name)
-      )
+        course_name: ERB::Util.html_escape(conflicting_lesson.course.name))
 
       redirect_back_or @course
       return

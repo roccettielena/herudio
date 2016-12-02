@@ -1,12 +1,13 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe SubscriptionsController do
-  before(:each) do
+  before do
     allow(Subscription).to receive(:open?)
       .and_return(true)
   end
 
-  let(:current_user) { FactoryGirl.create(:user)}
+  let(:current_user) { FactoryGirl.create(:user) }
   before { sign_in current_user }
 
   let!(:lesson) { FactoryGirl.create(:lesson) }
@@ -31,7 +32,7 @@ RSpec.describe SubscriptionsController do
     end
 
     context 'when subscriptions are closed' do
-      before(:each) do
+      before do
         allow(Subscription).to receive(:closed?)
           .and_return(true)
       end
@@ -54,7 +55,7 @@ RSpec.describe SubscriptionsController do
     end
 
     context 'when there are no seats available' do
-      before(:each) { course.update_column :seats, 0 }
+      before { course.update_column :seats, 0 }
 
       it 'does not create the subscription' do
         expect {
@@ -64,7 +65,7 @@ RSpec.describe SubscriptionsController do
     end
 
     context 'when the subscription is to a past lesson' do
-      before(:each) do
+      before do
         lesson.time_frame.update_column :ends_at, Time.zone.now - 1.hour
       end
 
@@ -76,16 +77,13 @@ RSpec.describe SubscriptionsController do
     end
 
     context 'when the lesson is in conflict with a subscribed lesson' do
-      before(:each) do
+      before do
         FactoryGirl.create(:subscription,
           user: current_user,
           lesson: FactoryGirl.create(:lesson,
             time_frame: FactoryGirl.create(:time_frame,
               starts_at: lesson.starts_at,
-              ends_at: lesson.ends_at
-            )
-          )
-        )
+              ends_at: lesson.ends_at)))
       end
 
       it 'does not create the subscription' do
@@ -96,16 +94,13 @@ RSpec.describe SubscriptionsController do
     end
 
     context 'when the lesson is in conflict with an organized lesson' do
-      before(:each) do
+      before do
         FactoryGirl.create(:lesson,
           course: FactoryGirl.create(:course,
-            organizers: [current_user]
-          ),
+            organizers: [current_user]),
           time_frame: FactoryGirl.create(:time_frame,
             starts_at: lesson.starts_at,
-            ends_at: lesson.ends_at
-          )
-        )
+            ends_at: lesson.ends_at))
       end
 
       it 'does not create the subscription' do
@@ -118,7 +113,7 @@ RSpec.describe SubscriptionsController do
 
   describe "DELETE 'destroy'" do
     context 'when subscriptions are closed' do
-      before(:each) do
+      before do
         allow(Subscription).to receive(:closed?)
           .and_return(true)
       end
@@ -140,7 +135,7 @@ RSpec.describe SubscriptionsController do
       end
 
       context 'when the subscription is to a past lesson' do
-        before(:each) do
+        before do
           lesson.time_frame.update_column :ends_at, Time.zone.now - 1.hour
         end
 

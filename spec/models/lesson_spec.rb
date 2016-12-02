@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe Lesson do
@@ -14,7 +15,7 @@ RSpec.describe Lesson do
   end
 
   it 'validates it is not in conflict with other lessons of the course' do
-    conflicting_lesson = Lesson.new
+    conflicting_lesson = described_class.new
 
     course = Course.new
     allow(course).to receive(:lessons)
@@ -35,9 +36,7 @@ RSpec.describe Lesson do
       subject do
         FactoryGirl.build_stubbed(:lesson,
           time_frame: FactoryGirl.build_stubbed(:time_frame,
-            ends_at: Date.yesterday
-          )
-        )
+            ends_at: Date.yesterday))
       end
 
       it 'returns true' do
@@ -49,9 +48,7 @@ RSpec.describe Lesson do
       subject do
         FactoryGirl.build_stubbed(:lesson,
           time_frame: FactoryGirl.build_stubbed(:time_frame,
-            ends_at: Date.tomorrow
-          )
-        )
+            ends_at: Date.tomorrow))
       end
 
       it 'returns false' do
@@ -61,7 +58,7 @@ RSpec.describe Lesson do
   end
 
   describe '#seats' do
-    before(:each) do
+    before do
       allow(subject.course).to receive(:seats)
         .and_return(30)
     end
@@ -72,7 +69,7 @@ RSpec.describe Lesson do
   end
 
   describe '#taken_seats' do
-    before(:each) do
+    before do
       allow(subject.subscriptions).to receive(:count)
         .and_return(13)
     end
@@ -83,7 +80,7 @@ RSpec.describe Lesson do
   end
 
   describe '#available_seats' do
-    before(:each) do
+    before do
       allow(subject).to receive(:seats)
         .and_return(30)
 
@@ -100,20 +97,16 @@ RSpec.describe Lesson do
     subject do
       FactoryGirl.build_stubbed(:lesson,
         time_frame: FactoryGirl.build_stubbed(:time_frame,
-          starts_at: Time.now,
-          ends_at: Time.now + 1.hour
-        )
-      )
+          starts_at: Time.zone.now,
+          ends_at: Time.zone.now + 1.hour))
     end
 
     context 'when the lessons overlap' do
       let(:lesson) do
         FactoryGirl.build_stubbed(:lesson,
           time_frame: FactoryGirl.build_stubbed(:time_frame,
-            starts_at: Time.now + 30.minutes,
-            ends_at: Time.now + 90.minutes
-          )
-        )
+            starts_at: Time.zone.now + 30.minutes,
+            ends_at: Time.zone.now + 90.minutes))
       end
 
       it 'returns true' do
@@ -125,10 +118,8 @@ RSpec.describe Lesson do
       let(:lesson) do
         FactoryGirl.build_stubbed(:lesson,
           time_frame: FactoryGirl.build_stubbed(:time_frame,
-            starts_at: Time.now + 61.minutes,
-            ends_at: Time.now + 121.minutes
-          )
-        )
+            starts_at: Time.zone.now + 61.minutes,
+            ends_at: Time.zone.now + 121.minutes))
       end
 
       it 'returns false' do
@@ -193,19 +184,15 @@ RSpec.describe Lesson do
     it 'returns the available lessons' do
       available_lesson = FactoryGirl.create(:lesson,
         course: FactoryGirl.create(:course,
-          seats: 1
-        )
-      )
+          seats: 1))
 
       unavailable_lesson = FactoryGirl.create(:lesson,
         course: FactoryGirl.create(:course,
-          seats: 1
-        )
-      )
+          seats: 1))
 
       FactoryGirl.create(:subscription, lesson: unavailable_lesson)
 
-      expect(Lesson.available).to eq([available_lesson])
+      expect(described_class.available).to eq([available_lesson])
     end
   end
 
@@ -214,11 +201,11 @@ RSpec.describe Lesson do
       frame = FactoryGirl.build_stubbed(:time_frame)
       scope = OpenStruct.new(available: [])
 
-      allow(Lesson).to receive(:where)
+      allow(described_class).to receive(:where)
         .with(time_frame: frame)
         .and_return(scope)
 
-      Lesson.available_for(frame)
+      described_class.available_for(frame)
     end
   end
 end

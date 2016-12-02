@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe Course do
@@ -31,7 +32,7 @@ RSpec.describe Course do
     let!(:nonmatching_course) { FactoryGirl.create(:course, name: 'Barcourse') }
 
     it 'returns the courses matching the given query' do
-      expect(Course.by_name('foo')).to eq([matching_course])
+      expect(described_class.by_name('foo')).to eq([matching_course])
     end
   end
 
@@ -40,7 +41,7 @@ RSpec.describe Course do
     let!(:nonmatching_course) { FactoryGirl.create(:course) }
 
     it 'returns the courses belonging to the given category' do
-      expect(Course.by_category(matching_course.category)).to eq([matching_course])
+      expect(described_class.by_category(matching_course.category)).to eq([matching_course])
     end
   end
 end

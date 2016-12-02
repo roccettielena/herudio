@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class TimeFrame < ActiveRecord::Base
   has_many :lessons, inverse_of: :time_frame, dependent: :restrict_with_exception
 

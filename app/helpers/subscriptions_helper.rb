@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module SubscriptionsHelper
   def subscription_link(user, lesson, options = {})
     if user.subscribed_to?(lesson)
@@ -32,7 +33,7 @@ module SubscriptionsHelper
     output.join("\n").html_safe
   end
 
-  def unsubscribe_link(user, lesson, options = {})
+  def unsubscribe_link(_user, lesson, options = {})
     text = fa_icon('trash')
     text += ' ' + t('helpers.subscriptions.unsubscribe')
 
@@ -51,17 +52,15 @@ module SubscriptionsHelper
 
   private
 
-  def conflict_message_for(user, lesson, options = {})
+  def conflict_message_for(user, lesson, _options = {})
     conflict_message = nil
 
     if (conflicting_lesson = lesson.conflicting_for(user, [:subscribed]))
       conflict_message = t('helpers.subscriptions.conflicting_with_subscribed',
-        course_name: conflicting_lesson.course.name
-      )
+        course_name: conflicting_lesson.course.name)
     elsif (conflicting_lesson = lesson.conflicting_for(user, [:organized]))
       conflict_message = t('helpers.subscriptions.conflicting_with_organized',
-        course_name: conflicting_lesson.course.name
-      )
+        course_name: conflicting_lesson.course.name)
     end
 
     conflict_message

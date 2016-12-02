@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CoursesController < ApplicationController
   has_scope :by_name
   has_scope :by_category

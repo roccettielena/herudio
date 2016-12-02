@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Users::InvitationsController < Devise::InvitationsController
   def new
     raise_404
@@ -17,7 +18,7 @@ class Users::InvitationsController < Devise::InvitationsController
     token = update_resource_params['invitation_token']
     resource = resource_class.find_by_invitation_token(token, false)
 
-    raise ActiveRecord::NotFound if !resource
+    fail ActiveRecord::NotFound unless resource
 
     resource.validate_group!
     resource.assign_attributes(update_resource_params.except('invitation_token'))

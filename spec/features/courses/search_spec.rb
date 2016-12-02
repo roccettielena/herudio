@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.feature 'Courses search' do
@@ -18,9 +19,7 @@ RSpec.feature 'Courses search' do
     matching_course = FactoryGirl.create(:course,
       name: 'Foocourse',
       category: FactoryGirl.create(:course_category,
-        name: 'Test category'
-      )
-    )
+        name: 'Test category'))
 
     nonmatching_course = FactoryGirl.create(:course, name: 'Barcourse')
 

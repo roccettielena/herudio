@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register AdminUser do
   permit_params :full_name, :email, :password, :password_confirmation
 
@@ -26,7 +27,7 @@ ActiveAdmin.register AdminUser do
     f.actions
   end
 
-  show do |admin_user|
+  show do |_admin_user|
     attributes_table do
       row :id
       row :full_name
