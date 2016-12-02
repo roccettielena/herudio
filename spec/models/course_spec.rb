@@ -29,7 +29,7 @@ RSpec.describe Course do
 
   describe '.by_name' do
     let!(:matching_course) { FactoryGirl.create(:course, name: 'Foocourse') }
-    let!(:nonmatching_course) { FactoryGirl.create(:course, name: 'Barcourse') }
+    before { FactoryGirl.create(:course, name: 'Barcourse') }
 
     it 'returns the courses matching the given query' do
       expect(described_class.by_name('foo')).to eq([matching_course])
@@ -38,7 +38,7 @@ RSpec.describe Course do
 
   describe '.by_category' do
     let!(:matching_course) { FactoryGirl.create(:course) }
-    let!(:nonmatching_course) { FactoryGirl.create(:course) }
+    before { FactoryGirl.create(:course) }
 
     it 'returns the courses belonging to the given category' do
       expect(described_class.by_category(matching_course.category)).to eq([matching_course])

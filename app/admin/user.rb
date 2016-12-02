@@ -24,18 +24,18 @@ ActiveAdmin.register User do
   end
 
   collection_action :fill_subscriptions, method: :post do
-    filler = SubscriptionFillingService.new
+    begin
+      filler = SubscriptionFillingService.new
 
-    TimeFrame.all.each do |time_frame|
-      begin
+      TimeFrame.all.find_each do |time_frame|
         filler.fill_subscriptions_for(time_frame)
-      rescue SubscriptionFillingService::NoLessonsError => e
-        flash[:error] = "Non ci sono lezioni disponibili per l'iscrizione automatica."
-        redirect_to collection_path && return
       end
-    end
 
-    redirect_to collection_path, notice: 'Le iscrizioni sono state completate correttamente!'
+      redirect_to collection_path, notice: 'Le iscrizioni sono state completate correttamente!'
+    rescue SubscriptionFillingService::NoLessonsError
+      flash[:error] = "Non ci sono lezioni disponibili per l'iscrizione automatica."
+      redirect_to collection_path
+    end
   end
 
   action_item :new_subscription, only: :show do

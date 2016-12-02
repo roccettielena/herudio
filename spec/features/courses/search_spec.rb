@@ -3,8 +3,9 @@ require 'rails_helper'
 
 RSpec.feature 'Courses search' do
   scenario 'user can search the courses by name' do
-    matching_course = FactoryGirl.create(:course, name: 'Foocourse')
-    nonmatching_course = FactoryGirl.create(:course, name: 'Barcourse')
+    FactoryGirl.create(:course, name: 'Foocourse')
+    FactoryGirl.create(:course, name: 'Barcourse')
+
     visit root_path
     click_link I18n.t('layout.nav.courses')
 
@@ -16,12 +17,12 @@ RSpec.feature 'Courses search' do
   end
 
   scenario 'user can search the courses by category' do
-    matching_course = FactoryGirl.create(:course,
+    FactoryGirl.create(:course,
       name: 'Foocourse',
       category: FactoryGirl.create(:course_category,
         name: 'Test category'))
 
-    nonmatching_course = FactoryGirl.create(:course, name: 'Barcourse')
+    FactoryGirl.create(:course, name: 'Barcourse')
 
     visit root_path
     click_link I18n.t('layout.nav.courses')
