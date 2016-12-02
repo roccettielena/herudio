@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.3.3'
 
 # Ruby on Rails
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.7'
 
 # Asset processors
 gem 'sass-rails'
@@ -21,7 +21,7 @@ gem 'font-awesome-rails'
 # Authentication
 gem 'devise'
 gem 'devise_invitable'
-gem 'devise-async'
+gem 'devise-async', git: 'https://github.com/mhfs/devise-async.git', branch: 'devise-4.x'
 
 # Async processing
 gem 'sidekiq'
@@ -63,7 +63,7 @@ gem 'foreman'
 gem 'has_scope'
 
 # Administration
-gem 'activeadmin', github: 'activeadmin'
+gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin.git'
 gem 'just-datetime-picker'
 
 group :development do

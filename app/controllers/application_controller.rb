@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:account_update).concat([:group_id])
-    devise_parameter_sanitizer.for(:accept_invitation).concat([:group_id])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:group_id])
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:group_id])
   end
 
   def raise_404
