@@ -1,8 +1,8 @@
 - provide :body_classes, 'home'
 
-%section.home-overlay.overlay.full-screen
-  .overlay-inner.full-screen-inner
-    .container.full-screen-target
+%section.home-overlay.overlay
+  .overlay-inner
+    .overlay-main
       %h1.overlay-headline
         Settimana dello Studente: insegna quello che sai, impara quello che vuoi.
 
@@ -16,7 +16,9 @@
         %blockquote.overlay-text “Costruiamo il nostro futuro. Adesso.”
 
       .overlay-actions
-        = link_to 'Partecipa alla Settimana dello Studente!', new_user_session_path, class: 'btn btn-cta'
+        %a.btn.btn-cta{href: new_user_session_path}
+          %span.visible-xs.visible-sm Partecipa!
+          %span.visible-md.visible-lg Partecipa alla Settimana dello Studente!
 
     .overlay-arrow-container
       %a(href='#dual')
