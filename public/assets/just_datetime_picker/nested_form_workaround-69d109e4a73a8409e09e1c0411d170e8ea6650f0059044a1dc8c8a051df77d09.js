@@ -1,1 +1,0 @@
-$(document).on("click","body.active_admin a.button",function(){$("input.datepicker:not(.hasDatePicker)").each(function(){$input=$(this),defaults={dateFormat:"yy-mm-dd"},options=$input.data("datepicker-options"),$input.datepicker($.extend(defaults,options))})});
