@@ -3,17 +3,26 @@
   background-position: center center;
   color: white;
   text-align: center;
+  min-height: calc(100vh - 60px);
 
   .overlay-inner {
-    background-color: darken(rgba($blue-dark, .85), 13%);
-
-    .container {
-      max-width: 1100px;
-    }
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     .overlay-text-container {
       max-width: 800px;
       margin: 0 auto;
+    }
+
+    .overlay-main {
+      margin-top: auto;
     }
   }
 
@@ -46,8 +55,9 @@
   }
 
   .overlay-arrow-container {
-    position: relative;
-    bottom: 20px;
+    margin-top: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
 
     a {
       color: white;

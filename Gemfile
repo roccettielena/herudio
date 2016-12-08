@@ -10,9 +10,6 @@ gem 'uglifier'
 gem 'coffee-rails'
 gem 'autoprefixer-rails'
 
-# Bower for Rails
-gem 'bower-rails'
-
 # Assets
 gem 'jquery-rails'
 gem 'bootstrap-sass'

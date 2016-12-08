@@ -49,7 +49,7 @@ Contributing
 
 Credits
 -------
-Herudio is developed and maintained by [Alessandro Desantis](http://alessandro1997.github.io).
+Herudio is developed and maintained by [Alessandro Desantis](https://github.com/alessandro1997).
 
 License
 -------

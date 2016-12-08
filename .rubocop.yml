@@ -91,3 +91,6 @@ Metrics/CyclomaticComplexity:
 
 Rails/HttpPositionalArguments:
   Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
