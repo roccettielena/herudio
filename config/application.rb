@@ -43,5 +43,19 @@ module Herudio
     config.active_job.queue_adapter = :sidekiq
 
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Mailer configuration.
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.smtp_settings = {
+      user_name: ENV.fetch('SENDGRID_USERNAME'),
+      password: ENV.fetch('SENDGRID_PASSWORD'),
+      domain: ENV.fetch('SENDGRID_DOMAIN'),
+      address: 'smtp.sendgrid.net',
+      port: 587,
+      authentication: :plain,
+      enable_starttls_auto: true
+    }
   end
 end
