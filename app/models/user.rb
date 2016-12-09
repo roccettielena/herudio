@@ -5,11 +5,17 @@ class User < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy, inverse_of: :user
   has_many :subscribed_lessons, class_name: 'Lesson', through: :subscriptions, source: :lesson
 
-  has_and_belongs_to_many :courses, inverse_of: :organizers, join_table: 'courses_organizers', foreign_key: 'organizer_id'
+  has_and_belongs_to_many :courses,
+    inverse_of: :organizers,
+    join_table: 'courses_organizers',
+    foreign_key: 'organizer_id'
+
   has_many :organized_lessons, class_name: 'Lesson', through: :courses, source: :lessons
 
-  devise :invitable, :database_authenticatable, :confirmable, :recoverable, :rememberable,
-    :trackable, :validatable, :registerable, :async
+  devise(
+    :invitable, :database_authenticatable, :confirmable, :recoverable, :rememberable, :trackable,
+    :validatable, :registerable, :async
+  )
 
   validates :group, presence: { if: -> { validate_group? && persisted? } }
   validates :full_name, presence: true
@@ -63,8 +69,7 @@ class User < ActiveRecord::Base
     end
 
     def with_no_occupations_for(time_frame)
-      with_no_subscriptions_for(time_frame)
-        .with_no_organized_lessons_for(time_frame)
+      with_no_subscriptions_for(time_frame).with_no_organized_lessons_for(time_frame)
     end
   end
 

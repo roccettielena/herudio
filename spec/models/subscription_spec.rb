@@ -30,14 +30,14 @@ RSpec.describe Subscription do
 
   describe '.open?' do
     after do
-      ENV['SUBSCRIPTIONS_OPEN_AT'] = ''
-      ENV['SUBSCRIPTIONS_CLOSE_AT'] = ''
+      ENV.delete('SUBSCRIPTIONS_OPEN_AT')
+      ENV.delete('SUBSCRIPTIONS_CLOSE_AT')
     end
 
     context 'when there is no opening or closing time' do
       before do
-        ENV['SUBSCRIPTIONS_OPEN_AT'] = ''
-        ENV['SUBSCRIPTIONS_CLOSE_AT'] = ''
+        ENV.delete('SUBSCRIPTIONS_OPEN_AT')
+        ENV.delete('SUBSCRIPTIONS_CLOSE_AT')
       end
 
       it 'returns true' do
