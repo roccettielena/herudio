@@ -44,6 +44,9 @@ module Herudio
 
     config.active_record.raise_in_transactional_callbacks = true
 
+    # Dump the schema in SQL rather than Ruby.
+    config.active_record.schema_format = :sql
+
     # Mailer configuration.
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.raise_delivery_errors = true
