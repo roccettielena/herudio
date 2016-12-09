@@ -22,18 +22,18 @@ it:
   activerecord:
     models:
       user:
-        one: 'Utente'
-        other: 'Utenti'
+        one:   Utente
+        other: Utenti
 
     attributes:
       user:
-        id:                 'ID'
-        group:              'Gruppo'
-        full_name:          'Nome completo'
-        email:              'Email'
-        current_sign_in_at: 'Ultimo accesso'
-        current_sign_in_ip: 'Ultimo IP'
-        created_at:         'Data creazione'
-        updated_at:         'Data aggiornamento'
-        status:             'Stato'
-        unconfirmed_email:  'Email (non confermata)'
+        id:                 ID
+        group:              Gruppo
+        full_name:          Nome completo
+        email:              Email
+        current_sign_in_at: Ultimo accesso
+        current_sign_in_ip: Ultimo IP
+        created_at:         Data creazione
+        updated_at:         Data aggiornamento
+        status:             Stato
+        unconfirmed_email:  Email (non confermata)

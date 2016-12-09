@@ -1,0 +1,30 @@
+it:
+  simple_form:
+    labels:
+      authorized_user: &labels
+        group:          'Gruppo:'
+        first_name:     'Nome:'
+        last_name:      'Cognome:'
+        birth_location: 'Città di nascita:'
+        birth_date:     'Data di nascita:'
+
+  formtastic:
+    labels:
+      authorized_user: *labels
+
+  activerecord:
+    models:
+      authorized_user:
+        one:   Preiscrizione
+        other: Preiscrizioni
+
+    attributes:
+      authorized_user:
+        id:             ID
+        group:          Gruppo
+        first_name:     Nome
+        last_name:      Cognome
+        birth_location: Luogo di nascita
+        birth_date:     Data di nascita
+        created_at:     Data creazione
+        updated_at:     Data aggiornamento
