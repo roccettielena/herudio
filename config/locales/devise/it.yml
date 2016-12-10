@@ -43,6 +43,9 @@ it:
         submit: 'Modifica profilo'
         hints:
           reconfirmation_html: 'In attesa di conferma per <strong>%{email}</strong>'
+      new:
+        title: 'Registrati'
+        submit: 'Registrati'
 
     failure:
       invited: 'Hai un invito in sospeso, accettalo per terminare la creazione del tuo account.'

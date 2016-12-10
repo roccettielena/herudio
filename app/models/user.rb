@@ -18,9 +18,18 @@ class User < ActiveRecord::Base
   )
 
   validates :group, presence: { if: -> { validate_group? && persisted? } }
-  validates :full_name, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :birth_date, presence: true, date: true
+  validates :birth_location, presence: true
+
+  validate :validate_user_authorization
 
   scope :ordered_by_name, -> { order('full_name ASC') }
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 
   def to_s
     "#{full_name} (#{group.name})"
@@ -79,5 +88,19 @@ class User < ActiveRecord::Base
 
   def subscribed_to?(lesson)
     !!subscription_to(lesson)
+  end
+
+  private
+
+  def validate_user_authorization
+    return unless first_name.present?
+    return unless last_name.present?
+    return unless birth_location.present?
+    return unless birth_date.present?
+    return unless group_id.present?
+
+    return if AuthorizedUser.matching_user(self).exists?
+
+    errors.add :base, 'Le informazioni che hai inserito non corrispondono a uno studente valido.'
   end
 end

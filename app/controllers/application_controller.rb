@@ -9,8 +9,23 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:account_update, keys: [:group_id])
-    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:group_id])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [
+      :first_name,
+      :last_name,
+      :group,
+      :birth_date,
+      :birth_location,
+      :group_id
+    ])
+
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [
+      :first_name,
+      :last_name,
+      :group,
+      :birth_date,
+      :birth_location,
+      :group_id
+    ])
   end
 
   def raise_404
