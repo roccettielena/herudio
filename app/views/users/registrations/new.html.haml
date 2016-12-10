@@ -16,8 +16,7 @@
           = f.input :last_name, input_html: { class: 'input-lg' }, required: true
           = f.association :group, collection: UserGroup.ordered_by_name, input_html: { class: 'input-lg' }, required: true
           = f.input :birth_date, as: :string, input_html: { class: 'input-lg datepicker',
-            data: { provide: :datepicker,
-              'date-min' => (Time.zone.today - 25.years).to_s,
+            data: { 'date-min' => (Time.zone.today - 25.years).to_s,
               'date-max' => (Time.zone.today - 13.years).to_s,
             },
           }, required: true

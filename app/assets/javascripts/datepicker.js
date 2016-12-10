@@ -1,7 +1,3 @@
-//= require pickadate/lib/picker
-//= require pickadate/lib/picker.date
-//= require pickadate/lib/translations/it_IT
-
 $(function() {
   $('.datepicker').each(function() {
     var minDate = $(this).data('date-min').split('-');
