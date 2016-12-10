@@ -58,7 +58,8 @@
               %li{role: 'presentation'}
                 = link_to "#{fa_icon('sign-out', class: 'fa-fw')} #{t('layout.nav.sign_out')}".html_safe, destroy_user_session_path, method: :delete, role: 'menuitem', tabindex: '-1'
         - else
-          %li{class: ('active' if params[:controller] == 'users/registrations' && ['new', 'create'].include?(params[:action]))}
-            = link_to "#{fa_icon('user', class: 'fa-fw')} #{t('layout.nav.sign_up')}".html_safe, new_user_registration_path
+          - if ENV.fetch('REGISTRATION_TYPE') == 'regular'
+            %li{class: ('active' if params[:controller] == 'users/registrations' && ['new', 'create'].include?(params[:action]))}
+              = link_to "#{fa_icon('user', class: 'fa-fw')} #{t('layout.nav.sign_up')}".html_safe, new_user_registration_path
           %li{class: ('active' if params[:controller] == 'devise/sessions' && ['new', 'create'].include?(params[:action]))}
             = link_to "#{fa_icon('sign-in', class: 'fa-fw')} #{t('layout.nav.sign_in')}".html_safe, new_user_session_path

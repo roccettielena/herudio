@@ -370,7 +370,7 @@ CREATE TABLE users (
     confirmed_at timestamp without time zone,
     confirmation_sent_at timestamp without time zone,
     unconfirmed_email character varying,
-    group_id integer,
+    group_id integer NOT NULL,
     invitation_token character varying,
     invitation_created_at timestamp without time zone,
     invitation_sent_at timestamp without time zone,
@@ -720,4 +720,6 @@ INSERT INTO schema_migrations (version) VALUES ('20151206184535');
 INSERT INTO schema_migrations (version) VALUES ('20161209134044');
 
 INSERT INTO schema_migrations (version) VALUES ('20161210122620');
+
+INSERT INTO schema_migrations (version) VALUES ('20161210152220');
 
