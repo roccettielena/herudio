@@ -21,3 +21,5 @@ ORG_IMAGE: 'http://www.example.com/img1.jpg'
 ORG_URL: 'http://www.example.com'
 EASTER_EGG: 'false'
 REGISTRATION_TYPE: 'invitation'
+BUGSNAG_API_KEY: YourBugsnagApiKey
+BUGSNAG_RELEASE_STAGE: development
