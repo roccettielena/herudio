@@ -85,7 +85,6 @@ class User < ActiveRecord::Base
   private
 
   def validate_user_authorization
-    raise 'validating'
     return unless first_name.present?
     return unless last_name.present?
     return unless birth_location.present?
