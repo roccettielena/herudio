@@ -12,8 +12,38 @@ RSpec.describe User do
     end
   end
 
+  context "when REGISTRATION_TYPE is 'regular'" do
+    before { ENV['REGISTRATION_TYPE'] = 'regular' }
+
+    context 'when no matching authorization is found' do
+      before do
+        allow(AuthorizedUser).to receive(:matching_user)
+          .with(subject)
+          .and_return(OpenStruct.new(exists?: false))
+      end
+
+      it 'returns a validation error' do
+        expect(subject).not_to be_valid
+      end
+    end
+
+    context 'when a matching authorization is found' do
+      before do
+        allow(AuthorizedUser).to receive(:matching_user)
+          .with(subject)
+          .and_return(OpenStruct.new(exists?: true))
+      end
+
+      it 'returns a validation error' do
+        expect(subject).to be_valid
+      end
+    end
+  end
+
   describe '#subscription_to' do
     subject { described_class.new }
+
+    before { Lesson }
 
     it 'returns the subscription to the lesson' do
       lesson = instance_double('Lesson')
