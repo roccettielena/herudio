@@ -24,7 +24,7 @@ it:
         group:          Gruppo
         first_name:     Nome
         last_name:      Cognome
-        birth_location: Luogo di nascita
+        birth_location: Città di nascita
         birth_date:     Data di nascita
         created_at:     Data creazione
         updated_at:     Data aggiornamento

@@ -85,6 +85,8 @@ ActiveAdmin.register User do
             row :group
             row :first_name
             row :last_name
+            row :birth_date
+            row :birth_location
             row :email
             row :unconfirmed_email if user.unconfirmed_email.present?
           end
@@ -144,6 +146,8 @@ ActiveAdmin.register User do
       f.input :group, collection: UserGroup.ordered_by_name, required: false
       f.input :first_name
       f.input :last_name
+      f.input :birth_date
+      f.input :birth_location
       f.input :email
       f.input :password, required: f.object.new_record?, hint: f.object.persisted?
       f.input :password_confirmation, required: f.object.new_record?
