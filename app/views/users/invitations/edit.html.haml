@@ -12,8 +12,6 @@
 
       %hr/
 
-      = f.association :group, required: true, input_html: { class: 'input-lg' }, collection: UserGroup.ordered_by_name
-
       .form-actions
         %button.btn.btn-lg.btn-primary(type='submit')
           = t('devise.invitations.edit.submit')

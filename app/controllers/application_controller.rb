@@ -18,14 +18,7 @@ class ApplicationController < ActionController::Base
       :group_id
     ])
 
-    devise_parameter_sanitizer.permit(:accept_invitation, keys: [
-      :first_name,
-      :last_name,
-      :group,
-      :birth_date,
-      :birth_location,
-      :group_id
-    ])
+    devise_parameter_sanitizer.permit(:accept_invitation)
   end
 
   def raise_404

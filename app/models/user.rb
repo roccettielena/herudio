@@ -17,13 +17,13 @@ class User < ActiveRecord::Base
     :validatable, :registerable, :async
   )
 
-  validates :group, presence: { if: -> { validate_group? && persisted? } }
+  validates :group, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :birth_date, presence: true, date: true
   validates :birth_location, presence: true
 
-  validate :validate_user_authorization
+  validate :validate_user_authorization, if: -> { ENV.fetch('REGISTRATION_TYPE') == 'regular' }
 
   scope :ordered_by_name, -> { order('full_name ASC') }
 
@@ -33,14 +33,6 @@ class User < ActiveRecord::Base
 
   def to_s
     "#{full_name} (#{group.name})"
-  end
-
-  def validate_group?
-    @validate_group
-  end
-
-  def validate_group!
-    @validate_group = true
   end
 
   class << self
@@ -93,6 +85,7 @@ class User < ActiveRecord::Base
   private
 
   def validate_user_authorization
+    raise 'validating'
     return unless first_name.present?
     return unless last_name.present?
     return unless birth_location.present?
