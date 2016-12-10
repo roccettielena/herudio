@@ -5,10 +5,12 @@ class AuthorizedUsersImporter
 
   column :first_name,
     as: ['NOME'],
+    to: -> (first_name) { first_name.strip },
     required: true
 
   column :last_name,
     as: ['COGNOME'],
+    to: -> (last_name) { last_name.strip },
     required: true
 
   column :group,
@@ -20,6 +22,7 @@ class AuthorizedUsersImporter
     as: ['DATA DI NASCITA (GG/MM/AAAA)']
 
   column :birth_location,
+    to: -> (birth_location) { birth_location.strip },
     as: ['LUOGO DI NASCITA']
 
   identifier :group, :first_name, :last_name
