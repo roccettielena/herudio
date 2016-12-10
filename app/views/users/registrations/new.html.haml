@@ -1,0 +1,26 @@
+- provide :title, t('devise.registrations.new.title')
+
+.container-md
+  .row
+    .col-xs-12.col-md-6.col-md-push-3
+      %h1= t('devise.registrations.new.title')
+
+      = simple_form_for(resource, url: user_registration_path, html: { role: 'form' }) do |f|
+        - error = (resource.errors.messages[:base] || []).join(', ')
+
+        - if error.present?
+          .alert.alert-danger= error
+
+        .strong
+          = f.input :first_name, input_html: { class: 'input-lg' }, required: true
+          = f.input :last_name, input_html: { class: 'input-lg' }, required: true
+          = f.association :group, collection: UserGroup.ordered_by_name, input_html: { class: 'input-lg' }, required: true
+          = f.input :birth_date, input_html: { class: 'input-lg' }, required: true, start_year: Time.zone.today.year - 100, end_year: Time.zone.today.year - 10, include_blank: true
+          = f.input :birth_location, input_html: { class: 'input-lg' }, required: true
+          = f.input :email, input_html: { class: 'input-lg' }, required: true
+          = f.input :password, input_html: { class: 'input-lg' }, required: true
+          = f.input :password_confirmation, input_html: { class: 'input-lg' }, required: true
+
+          .form-actions
+            %button.btn.btn-lg.btn-primary(type='submit')
+              = t('devise.registrations.new.submit')

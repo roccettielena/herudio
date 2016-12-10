@@ -9,7 +9,10 @@ it:
         new_password:          'Nuova password:'
         password_confirmation: 'Conferma password:'
         current_password:      'Password attuale:'
-        full_name:             'Nome completo:'
+        first_name:            'Nome:'
+        last_name:             'Cognome:'
+        birth_date:            'Data di nascita:'
+        birth_location:        'Città di nascita:'
         group:                 'Gruppo:'
 
   formtastic:
@@ -22,18 +25,19 @@ it:
   activerecord:
     models:
       user:
-        one: 'Utente'
-        other: 'Utenti'
+        one:   Utente
+        other: Utenti
 
     attributes:
       user:
-        id:                 'ID'
-        group:              'Gruppo'
-        full_name:          'Nome completo'
-        email:              'Email'
-        current_sign_in_at: 'Ultimo accesso'
-        current_sign_in_ip: 'Ultimo IP'
-        created_at:         'Data creazione'
-        updated_at:         'Data aggiornamento'
-        status:             'Stato'
-        unconfirmed_email:  'Email (non confermata)'
+        id:                 ID
+        group:              Gruppo
+        first_name:         Nome
+        last_name:          Cognome
+        email:              Email
+        current_sign_in_at: Ultimo accesso
+        current_sign_in_ip: Ultimo IP
+        created_at:         Data creazione
+        updated_at:         Data aggiornamento
+        status:             Stato
+        unconfirmed_email:  Email (non confermata)

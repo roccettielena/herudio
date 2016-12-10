@@ -366,7 +366,6 @@ CREATE TABLE users (
     last_sign_in_ip inet,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    full_name character varying,
     confirmation_token character varying,
     confirmed_at timestamp without time zone,
     confirmation_sent_at timestamp without time zone,
@@ -379,7 +378,11 @@ CREATE TABLE users (
     invitation_limit integer,
     invited_by_id integer,
     invited_by_type character varying,
-    invitations_count integer DEFAULT 0
+    invitations_count integer DEFAULT 0,
+    first_name character varying NOT NULL,
+    last_name character varying NOT NULL,
+    birth_date date NOT NULL,
+    birth_location character varying NOT NULL
 );
 
 
@@ -715,4 +718,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141212201418');
 INSERT INTO schema_migrations (version) VALUES ('20151206184535');
 
 INSERT INTO schema_migrations (version) VALUES ('20161209134044');
+
+INSERT INTO schema_migrations (version) VALUES ('20161210122620');
 

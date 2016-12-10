@@ -4,6 +4,7 @@ it:
 
     nav:
       sign_in:        'Accedi'
+      sign_up:        'Registrati'
       sign_out:       'Esci'
       edit_profile:   'Modifica profilo'
       home:           'Home'
