@@ -2,9 +2,10 @@
 ActiveAdmin.register User do
   decorate_with UserDecorator
 
-  permit_params :full_name, :email, :password, :password_confirmation, :group_id
+  permit_params :first_name, :last_name, :email, :password, :password_confirmation, :group_id
 
-  filter :full_name
+  filter :first_name
+  filter :last_name
   filter :email
   filter :group
 
@@ -59,7 +60,8 @@ ActiveAdmin.register User do
     id_column
 
     column :group, sortable: :group_id
-    column :full_name
+    column :first_name
+    column :last_name
     column :email
     column :current_sign_in_at
 
@@ -81,7 +83,8 @@ ActiveAdmin.register User do
           attributes_table_for user do
             row :id
             row :group
-            row :full_name
+            row :first_name
+            row :last_name
             row :email
             row :unconfirmed_email if user.unconfirmed_email.present?
           end
@@ -139,7 +142,8 @@ ActiveAdmin.register User do
   form do |f|
     f.inputs t('activeadmin.user.panels.details') do
       f.input :group, collection: UserGroup.ordered_by_name, required: false
-      f.input :full_name
+      f.input :first_name
+      f.input :last_name
       f.input :email
       f.input :password, required: f.object.new_record?, hint: f.object.persisted?
       f.input :password_confirmation, required: f.object.new_record?
