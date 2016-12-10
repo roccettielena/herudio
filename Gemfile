@@ -62,7 +62,12 @@ gem 'has_scope'
 # Administration
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin.git'
 gem 'just-datetime-picker'
+
+# Imports
 gem 'csv-importer'
+
+# Error reporting
+gem 'bugsnag'
 
 group :development do
   # Preloading
