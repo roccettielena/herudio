@@ -9,3 +9,8 @@
     box-shadow: none;
   }
 }
+
+.form-control[readonly] {
+  background-color: white;
+  cursor: text;
+}
