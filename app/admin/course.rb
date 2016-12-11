@@ -94,7 +94,7 @@ ActiveAdmin.register Course do
       f.input :description
       f.input :location
       f.input :seats
-      f.input :organizers, as: :select, multiple: true, include_blank: true, collection: User.ordered_by_name.select(:id, :full_name)
+      f.input :organizers, as: :select, multiple: true, include_blank: true, collection: User.ordered_by_name.select(:id, :first_name, :last_name)
     end
 
     f.has_many :lessons, heading: t('activeadmin.course.panels.lessons'), allow_destroy: true do |a|
