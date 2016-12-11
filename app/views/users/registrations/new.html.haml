@@ -15,12 +15,7 @@
           = f.input :first_name, input_html: { class: 'input-lg' }, required: true
           = f.input :last_name, input_html: { class: 'input-lg' }, required: true
           = f.association :group, collection: UserGroup.ordered_by_name, input_html: { class: 'input-lg' }, required: true
-          = f.input :birth_date, as: :string, input_html: { class: 'input-lg datepicker',
-            data: { provide: :datepicker,
-              'date-min' => (Time.zone.today - 25.years).to_s,
-              'date-max' => (Time.zone.today - 13.years).to_s,
-            },
-          }, required: true
+          = f.input :birth_date, input_html: { class: 'input-lg' }, required: true, start_year: Time.zone.today.year - 100, end_year: Time.zone.today.year - 10
           = f.input :birth_location, input_html: { class: 'input-lg' }, as: :select, collection: AuthorizedUser.select(:birth_location).distinct.order(birth_location: :asc).pluck(:birth_location), required: true
           = f.input :email, input_html: { class: 'input-lg' }, required: true
           = f.input :password, input_html: { class: 'input-lg' }, required: true
