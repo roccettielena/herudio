@@ -1,5 +1,6 @@
 class AuthorizedUser < ActiveRecord::Base
   belongs_to :group, class_name: 'UserGroup', inverse_of: :authorized_users
+  has_one :user, inverse_of: :authorized_user
 
   validates :first_name, presence: true
   validates :last_name, presence: true

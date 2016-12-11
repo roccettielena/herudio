@@ -382,7 +382,8 @@ CREATE TABLE users (
     first_name character varying NOT NULL,
     last_name character varying NOT NULL,
     birth_date date NOT NULL,
-    birth_location character varying NOT NULL
+    birth_location character varying NOT NULL,
+    authorized_user_id integer
 );
 
 
@@ -626,6 +627,13 @@ CREATE UNIQUE INDEX index_user_groups_on_name ON user_groups USING btree (name);
 
 
 --
+-- Name: index_users_on_authorized_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_authorized_user_id ON users USING btree (authorized_user_id);
+
+
+--
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -665,6 +673,14 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: fk_rails_0dff8675d5; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT fk_rails_0dff8675d5 FOREIGN KEY (authorized_user_id) REFERENCES authorized_users(id) ON DELETE CASCADE;
 
 
 --
@@ -722,4 +738,6 @@ INSERT INTO schema_migrations (version) VALUES ('20161209134044');
 INSERT INTO schema_migrations (version) VALUES ('20161210122620');
 
 INSERT INTO schema_migrations (version) VALUES ('20161210152220');
+
+INSERT INTO schema_migrations (version) VALUES ('20161211212642');
 
