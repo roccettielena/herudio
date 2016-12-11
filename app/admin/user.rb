@@ -2,7 +2,10 @@
 ActiveAdmin.register User do
   decorate_with UserDecorator
 
-  permit_params :first_name, :last_name, :email, :password, :password_confirmation, :group_id
+  permit_params(
+    :first_name, :last_name, :birth_location, :birth_date, :email, :password,
+    :password_confirmation, :group_id
+  )
 
   filter :first_name
   filter :last_name
@@ -66,10 +69,19 @@ ActiveAdmin.register User do
     column :current_sign_in_at
 
     column :status do |user|
-      if user.invitation_accepted?
-        status_tag 'Confermato', :ok
-      else
-        status_tag 'Invitato', :standby
+      case ENV.fetch('REGISTRATION_TYPE')
+      when 'invitation'
+        if user.invitation_accepted?
+          status_tag 'Confermato', :ok
+        else
+          status_tag 'Invitato', :standby
+        end
+      when 'regular'
+        if user.confirmed?
+          status_tag 'Confermato', :ok
+        else
+          status_tag 'Da confermare', :standby
+        end
       end
     end
 
@@ -97,10 +109,19 @@ ActiveAdmin.register User do
         panel t('activeadmin.user.panels.stats') do
           attributes_table_for user do
             row :status do
-              if user.invitation_accepted?
-                status_tag 'Confermato', :ok
-              else
-                status_tag 'Invitato', :standby
+              case ENV.fetch('REGISTRATION_TYPE')
+              when 'invitation'
+                if user.invitation_accepted?
+                  status_tag 'Confermato', :ok
+                else
+                  status_tag 'Invitato', :standby
+                end
+              when 'regular'
+                if user.confirmed?
+                  status_tag 'Confermato', :ok
+                else
+                  status_tag 'Da confermare', :standby
+                end
               end
             end
             row :current_sign_in_at
@@ -146,7 +167,7 @@ ActiveAdmin.register User do
       f.input :group, collection: UserGroup.ordered_by_name, required: false
       f.input :first_name
       f.input :last_name
-      f.input :birth_date
+      f.input :birth_date, start_year: Time.zone.today.year - 100, end_year: Time.zone.today.year
       f.input :birth_location
       f.input :email
       f.input :password, required: f.object.new_record?, hint: f.object.persisted?
@@ -171,6 +192,7 @@ ActiveAdmin.register User do
       end
 
       @user = User.find(params[:id])
+      @user.skip_authorized_user_validation
       @user.skip_reconfirmation!
 
       update!
