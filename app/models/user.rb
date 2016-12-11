@@ -17,10 +17,6 @@ class User < ActiveRecord::Base
     :validatable, :registerable, :async
   )
 
-  before_validation :set_authorized_user, if: -> {
-    new_record? && ENV.fetch('REGISTRATION_TYPE') == 'regular'
-  }
-
   validates :group, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -30,8 +26,13 @@ class User < ActiveRecord::Base
   validate :validate_user_authorization, if: -> {
     new_record? && ENV.fetch('REGISTRATION_TYPE') == 'regular'
   }
+  validate :validate_user_authorization_uniqueness, if: -> {
+    new_record? && ENV.fetch('REGISTRATION_TYPE') == 'regular'
+  }
 
-  scope :ordered_by_name, -> { order('full_name ASC') }
+  before_create :set_authorized_user, if: -> {
+    new_record? && ENV.fetch('REGISTRATION_TYPE') == 'regular'
+  }
 
   def full_name
     "#{first_name} #{last_name}"
@@ -78,6 +79,10 @@ class User < ActiveRecord::Base
     def with_no_occupations_for(time_frame)
       with_no_subscriptions_for(time_frame).with_no_organized_lessons_for(time_frame)
     end
+
+    def ordered_by_name
+      order('full_name ASC')
+    end
   end
 
   def subscription_to(lesson)
@@ -98,8 +103,12 @@ class User < ActiveRecord::Base
 
   private
 
+  def load_authorized_user
+    AuthorizedUser.matching_user(self).first
+  end
+
   def set_authorized_user
-    self.authorized_user = AuthorizedUser.matching_user(self).first
+    self.authorized_user = load_authorized_user
   end
 
   def validate_user_authorization
@@ -111,8 +120,15 @@ class User < ActiveRecord::Base
     return unless birth_date.present?
     return unless group_id.present?
 
-    return if authorized_user
+    return if load_authorized_user
 
     errors.add :base, 'Le informazioni che hai inserito non corrispondono a uno studente valido.'
+  end
+
+  def validate_user_authorization_uniqueness
+    return if @skip_authorized_user_validation
+    return unless load_authorized_user&.user
+
+    errors.add :base, 'Questo utente è già registrato alla piattaforma.'
   end
 end
