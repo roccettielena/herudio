@@ -100,10 +100,19 @@ ActiveAdmin.register User do
         panel t('activeadmin.user.panels.stats') do
           attributes_table_for user do
             row :status do
-              if user.invitation_accepted?
-                status_tag 'Confermato', :ok
-              else
-                status_tag 'Invitato', :standby
+              case ENV.fetch('REGISTRATION_TYPE')
+              when 'invitation'
+                if user.invitation_accepted?
+                  status_tag 'Confermato', :ok
+                else
+                  status_tag 'Invitato', :standby
+                end
+              when 'regular'
+                if user.confirmed?
+                  status_tag 'Confermato', :ok
+                else
+                  status_tag 'Da confermare', :standby
+                end
               end
             end
             row :current_sign_in_at
