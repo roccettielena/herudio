@@ -23,7 +23,9 @@ class User < ActiveRecord::Base
   validates :birth_date, presence: true, date: true
   validates :birth_location, presence: true
 
-  validate :validate_user_authorization, if: -> { ENV.fetch('REGISTRATION_TYPE') == 'regular' }
+  validate :validate_user_authorization, if: -> {
+    new_record? && ENV.fetch('REGISTRATION_TYPE') == 'regular'
+  }
 
   scope :ordered_by_name, -> { order('full_name ASC') }
 
@@ -82,9 +84,19 @@ class User < ActiveRecord::Base
     !!subscription_to(lesson)
   end
 
+  def skip_authorized_user_validation
+    @skip_authorized_user_validation = true
+  end
+
+  def skip_authorized_user_validation?
+    @skip_authorized_user_validation
+  end
+
   private
 
   def validate_user_authorization
+    return if @skip_authorized_user_validation
+
     return unless first_name.present?
     return unless last_name.present?
     return unless birth_location.present?
