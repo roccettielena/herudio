@@ -19,7 +19,7 @@ RSpec.describe User do
       before do
         allow(AuthorizedUser).to receive(:matching_user)
           .with(subject)
-          .and_return(OpenStruct.new(exists?: false))
+          .and_return(OpenStruct.new(first: nil))
       end
 
       it 'returns a validation error' do
@@ -31,7 +31,7 @@ RSpec.describe User do
       before do
         allow(AuthorizedUser).to receive(:matching_user)
           .with(subject)
-          .and_return(OpenStruct.new(exists?: true))
+          .and_return(OpenStruct.new(first: build_stubbed(:authorized_user)))
       end
 
       it 'returns a validation error' do

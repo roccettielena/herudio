@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class User < ActiveRecord::Base
   belongs_to :group, class_name: 'UserGroup', inverse_of: :users
-
+  belongs_to :authorized_user, inverse_of: :user
   has_many :subscriptions, dependent: :destroy, inverse_of: :user
   has_many :subscribed_lessons, class_name: 'Lesson', through: :subscriptions, source: :lesson
 
@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
     :invitable, :database_authenticatable, :confirmable, :recoverable, :rememberable, :trackable,
     :validatable, :registerable, :async
   )
+
+  before_validation :set_authorized_user, if: -> {
+    new_record? && ENV.fetch('REGISTRATION_TYPE') == 'regular'
+  }
 
   validates :group, presence: true
   validates :first_name, presence: true
@@ -94,6 +98,10 @@ class User < ActiveRecord::Base
 
   private
 
+  def set_authorized_user
+    self.authorized_user = AuthorizedUser.matching_user(self).first
+  end
+
   def validate_user_authorization
     return if @skip_authorized_user_validation
 
@@ -103,7 +111,7 @@ class User < ActiveRecord::Base
     return unless birth_date.present?
     return unless group_id.present?
 
-    return if AuthorizedUser.matching_user(self).exists?
+    return if authorized_user
 
     errors.add :base, 'Le informazioni che hai inserito non corrispondono a uno studente valido.'
   end
