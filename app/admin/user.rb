@@ -69,10 +69,19 @@ ActiveAdmin.register User do
     column :current_sign_in_at
 
     column :status do |user|
-      if user.invitation_accepted?
-        status_tag 'Confermato', :ok
-      else
-        status_tag 'Invitato', :standby
+      case ENV.fetch('REGISTRATION_TYPE')
+      when 'invitation'
+        if user.invitation_accepted?
+          status_tag 'Confermato', :ok
+        else
+          status_tag 'Invitato', :standby
+        end
+      when 'regular'
+        if user.confirmed?
+          status_tag 'Confermato', :ok
+        else
+          status_tag 'Da confermare', :standby
+        end
       end
     end
 
