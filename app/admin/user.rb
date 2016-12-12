@@ -15,7 +15,6 @@ ActiveAdmin.register User do
   belongs_to :user_group, optional: true
 
   member_action :confirm, method: :put do
-    resource.skip_group_validation!
     resource.confirm!
 
     redirect_to resource_path, notice: "L'utente è stato confermato."
@@ -23,7 +22,6 @@ ActiveAdmin.register User do
 
   member_action :invite, method: :post do
     resource.invite!
-
     redirect_to resource_path, notice: "L'utente è stato invitato."
   end
 

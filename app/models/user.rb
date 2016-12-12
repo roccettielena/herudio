@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
     end
 
     def ordered_by_name
-      order('full_name ASC')
+      order('last_name ASC, first_name ASC')
     end
   end
 
