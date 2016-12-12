@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
         WHERE
           subscriptions.user_id = users.id
           AND subscriptions.lesson_id = lessons.id
-          AND lessons.time_frame_id = :time_frame_id
+          AND lessons.time_frame_id IN(:time_frame_ids)
       ) = 0
     SQL
 
@@ -64,20 +64,22 @@ class User < ActiveRecord::Base
           ON courses.id = courses_organizers.course_id
         WHERE
           courses_organizers.organizer_id = users.id
-          AND lessons.time_frame_id = :time_frame_id
+          AND lessons.time_frame_id IN(:time_frame_ids)
       ) = 0
     SQL
 
-    def with_no_subscriptions_for(time_frame)
-      where NO_SUBSCRIPTIONS_SQL, time_frame_id: time_frame.id
+    def with_no_subscriptions_for(time_frames)
+      time_frames = [time_frames].flatten
+      where NO_SUBSCRIPTIONS_SQL, time_frame_ids: time_frames.map(&:id)
     end
 
-    def with_no_organized_lessons_for(time_frame)
-      where NO_ORGANIZED_LESSONS_SQL, time_frame_id: time_frame.id
+    def with_no_organized_lessons_for(time_frames)
+      time_frames = [time_frames].flatten
+      where NO_ORGANIZED_LESSONS_SQL, time_frame_ids: time_frames.map(&:id)
     end
 
-    def with_no_occupations_for(time_frame)
-      with_no_subscriptions_for(time_frame).with_no_organized_lessons_for(time_frame)
+    def with_no_occupations_for(time_frames)
+      with_no_subscriptions_for(time_frames).with_no_organized_lessons_for(time_frames)
     end
 
     def ordered_by_name
