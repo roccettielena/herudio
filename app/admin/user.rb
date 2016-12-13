@@ -17,9 +17,13 @@ ActiveAdmin.register User do
   belongs_to :user_group, optional: true
 
   member_action :confirm, method: :put do
-    resource.confirm!
-
+    resource.confirm
     redirect_to resource_path, notice: "L'utente è stato confermato."
+  end
+
+  member_action :resend_confirmation_email, method: :put do
+    resource.send_confirmation_instructions
+    redirect_to resource_path, notice: "L'email di conferma è stata rimandata."
   end
 
   member_action :invite, method: :post do
@@ -48,6 +52,12 @@ ActiveAdmin.register User do
   action_item :confirm, only: :show do
     if ENV.fetch('REGISTRATION_TYPE') == 'regular' && !user.confirmed?
       link_to('Conferma Utente', confirm_admin_user_path(user), method: :put)
+    end
+  end
+
+  action_item :resend_confirmation_email, only: :show do
+    if ENV.fetch('REGISTRATION_TYPE') == 'regular' && !user.confirmed?
+      link_to('Rimanda Email di Conferma', confirm_admin_user_path(user), method: :put)
     end
   end
 
