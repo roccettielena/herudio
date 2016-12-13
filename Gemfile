@@ -69,6 +69,10 @@ gem 'csv-importer'
 # Error reporting
 gem 'bugsnag'
 
+# Business logic
+gem 'interactor-rails'
+gem 'with_advisory_lock'
+
 group :development do
   # Preloading
   gem 'spring'

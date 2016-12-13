@@ -2,6 +2,8 @@
 ActiveAdmin.register CourseCategory do
   permit_params :name
 
+  menu parent: 'Corsi'
+
   filter :name
 
   index do

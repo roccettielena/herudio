@@ -9,6 +9,14 @@ it:
       subscription:
         id:         'ID'
         user:       'Utente'
-        created_at: 'Data creazione'
+        created_at: 'Data iscrizione'
         course:     'Corso'
         lesson:     'Lezione'
+        origin:     'Origine'
+
+  enumerize:
+    subscription:
+      origin:
+        manual: 'Utente'
+        admin:  'Amministratore'
+        system: 'Sistema'
