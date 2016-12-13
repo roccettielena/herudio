@@ -37,6 +37,8 @@ class FillSubscriptions
         group_for_subscription = availability_percentages.first[0]
 
         group_for_subscription.time_frames.each do |time_frame|
+          next if user_subscribed_to_time_frame?(user, time_frame)
+
           available_lesson = Lesson.available_for(time_frame).order('RANDOM()').first
           next unless available_lesson
 
