@@ -2,6 +2,8 @@
 ActiveAdmin.register AuthorizedUser do
   permit_params :first_name, :last_name, :birth_location, :birth_date, :group_id
 
+  menu parent: 'Utenti'
+
   filter :first_name
   filter :last_name
   filter :birth_location

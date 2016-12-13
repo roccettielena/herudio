@@ -266,7 +266,8 @@ CREATE TABLE subscriptions (
     user_id integer NOT NULL,
     lesson_id integer NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    origin character varying NOT NULL
 );
 
 
@@ -290,13 +291,46 @@ ALTER SEQUENCE subscriptions_id_seq OWNED BY subscriptions.id;
 
 
 --
+-- Name: time_frame_groups; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE time_frame_groups (
+    id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    group_date date NOT NULL,
+    label character varying NOT NULL
+);
+
+
+--
+-- Name: time_frame_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE time_frame_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: time_frame_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE time_frame_groups_id_seq OWNED BY time_frame_groups.id;
+
+
+--
 -- Name: time_frames; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE time_frames (
     id integer NOT NULL,
     starts_at timestamp without time zone NOT NULL,
-    ends_at timestamp without time zone NOT NULL
+    ends_at timestamp without time zone NOT NULL,
+    group_id integer NOT NULL
 );
 
 
@@ -459,6 +493,13 @@ ALTER TABLE ONLY subscriptions ALTER COLUMN id SET DEFAULT nextval('subscription
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY time_frame_groups ALTER COLUMN id SET DEFAULT nextval('time_frame_groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY time_frames ALTER COLUMN id SET DEFAULT nextval('time_frames_id_seq'::regclass);
 
 
@@ -530,6 +571,14 @@ ALTER TABLE ONLY lessons
 
 ALTER TABLE ONLY subscriptions
     ADD CONSTRAINT subscriptions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: time_frame_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY time_frame_groups
+    ADD CONSTRAINT time_frame_groups_pkey PRIMARY KEY (id);
 
 
 --
@@ -620,6 +669,13 @@ CREATE INDEX index_courses_organizers_on_course_id_and_organizer_id ON courses_o
 
 
 --
+-- Name: index_time_frames_on_group_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_time_frames_on_group_id ON time_frames USING btree (group_id);
+
+
+--
 -- Name: index_user_groups_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -684,6 +740,22 @@ ALTER TABLE ONLY users
 
 
 --
+-- Name: fk_rails_5442c33b3d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY time_frames
+    ADD CONSTRAINT fk_rails_5442c33b3d FOREIGN KEY (group_id) REFERENCES time_frame_groups(id) ON DELETE CASCADE;
+
+
+--
+-- Name: fk_rails_d568111e53; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY authorized_users
+    ADD CONSTRAINT fk_rails_d568111e53 FOREIGN KEY (group_id) REFERENCES user_groups(id) ON DELETE CASCADE;
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -740,4 +812,14 @@ INSERT INTO schema_migrations (version) VALUES ('20161210122620');
 INSERT INTO schema_migrations (version) VALUES ('20161210152220');
 
 INSERT INTO schema_migrations (version) VALUES ('20161211212642');
+
+INSERT INTO schema_migrations (version) VALUES ('20161212224057');
+
+INSERT INTO schema_migrations (version) VALUES ('20161212224608');
+
+INSERT INTO schema_migrations (version) VALUES ('20161212225110');
+
+INSERT INTO schema_migrations (version) VALUES ('20161212231435');
+
+INSERT INTO schema_migrations (version) VALUES ('20161212235423');
 

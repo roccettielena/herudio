@@ -2,6 +2,8 @@
 ActiveAdmin.register UserGroup do
   permit_params :name
 
+  menu parent: 'Utenti'
+
   filter :name
 
   action_item :users, only: :show do
@@ -17,7 +19,7 @@ ActiveAdmin.register UserGroup do
     actions
   end
 
-  show do |_group|
+  show do
     attributes_table do
       row :id
       row :name

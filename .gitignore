@@ -83,3 +83,6 @@ pickle-email-*.html
 
 # Ignore Bower assets.
 /vendor/assets/bower_components/
+
+# Ignore DB dumps.
+/db/*.dump

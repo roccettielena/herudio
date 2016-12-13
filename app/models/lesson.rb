@@ -34,7 +34,7 @@ class Lesson < ActiveRecord::Base
     end
 
     def available_for(time_frame)
-      where(time_frame: time_frame).available
+      joins(:course).merge(Course.accepted).where(time_frame: time_frame).available
     end
   end
 

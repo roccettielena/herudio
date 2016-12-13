@@ -1,0 +1,6 @@
+it:
+  activeadmin:
+    time_frame_group:
+      panels:
+        details:     'Dettagli gruppo periodi'
+        time_frames: 'Periodi'
