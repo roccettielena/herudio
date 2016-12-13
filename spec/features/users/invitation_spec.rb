@@ -5,9 +5,7 @@ RSpec.feature 'Invitations' do
   before { ENV['REGISTRATION_TYPE'] = 'invitation' }
 
   scenario 'user can set a password' do
-    user = FactoryGirl.create(:user).tap do |u|
-      u.invite!
-    end
+    user = FactoryGirl.create(:user).tap(&:invite!)
 
     user_attributes = FactoryGirl.attributes_for(:user)
 

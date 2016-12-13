@@ -9,7 +9,7 @@ ActiveAdmin.register Subscription do
 
   menu false
 
-  permit_params :user_id, :lesson_id
+  permit_params :user_id, :lesson_id, :origin
 
   index do
     selectable_column
@@ -26,8 +26,10 @@ ActiveAdmin.register Subscription do
   form do |f|
     f.object.user = User.find_by(id: params[:user_id]) if params[:user_id]
     f.object.lesson = Lesson.find_by(id: params[:lesson_id]) if params[:lesson_id]
+    f.object.origin = 'admin'
 
     f.inputs t('activeadmin.subscription.panels.details') do
+      f.input :origin, as: :hidden
       f.input :user, collection: User.order(last_name: :asc)
       f.input :lesson, collection: Lesson.order(id: :asc)
     end

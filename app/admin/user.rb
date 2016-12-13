@@ -2,6 +2,8 @@
 ActiveAdmin.register User do
   decorate_with UserDecorator
 
+  menu parent: 'Utenti'
+
   permit_params(
     :first_name, :last_name, :birth_location, :birth_date, :email, :password,
     :password_confirmation, :group_id
@@ -26,34 +28,33 @@ ActiveAdmin.register User do
   end
 
   collection_action :fill_subscriptions, method: :post do
-    begin
-      filler = SubscriptionFillingService.new
-
-      TimeFrame.all.find_each do |time_frame|
-        filler.fill_subscriptions_for(time_frame)
-      end
-
-      redirect_to collection_path, notice: 'Le iscrizioni sono state completate correttamente!'
-    rescue SubscriptionFillingService::NoLessonsError
-      flash[:error] = "Non ci sono lezioni disponibili per l'iscrizione automatica."
-      redirect_to collection_path
-    end
+    FillSubscriptionsJob.perform_later
+    redirect_to collection_path,
+      notice: 'Il sistema sta completando le iscrizioni. Ci vorrà qualche minuto.'
   end
 
   action_item :new_subscription, only: :show do
-    link_to('Iscrivi Utente', new_admin_subscription_path(user_id: user.id))
+    unless User.advisory_lock_exists?(FillSubscriptions::ADVISORY_LOCK_NAME)
+      link_to('Iscrivi Utente', new_admin_subscription_path(user_id: user.id))
+    end
   end
 
   action_item :fill_subscriptions, only: :index do
-    link_to('Completa Iscrizioni', fill_subscriptions_admin_users_path, method: :post)
+    unless User.advisory_lock_exists?(FillSubscriptions::ADVISORY_LOCK_NAME)
+      link_to('Completa Iscrizioni', fill_subscriptions_admin_users_path, method: :post)
+    end
   end
 
   action_item :confirm, only: :show do
-    link_to('Conferma Utente', confirm_admin_user_path(user), method: :put) unless user.confirmed?
+    if ENV.fetch('REGISTRATION_TYPE') == 'regular' && !user.confirmed?
+      link_to('Conferma Utente', confirm_admin_user_path(user), method: :put)
+    end
   end
 
   action_item :invite, only: :show do
-    link_to('Invita Utente', invite_admin_user_path(user), method: :post) unless user.invitation_accepted?
+    if ENV.fetch('REGISTRATION_TYPE') == 'invitation' && !user.invitation_accepted?
+      link_to('Invita Utente', invite_admin_user_path(user), method: :post)
+    end
   end
 
   index do
@@ -147,7 +148,8 @@ ActiveAdmin.register User do
         column t('activerecord.attributes.subscription.id'), :id
         column t('activerecord.attributes.subscription.course'), :course
         column t('activerecord.attributes.subscription.lesson'), :lesson
-        column t('activerecord.attributes.subscription.created_at'), :screated_at
+        column t('activerecord.attributes.subscription.created_at'), :created_at
+        column t('activerecord.attributes.subscription.origin'), :origin
         column do |subscription|
           link_to(
             t('activeadmin.subscription.actions.destroy'),

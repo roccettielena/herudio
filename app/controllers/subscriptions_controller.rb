@@ -46,7 +46,7 @@ class SubscriptionsController < ApplicationController
       return
     end
 
-    Subscription.create!(user: current_user, lesson: @lesson)
+    Subscription.create!(user: current_user, lesson: @lesson, origin: 'manual')
     redirect_back_or @course, notice: t('controllers.subscriptions.create.subscribed')
   end
 

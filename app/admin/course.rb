@@ -2,6 +2,8 @@
 ActiveAdmin.register Course do
   decorate_with CourseDecorator
 
+  menu parent: 'Corsi'
+
   filter :category
   filter :name
   filter :location

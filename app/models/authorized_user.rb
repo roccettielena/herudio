@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AuthorizedUser < ActiveRecord::Base
   belongs_to :group, class_name: 'UserGroup', inverse_of: :authorized_users
   has_one :user, inverse_of: :authorized_user

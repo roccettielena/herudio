@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 class Subscription < ActiveRecord::Base
+  extend Enumerize
+
+  enumerize :origin, in: %w(manual admin system)
+
   belongs_to :user, inverse_of: :subscriptions
   belongs_to :lesson, inverse_of: :subscriptions
 

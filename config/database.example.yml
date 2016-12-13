@@ -1,11 +1,13 @@
+# pg_restore --verbose --clean --no-acl --no-owner -h localhost -d herudio_development db/latest.dump
+
 development:
   adapter:  postgresql
   host:     localhost
   encoding: unicode
   database: herudio_development
   pool:     5
-  username: herudio
-  password: herudio
+  username: postgres
+  password: postgres
   template: template0
 
 test:
@@ -14,8 +16,8 @@ test:
   encoding: unicode
   database: herudio_test
   pool:     5
-  username: herudio
-  password: herudio
+  username: postgres
+  password: postgres
   template: template0
 
 production:
@@ -24,6 +26,6 @@ production:
   encoding: unicode
   database: herudio_production
   pool:     5
-  username: herudio
-  password: herudio
+  username: postgres
+  password: postgres
   template: template0

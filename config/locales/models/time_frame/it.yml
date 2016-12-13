@@ -8,11 +8,13 @@ it:
     attributes:
       time_frame:
         id:        'ID'
+        group:     'Gruppo periodi'
         starts_at: 'Data inizio'
         ends_at:   'Data fine'
 
   formtastic:
     labels:
       time_frame:
+        group:     'Gruppo periodi:'
         starts_at: 'Data inizio:'
         ends_at:   'Data fine:'

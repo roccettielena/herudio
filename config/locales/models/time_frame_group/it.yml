@@ -1,0 +1,18 @@
+it:
+  activerecord:
+    models:
+      time_frame_group:
+        one:   'Gruppo Periodi'
+        other: 'Gruppi Periodi'
+
+    attributes:
+      time_frame_group:
+        id:         'ID'
+        label:      'Etichetta'
+        group_date: 'Data'
+
+  formtastic:
+    labels:
+      time_frame_group:
+        label:      'Etichetta:'
+        group_date: 'Data:'
