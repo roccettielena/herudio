@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec.describe TimeFrameGroup do
   subject { FactoryGirl.build(:time_frame_group) }
 

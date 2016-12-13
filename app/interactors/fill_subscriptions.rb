@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # @todo This must be tested.
 class FillSubscriptions
   include Interactor
@@ -10,7 +11,7 @@ class FillSubscriptions
 
   def call
     User.all.order('RANDOM()').each do |user|
-      context.time_frame_groups.each_pair do |date, groups|
+      context.time_frame_groups.each_pair do |_date, groups|
         next if groups.any? { |group| user_subscribed_to_group?(user, group) }
 
         availability_percentages = {}
@@ -29,7 +30,7 @@ class FillSubscriptions
 
         next if availability_percentages.empty?
 
-        availability_percentages = availability_percentages.sort_by do |group, percentage|
+        availability_percentages = availability_percentages.sort_by do |_group, percentage|
           percentage
         end
 
