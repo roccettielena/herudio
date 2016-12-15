@@ -197,15 +197,10 @@ RSpec.describe Lesson do
   end
 
   describe '.available_for' do
+    let!(:lesson) { create(:lesson) }
+
     it 'returns the available lessons in the given time frame' do
-      frame = FactoryGirl.build_stubbed(:time_frame)
-      scope = OpenStruct.new(available: [])
-
-      allow(described_class).to receive(:where)
-        .with(time_frame: frame)
-        .and_return(scope)
-
-      described_class.available_for(frame)
+      expect(described_class.available_for(lesson.time_frame)).to match_array([lesson])
     end
   end
 end

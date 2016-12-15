@@ -81,7 +81,7 @@ RSpec.describe User do
       end
     end
 
-    context 'when the user is not subscrbed to the lesson' do
+    context 'when the user is not subscribed to the lesson' do
       before do
         expect(subject).to receive(:subscription_to)
           .with(lesson)
@@ -97,7 +97,7 @@ RSpec.describe User do
 
   describe '.with_no_subscriptions_for' do
     let!(:frame) { FactoryGirl.create :time_frame }
-    let!(:lesson) { FactoryGirl.create :lesson, time_frame: frame }
+    let!(:lesson) { FactoryGirl.create(:lesson, time_frame: frame) }
 
     let!(:subscribed_user) { FactoryGirl.create(:subscription, lesson: lesson).user }
     let!(:unsubscribed_user) { FactoryGirl.create(:subscription).user }
