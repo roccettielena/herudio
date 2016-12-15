@@ -17,7 +17,7 @@ class CourseDecorator < Draper::Decorator
       label_class = 'label-info'
     elsif object.status.accepted?
       label_class = 'label-success'
-    elsif obejct.status.rejected?
+    elsif object.status.rejected?
       label_class = 'label-danger'
     end
 
