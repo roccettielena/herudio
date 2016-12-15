@@ -8,7 +8,7 @@ RSpec.feature 'Subscriptions index' do
   end
 
   given!(:current_user) { FactoryGirl.create(:user) }
-  given!(:subscription) { FactoryGirl.create(:subscription, user: current_user) }
+  given!(:subscription) { FactoryGirl.create(:subscription, user: current_user, origin: :manual) }
 
   background do
     signin current_user.email, current_user.password

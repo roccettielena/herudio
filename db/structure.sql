@@ -299,7 +299,8 @@ CREATE TABLE time_frame_groups (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     group_date date NOT NULL,
-    label character varying NOT NULL
+    label character varying NOT NULL,
+    enabled boolean DEFAULT true NOT NULL
 );
 
 
@@ -822,4 +823,6 @@ INSERT INTO schema_migrations (version) VALUES ('20161212225110');
 INSERT INTO schema_migrations (version) VALUES ('20161212231435');
 
 INSERT INTO schema_migrations (version) VALUES ('20161212235423');
+
+INSERT INTO schema_migrations (version) VALUES ('20161215115037');
 

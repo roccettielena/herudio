@@ -10,9 +10,11 @@ it:
         id:         'ID'
         label:      'Etichetta'
         group_date: 'Data'
+        enabled:    'Abilitato'
 
   formtastic:
     labels:
       time_frame_group:
         label:      'Etichetta:'
         group_date: 'Data:'
+        enabled:    'Abilitato'
