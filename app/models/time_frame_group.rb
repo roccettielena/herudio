@@ -8,6 +8,8 @@ class TimeFrameGroup < ActiveRecord::Base
 
   validates :group_date, presence: true
 
+  scope :enabled, -> { where enabled: true }
+
   def to_s
     label
   end

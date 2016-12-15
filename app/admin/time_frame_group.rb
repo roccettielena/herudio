@@ -8,7 +8,7 @@ ActiveAdmin.register TimeFrameGroup do
   filter :ends_at
 
   permit_params do
-    [:label].tap do |params_to_permit|
+    [:label, :enabled].tap do |params_to_permit|
       params_to_permit << :group_date if params[:action].in?(%w(new create))
     end
   end
@@ -21,6 +21,7 @@ ActiveAdmin.register TimeFrameGroup do
 
     column :label
     column :group_date
+    column :enabled
 
     actions
   end
@@ -31,6 +32,7 @@ ActiveAdmin.register TimeFrameGroup do
         row :id
         row :label
         row :group_date
+        row :enabled
       end
     end
 
@@ -43,6 +45,7 @@ ActiveAdmin.register TimeFrameGroup do
         column t('activerecord.attributes.time_frame.ends_at'), :ends_at do |time_frame|
           link_to time_frame.ends_at, admin_time_frame_path(time_frame)
         end
+        column :enabled
       end
     end
   end
@@ -51,6 +54,7 @@ ActiveAdmin.register TimeFrameGroup do
     f.inputs t('activeadmin.time_frame_group.panels.details') do
       f.input :label
       f.input :group_date, disabled: resource.persisted?
+      f.input :enabled
     end
 
     f.actions

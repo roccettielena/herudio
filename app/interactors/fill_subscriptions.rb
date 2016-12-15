@@ -66,7 +66,7 @@ class FillSubscriptions
   def load_time_frame_groups
     context.time_frame_groups = {}
 
-    TimeFrameGroup.find_each do |time_frame_group|
+    TimeFrameGroup.enabled.find_each do |time_frame_group|
       context.time_frame_groups[time_frame_group.group_date] = (
         context.time_frame_groups[time_frame_group.group_date] || []
       ) + [time_frame_group]
