@@ -20,6 +20,9 @@ class Subscription < ActiveRecord::Base
       opening_time = (now - 1.hour) if opening_time.blank?
       closing_time = (now + 1.hour) if closing_time.blank?
 
+      opening_time = Time.zone.parse(opening_time)
+      closing_time = Time.zone.parse(closing_time)
+
       now >= opening_time && now <= closing_time
     end
 
