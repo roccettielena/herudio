@@ -7,7 +7,6 @@ gem 'rails', '4.2.7'
 # Asset processors
 gem 'sass-rails'
 gem 'uglifier'
-gem 'coffee-rails'
 gem 'autoprefixer-rails'
 
 # Assets
@@ -46,9 +45,6 @@ gem 'cocoon'
 gem 'pg'
 gem 'date_validator'
 gem 'enumerize'
-
-# JavaScript runtime
-gem 'therubyracer', platform: :ruby
 
 # Web server
 gem 'thin'

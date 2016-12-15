@@ -10,7 +10,11 @@ class User < ActiveRecord::Base
     join_table: 'courses_organizers',
     foreign_key: 'organizer_id'
 
-  has_many :organized_lessons, class_name: 'Lesson', through: :courses, source: :lessons
+  has_many :organized_lessons,
+    -> { joins(:course).merge(Course.accepted) },
+    class_name: 'Lesson',
+    through: :courses,
+    source: :lessons
 
   devise(
     :invitable, :database_authenticatable, :confirmable, :recoverable, :rememberable, :trackable,
@@ -46,10 +50,12 @@ class User < ActiveRecord::Base
     NO_SUBSCRIPTIONS_SQL = <<-SQL
       (
         SELECT COUNT(subscriptions.*)
-        FROM subscriptions, lessons
+        FROM subscriptions, lessons, courses
         WHERE
           subscriptions.user_id = users.id
           AND subscriptions.lesson_id = lessons.id
+          AND lessons.course_id = courses.id
+          AND courses.status = 'accepted'
           AND lessons.time_frame_id IN(:time_frame_ids)
       ) = 0
     SQL
@@ -60,6 +66,7 @@ class User < ActiveRecord::Base
         FROM lessons
         INNER JOIN courses
           ON lessons.course_id = courses.id
+          AND courses.status = 'accepted'
         INNER JOIN courses_organizers
           ON courses.id = courses_organizers.course_id
         WHERE
