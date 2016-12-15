@@ -1,8 +1,9 @@
 it:
   controllers:
     subscriptions:
-      closed:      'Le iscrizioni sono attualmente chiuse.'
-      past_lesson: 'Questa lezione è già finita!'
+      closed:              'Le iscrizioni sono attualmente chiuse.'
+      past_lesson:         'Questa lezione è già finita!'
+      not_user_originated: "Non puoi cancellare un'iscrizione creata dal sistema."
 
       create:
         subscribed:         'Ti sei iscritto alla lezione specificata.'

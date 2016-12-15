@@ -126,7 +126,9 @@ RSpec.describe SubscriptionsController do
     end
 
     context 'when the user is subscribed to the lesson' do
-      before { FactoryGirl.create(:subscription, user: current_user, lesson: lesson) }
+      before do
+        FactoryGirl.create(:subscription, user: current_user, lesson: lesson, origin: :manual)
+      end
 
       it 'destroys the subscription' do
         expect {

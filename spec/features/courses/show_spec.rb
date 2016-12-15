@@ -42,7 +42,7 @@ RSpec.feature 'Courses show' do
   scenario 'user can unsubscribe from the lessons' do
     user = FactoryGirl.create(:user)
     signin user.email, user.password
-    FactoryGirl.create(:subscription, user: user, lesson: lesson)
+    FactoryGirl.create(:subscription, user: user, lesson: lesson, origin: :manual)
 
     visit root_path
     click_link I18n.t('layout.nav.courses')

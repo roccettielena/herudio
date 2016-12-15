@@ -66,6 +66,11 @@ class SubscriptionsController < ApplicationController
       return
     end
 
+    unless current_user.subscription_to(@lesson).origin.manual?
+      redirect_back_or @course, alert: t('controllers.subscriptions.not_user_originated')
+      return
+    end
+
     current_user.subscription_to(@lesson).destroy
     redirect_back_or @course, notice: t('controllers.subscriptions.destroy.unsubscribed')
   end

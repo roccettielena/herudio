@@ -73,23 +73,6 @@ gem 'bugsnag'
 gem 'interactor-rails'
 gem 'with_advisory_lock'
 
-group :development do
-  # Preloading
-  gem 'spring'
-  gem 'spring-commands-rspec'
-
-  # Development
-  gem 'pry-rails'
-  gem 'pry-rescue'
-
-  # Asset logging suppression
-  gem 'quiet_assets'
-
-  # Code quality
-  gem 'rubocop'
-  gem 'rubocop-rspec'
-end
-
 group :development, :test do
   # Factories
   gem 'factory_girl_rails'
@@ -97,6 +80,19 @@ group :development, :test do
 
   # RSpec
   gem 'rspec-rails'
+end
+
+group :development do
+  # Preloading
+  gem 'spring'
+  gem 'spring-commands-rspec'
+
+  # Asset logging suppression
+  gem 'quiet_assets'
+
+  # Code quality
+  gem 'rubocop'
+  gem 'rubocop-rspec'
 end
 
 group :production do
@@ -116,4 +112,8 @@ group :test do
 
   # Database cleansing
   gem 'database_cleaner'
+
+  # Debugging
+  gem 'pry-rails'
+  gem 'pry-rescue'
 end
