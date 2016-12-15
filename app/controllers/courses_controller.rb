@@ -10,7 +10,7 @@ class CoursesController < ApplicationController
 
   def index
     @courses = apply_scopes(Course.accessible_by(current_user)).paginate(
-      page: params[:page],
+      page: params[:page].present? ? params[:page] : 1,
       per_page: 9
     )
   end
