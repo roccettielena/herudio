@@ -57,7 +57,7 @@ class Lesson < ActiveRecord::Base
   end
 
   def in_conflict_with?(lesson)
-    (starts_at <= lesson.ends_at) && (ends_at >= lesson.starts_at)
+    (starts_at < lesson.ends_at) && (ends_at > lesson.starts_at)
   end
 
   def conflicting_for(user, associations = [:subscribed, :organized])
