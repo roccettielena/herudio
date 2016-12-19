@@ -66,7 +66,7 @@ class SubscriptionsController < ApplicationController
       return
     end
 
-    unless current_user.subscription_to(@lesson).origin.manual?
+    if !current_user.subscription_to(@lesson).origin.manual? || ENV['ALLOW_FULL_SUBSCRIPTION_MANAGEMENT'] == 'true'
       redirect_back_or @course, alert: t('controllers.subscriptions.not_user_originated')
       return
     end

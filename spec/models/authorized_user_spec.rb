@@ -1,6 +1,14 @@
 # frozen_string_literal: true
-require 'rails_helper'
+RSpec.describe AuthorizedUser do
+  subject { build(:authorized_user) }
 
-RSpec.describe AuthorizedUser, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'is valid' do
+    expect(subject).to be_valid
+  end
+
+  %w(first_name last_name group birth_date birth_location).each do |attribute|
+    it "validates the presence of #{attribute}" do
+      expect(subject).to validate_presence_of(attribute)
+    end
+  end
 end
